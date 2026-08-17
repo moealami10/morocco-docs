@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Card } from '../components/ui'
+import { Seo } from '../components/Seo'
 
 // ---------------------------------------------------------------------------
 // Tool card data
@@ -67,6 +68,11 @@ const TOOLS: Tool[] = [
 const HomePage: React.FC = () => {
   return (
     <>
+      <Seo
+        title="Générateur de documents administratifs marocains gratuit | Kaghit"
+        description="Générez vos documents administratifs marocains en quelques clics — attestation de travail, autorisation parentale, photo CIN — gratuit, rapide, sans inscription."
+        canonicalUrl="https://kaghit.com/"
+      />
       {/* ── Hero ── */}
       <section className="relative overflow-hidden bg-white border-b border-neutral-100">
         {/* Subtle background accent */}

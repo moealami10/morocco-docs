@@ -2,6 +2,7 @@ import React, { useState, useCallback, useRef } from 'react'
 import Cropper, { type Area } from 'react-easy-crop'
 import { PageHeading, Card, FormField, Button } from '../components/ui'
 import { getCroppedImg, type PixelCrop } from '../lib/cropImage'
+import { Seo } from '../components/Seo'
 
 export type DocumentType = 'CIN (35x45mm)' | 'Passeport (35x45mm)'
 
@@ -117,6 +118,12 @@ const PhotoCINPage: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <Seo
+        title="Photo CIN / Passeport Maroc aux normes — Redimensionner en ligne"
+        description="Format officiel photo CIN Maroc (35×45 mm, 300 DPI) : cadrez et redimensionnez votre photo d'identité en ligne gratuitement pour CIN et passeport marocain."
+        canonicalUrl="https://kaghit.com/photo-cin"
+      />
+
       <PageHeading
         title="Photo CIN / Passeport"
         description="Recadrez et adaptez facilement votre photo d'identité au format officiel marocain (35 × 45 mm, 300 DPI) directement depuis votre navigateur."
@@ -436,6 +443,45 @@ const PhotoCINPage: React.FC = () => {
           <strong>Avertissement :</strong> Cet outil aide au cadrage et au formatage de vos photos d'identité aux normes marocaines (35 × 45 mm). Il ne garantit pas l'acceptation officielle par les autorités compétentes. Veuillez vérifier les exigences spécifiques actuelles de votre administration.
         </p>
       </div>
+
+      {/* ── Informational / SEO Section ── */}
+      <section className="mt-16 border-t border-neutral-200 pt-12">
+        <h2 className="text-xl font-bold text-neutral-900 mb-6">
+          Guide et normes pour la photo d'identité au Maroc
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card>
+            <h3 className="text-sm font-semibold text-neutral-900 mb-2 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary" />
+              Dimensions officielles (35 × 45 mm)
+            </h3>
+            <p className="text-xs text-neutral-600 leading-relaxed">
+              Pour la carte nationale d'identité électronique (CNIE) et le passeport biométrique marocain, le format standard est strictement fixé à 35 mm de largeur et 45 mm de hauteur. Cet outil génère une image en haute résolution (300 DPI - 413 × 531 px).
+            </p>
+          </Card>
+
+          <Card>
+            <h3 className="text-sm font-semibold text-neutral-900 mb-2 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary" />
+              Cadrage et posture du visage
+            </h3>
+            <p className="text-xs text-neutral-600 leading-relaxed">
+              Le visage doit être parfaitement centré, orienté de face avec le regard fixe vers l'objectif. L'expression doit être neutre (bouche fermée, pas de sourire prononcé). La tête doit occuper entre 70% et 80% de la hauteur de la photo.
+            </p>
+          </Card>
+
+          <Card>
+            <h3 className="text-sm font-semibold text-neutral-900 mb-2 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary" />
+              Éclairage &amp; Fond recommandé
+            </h3>
+            <p className="text-xs text-neutral-600 leading-relaxed">
+              La photo doit être prise sur un fond clair et uniforme (blanc ou bleu très clair), sans motifs ni ombres. L'éclairage doit être homogène afin d'éviter les yeux rouges ou les reflets sur les lunettes. Cet outil de recadrage ne remplace pas une prise de vue conforme.
+            </p>
+          </Card>
+        </div>
+      </section>
     </div>
   )
 }

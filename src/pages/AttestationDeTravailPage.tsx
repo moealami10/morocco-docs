@@ -1,6 +1,7 @@
-import React, { useState, useCallback, useMemo } from 'react'
+import React, { useState, useCallback, useMemo, useEffect } from 'react'
 import { PageHeading, Card, FormField, Button } from '../components/ui'
 import { generateAttestationPdf } from '../lib/attestationPdf'
+import { Seo } from '../components/Seo'
 
 // ---------------------------------------------------------------------------
 // Types
@@ -46,6 +47,38 @@ const EMPTY: AttestationData = {
   dateFin: '',
   lieuEmission: '',
   dateEmission: TODAY,
+}
+
+// ---------------------------------------------------------------------------
+// Draft persistence (sessionStorage — survives page navigation within the
+// same tab, clears automatically when the tab/browser closes)
+// ---------------------------------------------------------------------------
+
+const STORAGE_KEY = 'kaghit:draft:attestation-de-travail'
+
+function loadDraft(): AttestationData | null {
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY)
+    return raw ? { ...EMPTY, ...JSON.parse(raw) } : null
+  } catch {
+    return null
+  }
+}
+
+function saveDraft(data: AttestationData) {
+  try {
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+  } catch {
+    // Storage unavailable (e.g. private browsing) — fail silently, not critical
+  }
+}
+
+function clearDraft() {
+  try {
+    sessionStorage.removeItem(STORAGE_KEY)
+  } catch {
+    // ignore
+  }
 }
 
 function formatDate(iso: string): string {
@@ -211,11 +244,17 @@ const DocumentPreview: React.FC<PreviewProps> = ({ data }) => {
 // ---------------------------------------------------------------------------
 
 const AttestationDeTravailPage: React.FC = () => {
-  const [data, setData] = useState<AttestationData>(EMPTY)
+  const [data, setData] = useState<AttestationData>(() => loadDraft() ?? EMPTY)
   const [errors, setErrors] = useState<FormErrors>({})
   const [submitted, setSubmitted] = useState(false)
   const [isGenerating, setIsGenerating] = useState(false)
   const [pdfError, setPdfError] = useState<string | null>(null)
+
+  // Persist to sessionStorage on every change so navigating away and back
+  // (or an accidental refresh) doesn't lose what was typed
+  useEffect(() => {
+    saveDraft(data)
+  }, [data])
 
   // Generic field setter
   const set = useCallback(
@@ -263,6 +302,11 @@ const AttestationDeTravailPage: React.FC = () => {
       a.click()
       document.body.removeChild(a)
       URL.revokeObjectURL(url)
+      // Success — clear the saved draft and reset the form so sensitive
+      // data (CIN, salary-adjacent info) doesn't linger in the browser
+      clearDraft()
+      setData(EMPTY)
+      setSubmitted(false)
     } catch (e) {
       console.error(e)
       setPdfError('Une erreur est survenue lors de la génération du PDF. Veuillez réessayer.')
@@ -278,6 +322,12 @@ const AttestationDeTravailPage: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <Seo
+        title="Attestation de travail Maroc — Générateur gratuit en ligne"
+        description="Modèle attestation de travail Maroc : remplissez le formulaire et téléchargez votre attestation de travail conforme au format PDF en quelques clics, 100% gratuit."
+        canonicalUrl="https://kaghit.com/attestation-de-travail"
+      />
+
       <PageHeading
         title="Attestation de travail"
         description="Remplissez le formulaire ci-dessous. Le document PDF est généré entièrement dans votre navigateur — aucune donnée n'est envoyée sur un serveur."
@@ -586,6 +636,45 @@ const AttestationDeTravailPage: React.FC = () => {
           </p>
         </div>
       </div>
+
+      {/* ── Informational / SEO Section ── */}
+      <section className="mt-16 border-t border-neutral-200 pt-12">
+        <h2 className="text-xl font-bold text-neutral-900 mb-6">
+          Tout savoir sur l'attestation de travail au Maroc
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card>
+            <h3 className="text-sm font-semibold text-neutral-900 mb-2 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary" />
+              Rôle et utilité du document
+            </h3>
+            <p className="text-xs text-neutral-600 leading-relaxed">
+              L'attestation de travail est un document officiel délivré par l'employeur certifiant qu'un salarié exerce ou a exercé une activité professionnelle au sein de l'entreprise. Elle formalise l'existence du contrat de travail, l'ancienneté ainsi que le poste occupé.
+            </p>
+          </Card>
+
+          <Card>
+            <h3 className="text-sm font-semibold text-neutral-900 mb-2 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary" />
+              Utilisation fréquente au Maroc
+            </h3>
+            <p className="text-xs text-neutral-600 leading-relaxed">
+              Au Maroc, l'attestation de travail est couramment demandée pour l'ouverture d'un compte bancaire, les demandes de crédit, les dossiers de visa, les souscriptions d'assurance, ou encore pour les démarches administratives auprès de la CNSS et de la mutuelle.
+            </p>
+          </Card>
+
+          <Card>
+            <h3 className="text-sm font-semibold text-neutral-900 mb-2 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary" />
+              Valeur juridique &amp; Signature
+            </h3>
+            <p className="text-xs text-neutral-600 leading-relaxed">
+              Ce modèle en ligne permet de générer un document conforme à l'usage courant. Pour qu'il ait une valeur juridique probante, l'attestation originale doit obligatoirement être imprimée, signée par le représentant légal de l'entreprise et revêtue du cachet officiel. Cet outil ne remplace pas un conseil juridique.
+            </p>
+          </Card>
+        </div>
+      </section>
     </div>
   )
 }

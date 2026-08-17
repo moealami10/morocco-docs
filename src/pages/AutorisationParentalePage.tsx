@@ -1,6 +1,7 @@
-import React, { useState, useCallback, useMemo } from 'react'
+import React, { useState, useCallback, useMemo, useEffect } from 'react'
 import { PageHeading, Card, FormField, Button } from '../components/ui'
 import { generateAutorisationPdf } from '../lib/autorisationPdf'
+import { Seo } from '../components/Seo'
 
 // ---------------------------------------------------------------------------
 // Types
@@ -67,6 +68,38 @@ const EMPTY: AutorisationData = {
   motif: '',
   lieuEmission: '',
   dateEmission: TODAY,
+}
+
+// ---------------------------------------------------------------------------
+// Draft persistence (sessionStorage — survives page navigation within the
+// same tab, clears automatically when the tab/browser closes)
+// ---------------------------------------------------------------------------
+
+const STORAGE_KEY = 'kaghit:draft:autorisation-parentale'
+
+function loadDraft(): AutorisationData | null {
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY)
+    return raw ? { ...EMPTY, ...JSON.parse(raw) } : null
+  } catch {
+    return null
+  }
+}
+
+function saveDraft(data: AutorisationData) {
+  try {
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+  } catch {
+    // Storage unavailable (e.g. private browsing) — fail silently, not critical
+  }
+}
+
+function clearDraft() {
+  try {
+    sessionStorage.removeItem(STORAGE_KEY)
+  } catch {
+    // ignore
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -246,11 +279,17 @@ const DocumentPreview: React.FC<PreviewProps> = ({ data }) => {
 // Main page
 // ---------------------------------------------------------------------------
 const AutorisationParentalePage: React.FC = () => {
-  const [data, setData]           = useState<AutorisationData>(EMPTY)
+  const [data, setData]           = useState<AutorisationData>(() => loadDraft() ?? EMPTY)
   const [errors, setErrors]       = useState<FormErrors>({})
   const [submitted, setSubmitted] = useState(false)
   const [generating, setGenerating] = useState(false)
   const [pdfError, setPdfError]   = useState<string | null>(null)
+
+  // Persist to sessionStorage on every change so navigating away and back
+  // (or an accidental refresh) doesn't lose what was typed
+  useEffect(() => {
+    saveDraft(data)
+  }, [data])
 
   const set = useCallback(
     <K extends keyof AutorisationData>(field: K, value: AutorisationData[K]) => {
@@ -295,6 +334,11 @@ const AutorisationParentalePage: React.FC = () => {
       a.click()
       document.body.removeChild(a)
       URL.revokeObjectURL(url)
+      // Success — clear the saved draft and reset the form so sensitive
+      // data (CIN, child's info) doesn't linger in the browser
+      clearDraft()
+      setData(EMPTY)
+      setSubmitted(false)
     } catch (e) {
       console.error(e)
       setPdfError('Une erreur est survenue lors de la génération du PDF. Veuillez réessayer.')
@@ -317,6 +361,12 @@ const AutorisationParentalePage: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <Seo
+        title="Autorisation parentale voyage Maroc — Modèle gratuit à remplir"
+        description="Modèle d'autorisation parentale de voyage pour mineur au Maroc : générez et téléchargez votre document prêt à imprimer et signer, gratuit et sans inscription."
+        canonicalUrl="https://kaghit.com/autorisation-parentale"
+      />
+
       <PageHeading
         title="Autorisation parentale"
         description="Créez une autorisation parentale pour un mineur en quelques secondes. Le document PDF est généré entièrement dans votre navigateur — aucune donnée n'est transmise."
@@ -700,6 +750,45 @@ const AutorisationParentalePage: React.FC = () => {
           </p>
         </div>
       </div>
+
+      {/* ── Informational / SEO Section ── */}
+      <section className="mt-16 border-t border-neutral-200 pt-12">
+        <h2 className="text-xl font-bold text-neutral-900 mb-6">
+          Comprendre l'autorisation parentale de voyage au Maroc
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card>
+            <h3 className="text-sm font-semibold text-neutral-900 mb-2 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary" />
+              Objet de l'autorisation
+            </h3>
+            <p className="text-xs text-neutral-600 leading-relaxed">
+              L'autorisation parentale (ou autorisation de sortie du territoire) est un document officiel permettant à un enfant mineur de voyager séparément ou accompagné d'un tiers. Elle atteste formellement du consentement du parent ou tuteur légal.
+            </p>
+          </Card>
+
+          <Card>
+            <h3 className="text-sm font-semibold text-neutral-900 mb-2 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary" />
+              Exigences et contrôles aux frontières
+            </h3>
+            <p className="text-xs text-neutral-600 leading-relaxed">
+              Au Maroc, ce document est systématiquement demandé lors du passage aux frontières pour tout voyage international d'un mineur non accompagné de ses deux parents. Il est aussi requis lors des sorties scolaires, colonies de vacances ou compétitions sportives.
+            </p>
+          </Card>
+
+          <Card>
+            <h3 className="text-sm font-semibold text-neutral-900 mb-2 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary" />
+              Légalisation à la commune (Moqataa)
+            </h3>
+            <p className="text-xs text-neutral-600 leading-relaxed">
+              Pour être juridiquement recevable au Maroc et à l'étranger, la signature du parent sur ce document imprimé doit obligatoirement être légalisée auprès des autorités locales (Moqataa / commune). Cet outil ne remplace pas un conseil juridique professionnel.
+            </p>
+          </Card>
+        </div>
+      </section>
     </div>
   )
 }
