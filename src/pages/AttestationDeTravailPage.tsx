@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react'
-import { PageHeading, Card, FormField, Input, Button } from '../components/ui'
+import { PageHeading, Card, FormField, Button } from '../components/ui'
 import { generateAttestationPdf } from '../lib/attestationPdf'
 
 // ---------------------------------------------------------------------------
@@ -254,7 +254,7 @@ const AttestationDeTravailPage: React.FC = () => {
     setPdfError(null)
     try {
       const bytes = await generateAttestationPdf(data)
-      const blob = new Blob([bytes], { type: 'application/pdf' })
+      const blob = new Blob([bytes.buffer as ArrayBuffer], { type: 'application/pdf' })
       const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url

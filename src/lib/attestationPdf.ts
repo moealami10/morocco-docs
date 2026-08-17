@@ -260,7 +260,7 @@ export async function generateAttestationPdf(data: AttestationData): Promise<Uin
 
   const footerY = MARGIN_BOTTOM + 6
   const disclaimer =
-    "Document généré via Wraqi.ma. Ce document doit être imprimé, signé et tamponné par l'employeur pour être valide."
+    "Document généré via Kaghit.com. Ce document doit être imprimé, signé et tamponné par l'employeur pour être valide."
   const disclaimerSize = 7.5
   const disclaimerWidth = fontOblique.widthOfTextAtSize(disclaimer, disclaimerSize)
 
