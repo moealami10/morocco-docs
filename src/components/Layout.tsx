@@ -34,7 +34,7 @@ const Header: React.FC = () => {
           <Link
             to="/"
             className="flex items-center gap-2 group"
-            aria-label="Wraqi.ma — accueil"
+            aria-label="Kaghit.ma — accueil"
           >
             {/* Icon mark */}
             <span
@@ -44,7 +44,7 @@ const Header: React.FC = () => {
               W
             </span>
             <span className="text-lg font-bold tracking-tight text-neutral-900">
-              Wraqi
+              Kaghit
               <span className="text-primary">.ma</span>
             </span>
           </Link>
@@ -129,7 +129,7 @@ const Footer: React.FC = () => {
             to="/"
             className="text-sm font-bold text-neutral-900 hover:text-primary transition-colors duration-150 shrink-0"
           >
-            Wraqi<span className="text-primary">.ma</span>
+            Kaghit<span className="text-primary">.ma</span>
           </Link>
 
           {/* Disclaimer */}
@@ -141,7 +141,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="mt-6 pt-4 border-t border-neutral-100 text-xs text-neutral-400">
-          © {year} Wraqi.ma — Tous droits réservés.
+          © {year} Kaghit.ma — Tous droits réservés.
         </div>
       </div>
     </footer>
