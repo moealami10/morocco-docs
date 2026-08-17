@@ -41,7 +41,7 @@ const Header: React.FC = () => {
               className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white font-bold text-sm select-none group-hover:bg-primary-600 transition-colors duration-150"
               aria-hidden="true"
             >
-              W
+              K
             </span>
             <span className="text-lg font-bold tracking-tight text-neutral-900">
               Kaghit
