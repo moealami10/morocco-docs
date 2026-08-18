@@ -363,7 +363,7 @@ const AutorisationParentalePage: React.FC = () => {
 
       <PageHeading
         title="Autorisation parentale"
-        description="Créez une autorisation parentale pour un mineur en quelques secondes. Le document PDF est généré entièrement dans votre navigateur — aucune donnée n'est transmise."
+        description="Créez une autorisation parentale pour un mineur en quelques secondes. Le document PDF est généré dans votre navigateur. Vos informations restent dans votre navigateur et ne sont pas envoyées à nos serveurs."
         icon={
           <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -454,6 +454,7 @@ const AutorisationParentalePage: React.FC = () => {
                   <input
                     id="nomParent"
                     type="text"
+                    maxLength={60}
                     value={data.nomParent}
                     onChange={(e) => set('nomParent', e.target.value)}
                     placeholder="Mohammed El Amrani"
@@ -485,6 +486,7 @@ const AutorisationParentalePage: React.FC = () => {
                 <input
                   id="cinParent"
                   type="text"
+                  maxLength={20}
                   value={data.cinParent}
                   onChange={(e) => set('cinParent', e.target.value.toUpperCase())}
                   placeholder="AB123456"
@@ -498,6 +500,7 @@ const AutorisationParentalePage: React.FC = () => {
                 <input
                   id="adresseParent"
                   type="text"
+                  maxLength={100}
                   value={data.adresseParent}
                   onChange={(e) => set('adresseParent', e.target.value)}
                   placeholder="12, Rue des Roses, Quartier Palmier, Casablanca"
@@ -511,6 +514,7 @@ const AutorisationParentalePage: React.FC = () => {
                 <input
                   id="telephoneParent"
                   type="tel"
+                  maxLength={30}
                   value={data.telephoneParent}
                   onChange={(e) => set('telephoneParent', e.target.value)}
                   placeholder="+212 6 12 34 56 78"
@@ -533,6 +537,7 @@ const AutorisationParentalePage: React.FC = () => {
                 <input
                   id="nomEnfant"
                   type="text"
+                  maxLength={60}
                   value={data.nomEnfant}
                   onChange={(e) => set('nomEnfant', e.target.value)}
                   placeholder="Youssef El Amrani"
@@ -568,6 +573,7 @@ const AutorisationParentalePage: React.FC = () => {
                 <input
                   id="cinEnfant"
                   type="text"
+                  maxLength={30}
                   value={data.cinEnfant}
                   onChange={(e) => set('cinEnfant', e.target.value.toUpperCase())}
                   placeholder="Numéro acte de naissance ou CIN"
@@ -588,6 +594,7 @@ const AutorisationParentalePage: React.FC = () => {
                 <input
                   id="motif"
                   type="text"
+                  maxLength={150}
                   value={data.motif}
                   onChange={(e) => set('motif', e.target.value)}
                   placeholder="voyager en France pour des vacances en famille"
@@ -608,6 +615,7 @@ const AutorisationParentalePage: React.FC = () => {
                   <input
                     id="destination"
                     type="text"
+                    maxLength={150}
                     value={data.destination}
                     onChange={(e) => set('destination', e.target.value)}
                     placeholder="Paris, France"
@@ -628,6 +636,7 @@ const AutorisationParentalePage: React.FC = () => {
                 <input
                   id="datesSejour"
                   type="text"
+                  maxLength={150}
                   value={data.datesSejour}
                   onChange={(e) => set('datesSejour', e.target.value)}
                   placeholder="du 10 au 20 août 2026"
@@ -646,6 +655,7 @@ const AutorisationParentalePage: React.FC = () => {
                 <input
                   id="accompagnePar"
                   type="text"
+                  maxLength={60}
                   value={data.accompagnePar}
                   onChange={(e) => set('accompagnePar', e.target.value)}
                   placeholder="Khadija Benali (tante)"
@@ -669,6 +679,7 @@ const AutorisationParentalePage: React.FC = () => {
                 <input
                   id="lieuEmission"
                   type="text"
+                  maxLength={60}
                   value={data.lieuEmission}
                   onChange={(e) => set('lieuEmission', e.target.value)}
                   placeholder="Casablanca"

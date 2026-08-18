@@ -22,10 +22,13 @@ function saveProgress(state: Record<number, boolean>) {
   }
 }
 
+type TagType = 'Obligation légale' | 'Généralement demandé' | 'Recommandé' | 'Dépend du cas'
+
 interface StepItem {
   id: number
   title: string
   context: string
+  tag: TagType
   linkText?: string
   linkTo?: string
   isExternal?: boolean
@@ -35,7 +38,8 @@ const STEPS: StepItem[] = [
   {
     id: 1,
     title: 'Obtenir votre casier judiciaire',
-    context: 'Obligatoire pour la plupart des dossiers d\'embauche afin d\'attester de votre situation judiciaire (bulletin n°3).',
+    context: 'Fréquemment demandé par les employeurs lors d\'une embauche afin d\'attester de votre situation judiciaire (bulletin n°3).',
+    tag: 'Généralement demandé',
     linkText: 'Consulter le guide casier judiciaire →',
     linkTo: '/guides/casier-judiciaire',
   },
@@ -43,17 +47,32 @@ const STEPS: StepItem[] = [
     id: 2,
     title: 'Générer votre attestation de travail si vous en avez besoin pour le dossier',
     context: 'Si vous êtes déjà en poste ou devez prouver votre ancienneté auprès d\'un futur employeur.',
+    tag: 'Dépend du cas',
     linkText: 'Générer l\'attestation de travail →',
     linkTo: '/attestation-de-travail',
   },
   {
     id: 3,
     title: 'Préparer une photo d\'identité aux normes si le dossier en demande une',
-    context: 'Au format officiel 35×45 mm à joindre à votre fiche de candidature ou badge d\'entreprise.',
+    context: 'Au format standard 35×45 mm à joindre à votre fiche de candidature ou badge d\'entreprise.',
+    tag: 'Recommandé',
     linkText: 'Formater votre photo d\'identité →',
     linkTo: '/photo-cin',
   },
 ]
+
+function getTagBadgeStyle(tag: TagType): string {
+  switch (tag) {
+    case 'Obligation légale':
+      return 'bg-amber-50 text-amber-800 border-amber-200'
+    case 'Généralement demandé':
+      return 'bg-blue-50 text-blue-800 border-blue-200'
+    case 'Recommandé':
+      return 'bg-emerald-50 text-emerald-800 border-emerald-200'
+    case 'Dépend du cas':
+      return 'bg-neutral-100 text-neutral-700 border-neutral-200'
+  }
+}
 
 const GoalTrouverEmploiPage: React.FC = () => {
   const [checkedSteps, setCheckedSteps] = useState<Record<number, boolean>>(() => loadProgress())
@@ -152,10 +171,16 @@ const GoalTrouverEmploiPage: React.FC = () => {
                 </button>
 
                 <div className="flex-1">
-                  <div className="flex items-center justify-between gap-2">
-                    <h3 className={`text-base font-bold ${isDone ? 'line-through text-neutral-500' : 'text-neutral-900'}`}>
-                      {step.title}
-                    </h3>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h3 className={`text-base font-bold ${isDone ? 'line-through text-neutral-500' : 'text-neutral-900'}`}>
+                        {step.title}
+                      </h3>
+                      <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded border ${getTagBadgeStyle(step.tag)}`}>
+                        {step.tag}
+                      </span>
+                    </div>
+
                     <label className="flex items-center gap-1.5 cursor-pointer text-xs font-medium text-neutral-500 hover:text-neutral-900 select-none">
                       <input
                         type="checkbox"

@@ -22,10 +22,13 @@ function saveProgress(state: Record<number, boolean>) {
   }
 }
 
+type TagType = 'Obligation légale' | 'Généralement demandé' | 'Recommandé' | 'Dépend du cas'
+
 interface StepItem {
   id: number
   title: string
   context: string
+  tag: TagType
   linkText?: string
   linkTo?: string
 }
@@ -34,12 +37,14 @@ const STEPS: StepItem[] = [
   {
     id: 1,
     title: 'Vérifier si l\'autorisation est nécessaire',
-    context: 'Si les deux parents voyagent ensemble avec l\'enfant, aucune autorisation parentale n\'est requise, seul le passeport valide de l\'enfant est exigé.',
+    context: 'Si les deux parents voyagent ensemble avec l\'enfant, aucune autorisation parentale n\'est en principe requise (selon la destination et la compagnie aérienne, vérifiez toujours leurs exigences spécifiques), seul le passeport valide de l\'enfant est exigé.',
+    tag: 'Dépend du cas',
   },
   {
     id: 2,
     title: 'Générer l\'autorisation parentale',
     context: 'Indispensable si l\'enfant voyage seul ou accompagné d\'un seul parent ou d\'un membre de la famille.',
+    tag: 'Obligation légale',
     linkText: 'Générer l\'autorisation parentale →',
     linkTo: '/autorisation-parentale',
   },
@@ -47,15 +52,30 @@ const STEPS: StepItem[] = [
     id: 3,
     title: 'Faire légaliser la signature',
     context: 'À la commune ou Moqataa de votre domicile muni de votre CIN afin de rendre l\'autorisation légalement valide.',
+    tag: 'Obligation légale',
   },
   {
     id: 4,
     title: 'Préparer une photo d\'identité si un document de voyage est aussi à renouveler',
-    context: 'Au format officiel 35×45 mm pour la demande ou le renouvellement du passeport biométrique du mineur.',
+    context: 'Au format standard 35×45 mm pour la demande ou le renouvellement du passeport biométrique du mineur.',
+    tag: 'Dépend du cas',
     linkText: 'Formater la photo du passeport →',
     linkTo: '/photo-cin',
   },
 ]
+
+function getTagBadgeStyle(tag: TagType): string {
+  switch (tag) {
+    case 'Obligation légale':
+      return 'bg-amber-50 text-amber-800 border-amber-200'
+    case 'Généralement demandé':
+      return 'bg-blue-50 text-blue-800 border-blue-200'
+    case 'Recommandé':
+      return 'bg-emerald-50 text-emerald-800 border-emerald-200'
+    case 'Dépend du cas':
+      return 'bg-neutral-100 text-neutral-700 border-neutral-200'
+  }
+}
 
 const GoalVoyagerEnfantPage: React.FC = () => {
   const [checkedSteps, setCheckedSteps] = useState<Record<number, boolean>>(() => loadProgress())
@@ -156,10 +176,16 @@ const GoalVoyagerEnfantPage: React.FC = () => {
                 </button>
 
                 <div className="flex-1">
-                  <div className="flex items-center justify-between gap-2">
-                    <h3 className={`text-base font-bold ${isDone ? 'line-through text-neutral-500' : 'text-neutral-900'}`}>
-                      {step.title}
-                    </h3>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h3 className={`text-base font-bold ${isDone ? 'line-through text-neutral-500' : 'text-neutral-900'}`}>
+                        {step.title}
+                      </h3>
+                      <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded border ${getTagBadgeStyle(step.tag)}`}>
+                        {step.tag}
+                      </span>
+                    </div>
+
                     <label className="flex items-center gap-1.5 cursor-pointer text-xs font-medium text-neutral-500 hover:text-neutral-900 select-none">
                       <input
                         type="checkbox"

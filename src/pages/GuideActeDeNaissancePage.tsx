@@ -74,11 +74,31 @@ const GuideActeDeNaissancePage: React.FC = () => {
     },
   ]
 
-  const sources = [
-    'Agence de Développement du Digital — add.gov.ma/watiqa',
-    'Le Matin.ma — "Lancement officiel du portail watiqa.ma"',
-    'demarchesmaroc.com — "Obtenir un acte de naissance au Maroc"',
-    'Loi n° 37-99 relative à l\'état civil, et son décret d\'application n° 2-99-665 (articles 15-17)',
+  const SOURCES = [
+    {
+      name: 'Agence de Développement du Digital',
+      url: 'https://add.gov.ma',
+      detail: 'add.gov.ma/watiqa (guichet électronique watiqa.ma)',
+      verifiedDate: '18 août 2026',
+    },
+    {
+      name: 'Le Matin.ma',
+      url: 'https://lematin.ma',
+      detail: '"Lancement officiel du portail watiqa.ma"',
+      verifiedDate: '18 août 2026',
+    },
+    {
+      name: 'demarchesmaroc.com',
+      url: 'https://demarchesmaroc.com',
+      detail: '"Obtenir un acte de naissance au Maroc"',
+      verifiedDate: '18 août 2026',
+    },
+    {
+      name: 'Loi n° 37-99 relative à l\'état civil',
+      url: undefined,
+      detail: 'et son décret d\'application n° 2-99-665 (articles 15-17)',
+      verifiedDate: '18 août 2026',
+    },
   ]
 
   return (
@@ -209,7 +229,7 @@ const GuideActeDeNaissancePage: React.FC = () => {
                 Besoin aussi d'une photo d'identité aux normes ?
               </p>
               <p className="text-xs text-neutral-600 mt-0.5">
-                Recadrez la vôtre gratuitement au format officiel marocain 35×45 mm.
+                Recadrez la vôtre gratuitement au format 35×45 mm.
               </p>
             </div>
           </div>
@@ -223,8 +243,22 @@ const GuideActeDeNaissancePage: React.FC = () => {
         <div className="mt-10 pt-6 border-t border-neutral-100 text-xs text-neutral-400">
           <p className="font-semibold text-neutral-500 mb-2">Sources officielles &amp; références :</p>
           <ul className="list-disc list-inside space-y-1 text-[11px] leading-relaxed">
-            {sources.map((src, i) => (
-              <li key={i}>{src}</li>
+            {SOURCES.map((src, i) => (
+              <li key={i}>
+                {src.url ? (
+                  <a
+                    href={src.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-bold text-neutral-700 hover:text-primary transition-colors underline"
+                  >
+                    {src.name}
+                  </a>
+                ) : (
+                  <strong className="font-bold text-neutral-700">{src.name}</strong>
+                )}{' '}
+                — {src.detail} · <span className="italic text-neutral-400">Vérifié : {src.verifiedDate}</span>
+              </li>
             ))}
           </ul>
         </div>

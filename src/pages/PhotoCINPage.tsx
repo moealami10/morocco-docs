@@ -119,14 +119,14 @@ const PhotoCINPage: React.FC = () => {
   return (
     <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
       <Seo
-        title="Photo CIN / Passeport Maroc aux normes — Redimensionner en ligne"
-        description="Format officiel photo CIN Maroc (35×45 mm, 300 DPI) : cadrez et redimensionnez votre photo d'identité en ligne gratuitement pour CIN et passeport marocain."
+        title="Photo CIN / Passeport Maroc (35×45 mm) — Redimensionner en ligne"
+        description="Format photo CIN Maroc (35×45 mm, 300 DPI) : cadrez et redimensionnez votre photo d'identité en ligne gratuitement. Vos informations restent dans votre navigateur et ne sont pas envoyées à nos serveurs."
         canonicalUrl="https://kaghit.com/photo-cin"
       />
 
       <PageHeading
         title="Photo CIN / Passeport"
-        description="Recadrez et adaptez facilement votre photo d'identité au format officiel marocain (35 × 45 mm, 300 DPI) directement depuis votre navigateur."
+        description="Recadrez et adaptez facilement votre photo d'identité au format standard 35 × 45 mm (300 DPI). Vos informations restent dans votre navigateur et ne sont pas envoyées à nos serveurs."
         icon={
           <svg
             className="w-6 h-6"
@@ -151,7 +151,7 @@ const PhotoCINPage: React.FC = () => {
           <svg className="w-5 h-5 text-primary shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clipRule="evenodd" />
           </svg>
-          Recommandations pour une photo conforme (norme officielle)
+          Recommandations pour une photo au format standard (35 × 45 mm)
         </h2>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-neutral-600">
           <li className="flex items-center gap-2">

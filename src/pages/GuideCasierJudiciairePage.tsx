@@ -83,10 +83,25 @@ const GuideCasierJudiciairePage: React.FC = () => {
     },
   ]
 
-  const sources = [
-    'Ministère de la Justice — portail officiel casierjudiciaire.justice.gov.ma',
-    'demarchesmaroc.com — "Le casier judiciaire : demande au Maroc et à l\'étranger"',
-    'avocatrabat.com — "Casier judiciaire marocain pour les étrangers"',
+  const SOURCES = [
+    {
+      name: 'Ministère de la Justice — portail officiel casierjudiciaire.justice.gov.ma',
+      url: 'https://casierjudiciaire.justice.gov.ma',
+      detail: 'Demande de casier judiciaire en ligne (bulletin n°3)',
+      verifiedDate: '18 août 2026',
+    },
+    {
+      name: 'demarchesmaroc.com',
+      url: 'https://demarchesmaroc.com',
+      detail: '"Le casier judiciaire : demande au Maroc et à l\'étranger"',
+      verifiedDate: '18 août 2026',
+    },
+    {
+      name: 'avocatrabat.com',
+      url: 'https://avocatrabat.com',
+      detail: '"Casier judiciaire marocain pour les étrangers"',
+      verifiedDate: '18 août 2026',
+    },
   ]
 
   return (
@@ -232,8 +247,18 @@ const GuideCasierJudiciairePage: React.FC = () => {
         <div className="mt-10 pt-6 border-t border-neutral-100 text-xs text-neutral-400">
           <p className="font-semibold text-neutral-500 mb-2">Sources officielles &amp; références :</p>
           <ul className="list-disc list-inside space-y-1 text-[11px] leading-relaxed">
-            {sources.map((src, i) => (
-              <li key={i}>{src}</li>
+            {SOURCES.map((src, i) => (
+              <li key={i}>
+                <a
+                  href={src.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-neutral-700 hover:text-primary transition-colors underline"
+                >
+                  {src.name}
+                </a>{' '}
+                — {src.detail} · <span className="italic text-neutral-400">Vérifié : {src.verifiedDate}</span>
+              </li>
             ))}
           </ul>
         </div>

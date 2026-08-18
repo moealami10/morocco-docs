@@ -20,7 +20,7 @@ const TOOLS: Tool[] = [
     to: '/attestation-de-travail',
     title: 'Attestation de travail',
     description:
-      'Générez une attestation de travail officielle au nom de votre employé en quelques secondes — prête à imprimer et à signer.',
+      'Générez un modèle d\'attestation de travail personnalisable au nom de votre employé en quelques secondes — prêt à imprimer et à signer.',
     icon: (
       <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -51,7 +51,7 @@ const TOOLS: Tool[] = [
     to: '/photo-cin',
     title: 'Photo CIN',
     description:
-      'Redimensionnez et formatez votre photo au standard CIN marocain (35×45 mm, fond blanc) directement depuis votre navigateur.',
+      'Redimensionnez et formatez votre photo au format standard (35×45 mm, fond blanc) directement depuis votre navigateur.',
     icon: (
       <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -208,7 +208,7 @@ const HomePage: React.FC = () => {
       {/* ── How it works strip ── */}
       <section
         aria-labelledby="comment-heading"
-        className="border-t border-neutral-100 bg-neutral-50"
+        className="border-t border-b border-neutral-100 bg-neutral-50"
       >
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-14 sm:py-18">
           <h2
@@ -248,6 +248,41 @@ const HomePage: React.FC = () => {
             ))}
           </ol>
         </div>
+      </section>
+
+      {/* ── Trust Section ── */}
+      <section className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
+        <Card className="p-6 sm:p-10 bg-neutral-50/80 border-neutral-200">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 shrink-0">
+              <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fillRule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <h2 className="text-xl font-bold text-neutral-900">
+              Vos données restent privées.
+            </h2>
+          </div>
+
+          <ul className="space-y-3 text-sm text-neutral-800 font-medium mb-8">
+            <li className="flex items-center gap-2.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" aria-hidden="true" />
+              Aucune inscription.
+            </li>
+            <li className="flex items-center gap-2.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" aria-hidden="true" />
+              Les documents sont générés directement dans votre navigateur.
+            </li>
+            <li className="flex items-center gap-2.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" aria-hidden="true" />
+              Vos informations personnelles ne sont pas envoyées à nos serveurs pour générer les documents.
+            </li>
+          </ul>
+
+          <div className="p-4 rounded-xl bg-white border border-neutral-200/80 text-xs text-neutral-600 leading-relaxed">
+            Kaghit n'est pas un service gouvernemental. Nous vous aidons à préparer et comprendre vos démarches administratives, et nous indiquons toujours nos sources officielles.
+          </div>
+        </Card>
       </section>
     </>
   )

@@ -343,13 +343,13 @@ const AttestationDeTravailPage: React.FC = () => {
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
       <Seo
         title="Attestation de travail Maroc — Générateur gratuit en ligne"
-        description="Modèle attestation de travail Maroc : remplissez le formulaire et téléchargez votre attestation de travail conforme au format PDF en quelques clics, 100% gratuit."
+        description="Modèle d'attestation de travail Maroc : remplissez le formulaire et téléchargez votre attestation au format PDF en quelques clics, 100% gratuit."
         canonicalUrl="https://kaghit.com/attestation-de-travail"
       />
 
       <PageHeading
         title="Attestation de travail"
-        description="Remplissez le formulaire ci-dessous. Le document PDF est généré entièrement dans votre navigateur — aucune donnée n'est envoyée sur un serveur."
+        description="Remplissez le formulaire ci-dessous. Le document PDF est généré dans votre navigateur. Vos informations restent dans votre navigateur et ne sont pas envoyées à nos serveurs."
         icon={
           <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -391,6 +391,7 @@ const AttestationDeTravailPage: React.FC = () => {
                 <input
                   id="nomEntreprise"
                   type="text"
+                  maxLength={100}
                   value={data.nomEntreprise}
                   onChange={(e) => set('nomEntreprise', e.target.value)}
                   placeholder="Société Exemple SARL"
@@ -404,6 +405,7 @@ const AttestationDeTravailPage: React.FC = () => {
                 <input
                   id="adresseEntreprise"
                   type="text"
+                  maxLength={100}
                   value={data.adresseEntreprise}
                   onChange={(e) => set('adresseEntreprise', e.target.value)}
                   placeholder="123, Boulevard Mohammed V, Casablanca"
@@ -417,6 +419,7 @@ const AttestationDeTravailPage: React.FC = () => {
                 <input
                   id="iceEntreprise"
                   type="text"
+                  maxLength={20}
                   value={data.iceEntreprise}
                   onChange={(e) => set('iceEntreprise', e.target.value)}
                   placeholder="000000000000000"
@@ -437,6 +440,7 @@ const AttestationDeTravailPage: React.FC = () => {
                 <input
                   id="nomSignataire"
                   type="text"
+                  maxLength={60}
                   value={data.nomSignataire}
                   onChange={(e) => set('nomSignataire', e.target.value)}
                   placeholder="Ahmed El Alami"
@@ -450,6 +454,7 @@ const AttestationDeTravailPage: React.FC = () => {
                 <input
                   id="qualiteSignataire"
                   type="text"
+                  maxLength={80}
                   value={data.qualiteSignataire}
                   onChange={(e) => set('qualiteSignataire', e.target.value)}
                   placeholder="Directeur des Ressources Humaines"
@@ -472,6 +477,7 @@ const AttestationDeTravailPage: React.FC = () => {
                 <input
                   id="nomEmploye"
                   type="text"
+                  maxLength={60}
                   value={data.nomEmploye}
                   onChange={(e) => set('nomEmploye', e.target.value)}
                   placeholder="Fatima Zahra Benali"
@@ -486,6 +492,7 @@ const AttestationDeTravailPage: React.FC = () => {
                   <input
                     id="cinEmploye"
                     type="text"
+                    maxLength={20}
                     value={data.cinEmploye}
                     onChange={(e) => set('cinEmploye', e.target.value.toUpperCase())}
                     placeholder="AB123456"
@@ -499,6 +506,7 @@ const AttestationDeTravailPage: React.FC = () => {
                   <input
                     id="noCnss"
                     type="text"
+                    maxLength={20}
                     value={data.noCnss}
                     onChange={(e) => set('noCnss', e.target.value)}
                     placeholder="1234567"
@@ -512,6 +520,7 @@ const AttestationDeTravailPage: React.FC = () => {
                   <input
                     id="posteOccupe"
                     type="text"
+                    maxLength={80}
                     value={data.posteOccupe}
                     onChange={(e) => set('posteOccupe', e.target.value)}
                     placeholder="Ingénieur logiciel"
@@ -566,6 +575,7 @@ const AttestationDeTravailPage: React.FC = () => {
                       <input
                         id="salaireBrut"
                         type="text"
+                        maxLength={20}
                         value={data.salaireBrut}
                         onChange={(e) => set('salaireBrut', e.target.value)}
                         placeholder="12 500"
@@ -640,6 +650,7 @@ const AttestationDeTravailPage: React.FC = () => {
                 <input
                   id="lieuEmission"
                   type="text"
+                  maxLength={60}
                   value={data.lieuEmission}
                   onChange={(e) => set('lieuEmission', e.target.value)}
                   placeholder="Casablanca"

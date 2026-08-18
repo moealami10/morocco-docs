@@ -22,10 +22,13 @@ function saveProgress(state: Record<number, boolean>) {
   }
 }
 
+type TagType = 'Obligation légale' | 'Généralement demandé' | 'Recommandé' | 'Dépend du cas'
+
 interface StepItem {
   id: number
   title: string
   context: string
+  tag: TagType
   linkText?: string
   linkTo?: string
   isExternal?: boolean
@@ -36,11 +39,13 @@ const STEPS: StepItem[] = [
     id: 1,
     title: 'Vérifier le motif et la déclaration en cas de perte/vol',
     context: 'En cas de perte ou vol, rendez-vous à la police/gendarmerie pour obtenir la déclaration. En cas d\'expiration ou changement d\'adresse, préparez votre ancienne CIN et justificatifs.',
+    tag: 'Obligation légale',
   },
   {
     id: 2,
     title: 'Prendre rendez-vous en ligne sur le portail cnie.ma',
-    context: 'La pré-demande et la prise de rendez-vous en ligne sur le portail officiel de la DGSN sont obligatoires avant tout déplacement.',
+    context: 'La pré-demande et la prise de rendez-vous en ligne sur le portail officiel de la DGSN sont obligatoires depuis septembre 2020 avant tout déplacement.',
+    tag: 'Obligation légale',
     linkText: 'Accéder au portail officiel cnie.ma ↗',
     linkTo: 'https://www.cnie.ma',
     isExternal: true,
@@ -48,7 +53,8 @@ const STEPS: StepItem[] = [
   {
     id: 3,
     title: 'Préparer la photo d\'identité aux normes (35×45 mm)',
-    context: 'Format officiel 35×45 mm sur fond clair, visage centré sans ombres ni reflets.',
+    context: 'Format standard 35×45 mm sur fond clair, visage centré sans ombres ni reflets.',
+    tag: 'Obligation légale',
     linkText: 'Formater votre photo CIN →',
     linkTo: '/photo-cin',
   },
@@ -56,15 +62,49 @@ const STEPS: StepItem[] = [
     id: 4,
     title: 'Déposer le dossier (75 DH) et obtenir le récépissé provisoire',
     context: 'Réglez les frais de 75 DH en guichet et conservez le récépissé provisoire valable 3 mois.',
+    tag: 'Obligation légale',
   },
 ]
 
-const sources = [
-  'cnie.ma — portail officiel de la DGSN pour la prise de rendez-vous et la pré-demande (vérifié directement, y compris le tarif de 75 DH et l\'obligation de rendez-vous en ligne depuis 2020)',
-  'demarchesmaroc.com — "Carte d\'identité nationale (CIN)" et "Comment obtenir votre CNIE"',
-  'guidedumaroc.com — FAQ Carte d\'Identité Nationale (CIN) (source de la mention sur la délocalisation par commune, non confirmée sur une page officielle)',
-  'chhiwat.ma — "CIN Maroc : rendez-vous, demande et démarche de renouvellement"',
+const SOURCES = [
+  {
+    name: 'cnie.ma — portail officiel de la DGSN',
+    url: 'https://www.cnie.ma',
+    detail: 'Prise de rendez-vous et pré-demande (tarif 75 DH et RDV obligatoire depuis 2020)',
+    verifiedDate: '18 août 2026',
+  },
+  {
+    name: 'demarchesmaroc.com',
+    url: 'https://demarchesmaroc.com',
+    detail: '"Carte d\'identité nationale (CIN)" et "Comment obtenir votre CNIE"',
+    verifiedDate: '18 août 2026',
+  },
+  {
+    name: 'guidedumaroc.com',
+    url: 'https://guidedumaroc.com',
+    detail: 'FAQ Carte d\'Identité Nationale (CIN) (délocalisation par commune non confirmée sur page officielle)',
+    verifiedDate: '18 août 2026',
+  },
+  {
+    name: 'chhiwat.ma',
+    url: 'https://chhiwat.ma',
+    detail: '"CIN Maroc : rendez-vous, demande et démarche de renouvellement"',
+    verifiedDate: '18 août 2026',
+  },
 ]
+
+function getTagBadgeStyle(tag: TagType): string {
+  switch (tag) {
+    case 'Obligation légale':
+      return 'bg-amber-50 text-amber-800 border-amber-200'
+    case 'Généralement demandé':
+      return 'bg-blue-50 text-blue-800 border-blue-200'
+    case 'Recommandé':
+      return 'bg-emerald-50 text-emerald-800 border-emerald-200'
+    case 'Dépend du cas':
+      return 'bg-neutral-100 text-neutral-700 border-neutral-200'
+  }
+}
 
 const GoalRenouvelerCinPage: React.FC = () => {
   const [checkedSteps, setCheckedSteps] = useState<Record<number, boolean>>(() => loadProgress())
@@ -149,10 +189,16 @@ const GoalRenouvelerCinPage: React.FC = () => {
                 </button>
 
                 <div className="flex-1">
-                  <div className="flex items-center justify-between gap-2">
-                    <h3 className={`text-xs font-bold ${isDone ? 'line-through text-neutral-500' : 'text-neutral-900'}`}>
-                      Étape {step.id} : {step.title}
-                    </h3>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h3 className={`text-xs font-bold ${isDone ? 'line-through text-neutral-500' : 'text-neutral-900'}`}>
+                        Étape {step.id} : {step.title}
+                      </h3>
+                      <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded border ${getTagBadgeStyle(step.tag)}`}>
+                        {step.tag}
+                      </span>
+                    </div>
+
                     <label className="flex items-center gap-1 cursor-pointer text-[11px] font-medium text-neutral-500 hover:text-neutral-900 select-none">
                       <input
                         type="checkbox"
@@ -282,7 +328,7 @@ const GoalRenouvelerCinPage: React.FC = () => {
                 Besoin d'une photo aux normes pour votre nouvelle CIN ?
               </p>
               <p className="text-xs text-neutral-600 mt-0.5">
-                Recadrez la vôtre gratuitement au format officiel 35×45 mm.
+                Recadrez la vôtre gratuitement au format standard 35×45 mm.
               </p>
             </div>
           </div>
@@ -296,8 +342,18 @@ const GoalRenouvelerCinPage: React.FC = () => {
         <div className="mt-10 pt-6 border-t border-neutral-100 text-xs text-neutral-400">
           <p className="font-semibold text-neutral-500 mb-2">Sources officielles &amp; références :</p>
           <ul className="list-disc list-inside space-y-1 text-[11px] leading-relaxed">
-            {sources.map((src, i) => (
-              <li key={i}>{src}</li>
+            {SOURCES.map((src, i) => (
+              <li key={i}>
+                <a
+                  href={src.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-neutral-700 hover:text-primary transition-colors underline"
+                >
+                  {src.name}
+                </a>{' '}
+                — {src.detail} · <span className="italic text-neutral-400">Vérifié : {src.verifiedDate}</span>
+              </li>
             ))}
           </ul>
         </div>
