@@ -14,6 +14,7 @@ const NAV_ITEMS: NavItem[] = [
   { to: '/autorisation-parentale', label: 'Autorisation parentale' },
   { to: '/photo-cin', label: 'Photo CIN' },
   { to: '/guides', label: 'Guides' },
+  { to: '/objectifs', label: 'Objectifs' },
 ]
 
 // ---------------------------------------------------------------------------
