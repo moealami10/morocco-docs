@@ -71,8 +71,7 @@ const EMPTY: AutorisationData = {
 }
 
 // ---------------------------------------------------------------------------
-// Draft persistence (sessionStorage — survives page navigation within the
-// same tab, clears automatically when the tab/browser closes)
+// Draft persistence (sessionStorage)
 // ---------------------------------------------------------------------------
 
 const STORAGE_KEY = 'kaghit:draft:autorisation-parentale'
@@ -90,7 +89,7 @@ function saveDraft(data: AutorisationData) {
   try {
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data))
   } catch {
-    // Storage unavailable (e.g. private browsing) — fail silently, not critical
+    // Storage unavailable
   }
 }
 
@@ -285,8 +284,6 @@ const AutorisationParentalePage: React.FC = () => {
   const [generating, setGenerating] = useState(false)
   const [pdfError, setPdfError]   = useState<string | null>(null)
 
-  // Persist to sessionStorage on every change so navigating away and back
-  // (or an accidental refresh) doesn't lose what was typed
   useEffect(() => {
     saveDraft(data)
   }, [data])
@@ -308,7 +305,6 @@ const AutorisationParentalePage: React.FC = () => {
   }, [submitted, data, errors])
 
   const showDestination = isTravelType(data.typeAutorisation)
-  const showIntlWarning = data.typeAutorisation === "Voyage à l'étranger"
 
   const handleDownload = async () => {
     setSubmitted(true)
@@ -334,8 +330,6 @@ const AutorisationParentalePage: React.FC = () => {
       a.click()
       document.body.removeChild(a)
       URL.revokeObjectURL(url)
-      // Success — clear the saved draft and reset the form so sensitive
-      // data (CIN, child's info) doesn't linger in the browser
       clearDraft()
       setData(EMPTY)
       setSubmitted(false)
@@ -391,6 +385,16 @@ const AutorisationParentalePage: React.FC = () => {
           aria-label="Formulaire d'autorisation parentale"
         >
 
+          {/* Informational Callout: When is authorization required */}
+          <div className="mb-6 flex items-start gap-3 rounded-xl bg-blue-50 border border-blue-100 p-4 text-xs text-blue-900">
+            <svg className="w-5 h-5 text-blue-600 mt-0.5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clipRule="evenodd" />
+            </svg>
+            <div className="leading-relaxed">
+              <strong>Quand ce document est-il nécessaire ?</strong> Ce document est requis uniquement lorsque l'enfant voyage sans être accompagné de ses deux parents titulaires de l'autorité parentale. Si les deux parents voyagent avec l'enfant, aucune autorisation n'est requise : le passeport de l'enfant suffit.
+            </div>
+          </div>
+
           {/* ── Section: Type ── */}
           <Card className="mb-6">
             <h2 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-5">
@@ -418,29 +422,24 @@ const AutorisationParentalePage: React.FC = () => {
               </div>
             </FormField>
 
-            {/* Informational warning for international travel — UI only, NOT in PDF */}
-            {showIntlWarning && (
-              <div
-                role="note"
-                aria-label="Information voyage à l'étranger"
-                className="mt-4 flex items-start gap-2.5 rounded-lg bg-amber-50 border border-amber-100 px-4 py-3"
+            {/* Informational warning for legalization — shown for ALL authorization types */}
+            <div
+              role="note"
+              aria-label="Information légalisation"
+              className="mt-4 flex items-start gap-2.5 rounded-lg bg-amber-50 border border-amber-100 px-4 py-3"
+            >
+              <svg
+                className="w-4 h-4 text-amber-500 mt-0.5 shrink-0"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
               >
-                <svg
-                  className="w-4 h-4 text-amber-500 mt-0.5 shrink-0"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path fillRule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-                </svg>
-                <div className="text-xs text-amber-700 leading-relaxed">
-                  <strong>Voyage à l'étranger :</strong> ce document peut nécessiter une légalisation
-                  auprès de la commune (ou d'un notaire) avant d'être accepté.
-                  Selon la destination et les règles du pays concerné, la signature des deux parents
-                  peut être requise. Renseignez-vous auprès des autorités compétentes.
-                </div>
+                <path fillRule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+              </svg>
+              <div className="text-xs text-amber-700 leading-relaxed">
+                <strong>Légalisation de signature :</strong> ce document peut nécessiter une légalisation auprès de la commune (Moqataa) ou d'un notaire avant d'être accepté. Selon la destination et les exigences de l'autorité destinataire, l'accord des deux parents peut être demandé.
               </div>
-            )}
+            </div>
           </Card>
 
           {/* ── Section: Parent / Tuteur ── */}
@@ -652,6 +651,9 @@ const AutorisationParentalePage: React.FC = () => {
                   placeholder="Khadija Benali (tante)"
                   className={inputCls(false)}
                 />
+                <p className="mt-1.5 text-[11px] text-neutral-500 leading-relaxed italic bg-neutral-50 p-2.5 rounded border border-neutral-100">
+                  💡 <strong>Conseil pratique :</strong> Si le nom de famille de l'enfant diffère de celui de l'adulte accompagnateur, il est vivement recommandé de vous munir d'un justificatif de filiation (acte de naissance ou livret de famille).
+                </p>
               </FormField>
             </div>
           </Card>

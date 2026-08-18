@@ -7,6 +7,9 @@ import HomePage from './pages/HomePage'
 import AttestationDeTravailPage from './pages/AttestationDeTravailPage'
 import AutorisationParentalePage from './pages/AutorisationParentalePage'
 import PhotoCINPage from './pages/PhotoCINPage'
+import GuidesIndexPage from './pages/GuidesIndexPage'
+import GuideCasierJudiciairePage from './pages/GuideCasierJudiciairePage'
+import GuideActeDeNaissancePage from './pages/GuideActeDeNaissancePage'
 import NotFoundPage from './pages/NotFoundPage'
 import { ErrorBoundary } from './components/ErrorBoundary'
 
@@ -21,6 +24,9 @@ const App: React.FC = () => {
               <Route path="/attestation-de-travail" element={<AttestationDeTravailPage />} />
               <Route path="/autorisation-parentale" element={<AutorisationParentalePage />} />
               <Route path="/photo-cin" element={<PhotoCINPage />} />
+              <Route path="/guides" element={<GuidesIndexPage />} />
+              <Route path="/guides/casier-judiciaire" element={<GuideCasierJudiciairePage />} />
+              <Route path="/guides/acte-de-naissance" element={<GuideActeDeNaissancePage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Layout>

@@ -126,8 +126,11 @@ export async function generateAttestationPdf(data: AttestationData): Promise<Uin
 
   // ── Document title ────────────────────────────────────────────────────────
 
-  const titleText = 'ATTESTATION DE TRAVAIL'
-  const titleSize = 18
+  const isSalaryIncluded = data.inclureSalaire && Boolean(data.salaireBrut?.trim())
+  const titleText = isSalaryIncluded
+    ? 'ATTESTATION DE TRAVAIL ET DE SALAIRE'
+    : 'ATTESTATION DE TRAVAIL'
+  const titleSize = 16
   const titleWidth = fontBold.widthOfTextAtSize(titleText, titleSize)
   page.drawText(titleText, {
     x: (A4_W - titleWidth) / 2,
@@ -139,7 +142,7 @@ export async function generateAttestationPdf(data: AttestationData): Promise<Uin
   y -= titleSize * 1.5
 
   // Thin underline under title
-  const underlineW = titleWidth * 1.2
+  const underlineW = titleWidth * 1.15
   page.drawLine({
     start: { x: (A4_W - underlineW) / 2, y: y + 4 },
     end:   { x: (A4_W + underlineW) / 2, y: y + 4 },
@@ -156,6 +159,7 @@ export async function generateAttestationPdf(data: AttestationData): Promise<Uin
 
   // Format dates to French locale string
   const fmt = (iso: string) => {
+    if (!iso) return '___________'
     const [y, m, d] = iso.split('-')
     const months = [
       'janvier','février','mars','avril','mai','juin',
@@ -172,14 +176,25 @@ export async function generateAttestationPdf(data: AttestationData): Promise<Uin
     ? `, affilié(e) à la CNSS sous le numéro ${data.noCnss},`
     : ''
 
+  // Build Nature du contrat fragment
+  const natureContratFrag = data.natureContrat
+    ? ` dans le cadre d'un contrat ${data.natureContrat}`
+    : ''
+
+  // Build Salary sentence fragment
+  const salaireSentence = isSalaryIncluded
+    ? ` Le salaire brut mensuel perçu par l'intéressé(e) s'élève à ${data.salaireBrut.trim()} MAD.`
+    : ''
+
   // Paragraph 1 — opening attestation
   const p1 = `Nous soussignés, ${data.nomSignataire}, agissant en qualité de ${data.qualiteSignataire} de la société ${data.nomEntreprise}, dont le siège social est situé à ${data.adresseEntreprise}, attestons par la présente que :`
   y = drawParagraph(page, p1, fontRegular, bodySize, MARGIN_X, y, bodyWidth, COLOR_DARK, lh)
   y -= 5 * MM
 
-  // Paragraph 2 — core attestation sentence
+  // Paragraph 2 — core attestation sentence with contract nature & optional salary
   const employeLabel = 'M. / Mme'
-  const p2 = `${employeLabel} ${data.nomEmploye}, titulaire de la CIN n° ${data.cinEmploye}${cnssFragment} occupe / a occupé le poste de ${data.posteOccupe} au sein de notre société à compter du ${dateDebut} ${data.toujoursEnPoste ? "et est toujours en poste à ce jour" : `jusqu'au ${dateFin}`}.`
+  const periodText = data.toujoursEnPoste ? 'et est toujours en poste à ce jour' : `jusqu'au ${dateFin}`
+  const p2 = `${employeLabel} ${data.nomEmploye}, titulaire de la CIN n° ${data.cinEmploye}${cnssFragment} occupe / a occupé le poste de ${data.posteOccupe}${natureContratFrag} au sein de notre société à compter du ${dateDebut} ${periodText}.${salaireSentence}`
   y = drawParagraph(page, p2, fontRegular, bodySize, MARGIN_X, y, bodyWidth, COLOR_DARK, lh)
   y -= 8 * MM
 
@@ -203,7 +218,6 @@ export async function generateAttestationPdf(data: AttestationData): Promise<Uin
 
   // ── Signature block ───────────────────────────────────────────────────────
 
-  // Right-aligned signatory name & quality
   const sigName = data.nomSignataire
   const sigQuality = data.qualiteSignataire
   const sigNameWidth = fontBold.widthOfTextAtSize(sigName, bodySize)
@@ -264,7 +278,6 @@ export async function generateAttestationPdf(data: AttestationData): Promise<Uin
   const disclaimerSize = 7.5
   const disclaimerWidth = fontOblique.widthOfTextAtSize(disclaimer, disclaimerSize)
 
-  // Only draw on one line if it fits; else wrap
   if (disclaimerWidth <= bodyWidth) {
     page.drawText(disclaimer, {
       x: MARGIN_X,

@@ -7,6 +7,8 @@ import { Seo } from '../components/Seo'
 // Types
 // ---------------------------------------------------------------------------
 
+export type NatureContrat = 'CDI' | 'CDD' | 'Stage' | 'Autre'
+
 export interface AttestationData {
   nomEntreprise: string
   adresseEntreprise: string
@@ -17,6 +19,9 @@ export interface AttestationData {
   cinEmploye: string
   noCnss: string
   posteOccupe: string
+  natureContrat: NatureContrat
+  inclureSalaire: boolean
+  salaireBrut: string
   dateDebut: string
   toujoursEnPoste: boolean
   dateFin: string
@@ -42,6 +47,9 @@ const EMPTY: AttestationData = {
   cinEmploye: '',
   noCnss: '',
   posteOccupe: '',
+  natureContrat: 'CDI',
+  inclureSalaire: false,
+  salaireBrut: '',
   dateDebut: '',
   toujoursEnPoste: true,
   dateFin: '',
@@ -69,7 +77,7 @@ function saveDraft(data: AttestationData) {
   try {
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data))
   } catch {
-    // Storage unavailable (e.g. private browsing) — fail silently, not critical
+    // Storage unavailable
   }
 }
 
@@ -93,18 +101,22 @@ function formatDate(iso: string): string {
 
 function validate(data: AttestationData): FormErrors {
   const err: FormErrors = {}
-  if (!data.nomEntreprise.trim())     err.nomEntreprise = 'Champ obligatoire'
-  if (!data.adresseEntreprise.trim()) err.adresseEntreprise = 'Champ obligatoire'
-  if (!data.nomSignataire.trim())     err.nomSignataire = 'Champ obligatoire'
-  if (!data.qualiteSignataire.trim()) err.qualiteSignataire = 'Champ obligatoire'
-  if (!data.nomEmploye.trim())        err.nomEmploye = 'Champ obligatoire'
-  if (!data.cinEmploye.trim())        err.cinEmploye = 'Champ obligatoire'
-  if (!data.posteOccupe.trim())       err.posteOccupe = 'Champ obligatoire'
-  if (!data.dateDebut)                err.dateDebut = 'Champ obligatoire'
+  if (!data.nomEntreprise.trim())     err.nomEntreprise = 'Ce champ est obligatoire'
+  if (!data.adresseEntreprise.trim()) err.adresseEntreprise = 'Ce champ est obligatoire'
+  if (!data.nomSignataire.trim())     err.nomSignataire = 'Ce champ est obligatoire'
+  if (!data.qualiteSignataire.trim()) err.qualiteSignataire = 'Ce champ est obligatoire'
+  if (!data.nomEmploye.trim())        err.nomEmploye = 'Ce champ est obligatoire'
+  if (!data.cinEmploye.trim())        err.cinEmploye = 'Ce champ est obligatoire'
+  if (!data.posteOccupe.trim())       err.posteOccupe = 'Ce champ est obligatoire'
+  if (!data.natureContrat)            err.natureContrat = 'Ce champ est obligatoire'
+  if (data.inclureSalaire && !data.salaireBrut.trim()) {
+    err.salaireBrut = 'Ce champ est obligatoire lorsque le salaire est inclus'
+  }
+  if (!data.dateDebut)                err.dateDebut = 'Ce champ est obligatoire'
   if (!data.toujoursEnPoste && !data.dateFin)
-    err.dateFin = `Champ obligatoire si l'employé n'est plus en poste`
-  if (!data.lieuEmission.trim())      err.lieuEmission = 'Champ obligatoire'
-  if (!data.dateEmission)             err.dateEmission = 'Champ obligatoire'
+    err.dateFin = `Ce champ est obligatoire si l'employé n'est plus en poste`
+  if (!data.lieuEmission.trim())      err.lieuEmission = 'Ce champ est obligatoire'
+  if (!data.dateEmission)             err.dateEmission = 'Ce champ est obligatoire'
   return err
 }
 
@@ -135,6 +147,8 @@ const DocumentPreview: React.FC<PreviewProps> = ({ data }) => {
     d.dateDebut ||
     d.nomSignataire
 
+  const isSalaryIncluded = d.inclureSalaire && Boolean(d.salaireBrut.trim())
+
   return (
     <div
       className="font-serif bg-white rounded-xl border border-neutral-200 shadow-card overflow-hidden"
@@ -150,6 +164,11 @@ const DocumentPreview: React.FC<PreviewProps> = ({ data }) => {
           <span className="w-2.5 h-2.5 rounded-full bg-neutral-300" />
         </span>
         <span className="text-xs text-neutral-400 font-sans ml-1">Aperçu du document</span>
+        {isSalaryIncluded && (
+          <span className="ml-auto text-[10px] font-sans font-semibold text-primary bg-primary-50 px-2 py-0.5 rounded border border-primary-100">
+            Travail &amp; Salaire
+          </span>
+        )}
       </div>
 
       {/* A4-ish body */}
@@ -177,8 +196,10 @@ const DocumentPreview: React.FC<PreviewProps> = ({ data }) => {
             <div className="my-4 border-t-2 border-primary/30" aria-hidden="true" />
 
             {/* Title */}
-            <h2 className="text-center font-bold text-[15px] tracking-widest text-primary uppercase mb-6">
-              Attestation de Travail
+            <h2 className="text-center font-bold text-[14px] sm:text-[15px] tracking-widest text-primary uppercase mb-6">
+              {isSalaryIncluded
+                ? 'Attestation de Travail et de Salaire'
+                : 'Attestation de Travail'}
             </h2>
 
             {/* Opening */}
@@ -204,7 +225,10 @@ const DocumentPreview: React.FC<PreviewProps> = ({ data }) => {
               {cnssLine && <span>{cnssLine}</span>}
               {' '}occupe&nbsp;/&nbsp;a occupé le poste de{' '}
               <strong>{d.posteOccupe || '___________'}</strong>{' '}
-              au sein de notre société {periodLine}.
+              dans le cadre d'un contrat <strong>{d.natureContrat}</strong> au sein de notre société {periodLine}.
+              {isSalaryIncluded && (
+                <> Le salaire brut mensuel perçu par l'intéressé(e) s'élève à <strong>{d.salaireBrut} MAD</strong>.</>
+              )}
             </p>
 
             {/* Closing formula */}
@@ -250,8 +274,7 @@ const AttestationDeTravailPage: React.FC = () => {
   const [isGenerating, setIsGenerating] = useState(false)
   const [pdfError, setPdfError] = useState<string | null>(null)
 
-  // Persist to sessionStorage on every change so navigating away and back
-  // (or an accidental refresh) doesn't lose what was typed
+  // Persist to sessionStorage on every change
   useEffect(() => {
     saveDraft(data)
   }, [data])
@@ -260,7 +283,6 @@ const AttestationDeTravailPage: React.FC = () => {
   const set = useCallback(
     <K extends keyof AttestationData>(field: K, value: AttestationData[K]) => {
       setData((prev) => ({ ...prev, [field]: value }))
-      // Clear error on change
       if (submitted) {
         setErrors((prev) => {
           const next = { ...prev }
@@ -283,7 +305,6 @@ const AttestationDeTravailPage: React.FC = () => {
     const errs = validate(data)
     if (Object.keys(errs).length > 0) {
       setErrors(errs)
-      // Scroll to first error
       const firstErrorEl = document.querySelector('[aria-invalid="true"]')
       firstErrorEl?.scrollIntoView({ behavior: 'smooth', block: 'center' })
       return
@@ -297,13 +318,11 @@ const AttestationDeTravailPage: React.FC = () => {
       const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url
-      a.download = 'attestation-de-travail.pdf'
+      a.download = data.inclureSalaire ? 'attestation-de-travail-et-de-salaire.pdf' : 'attestation-de-travail.pdf'
       document.body.appendChild(a)
       a.click()
       document.body.removeChild(a)
       URL.revokeObjectURL(url)
-      // Success — clear the saved draft and reset the form so sensitive
-      // data (CIN, salary-adjacent info) doesn't linger in the browser
       clearDraft()
       setData(EMPTY)
       setSubmitted(false)
@@ -351,6 +370,16 @@ const AttestationDeTravailPage: React.FC = () => {
           onSubmit={(e) => { e.preventDefault(); handleDownload() }}
           aria-label="Formulaire d'attestation de travail"
         >
+          {/* Informational Callout: Distinction attestation vs certificat de travail */}
+          <div className="mb-6 flex items-start gap-3 rounded-xl bg-blue-50 border border-blue-100 p-4 text-xs text-blue-900">
+            <svg className="w-5 h-5 text-blue-600 mt-0.5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clipRule="evenodd" />
+            </svg>
+            <div className="leading-relaxed">
+              <strong>Note d'information :</strong> Cette attestation de travail peut être demandée à tout moment au cours de la relation de travail et n'exige pas légalement de mentionner le salaire. Elle se distingue du <em>certificat de travail</em>, que l'employeur est légalement tenu de délivrer dans un délai de 8 jours suivant la fin du contrat (Article 72 du Code du travail marocain).
+            </div>
+          </div>
+
           {/* Section: Entreprise */}
           <Card className="mb-6">
             <h2 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-5">
@@ -478,18 +507,76 @@ const AttestationDeTravailPage: React.FC = () => {
                 </FormField>
               </div>
 
-              <FormField id="posteOccupe" label="Poste occupé" required error={currentErrors.posteOccupe}>
-                <input
-                  id="posteOccupe"
-                  type="text"
-                  value={data.posteOccupe}
-                  onChange={(e) => set('posteOccupe', e.target.value)}
-                  placeholder="Ingénieur logiciel"
-                  aria-invalid={!!currentErrors.posteOccupe}
-                  aria-describedby={currentErrors.posteOccupe ? 'posteOccupe-error' : undefined}
-                  className={inputBase(!!currentErrors.posteOccupe)}
-                />
-              </FormField>
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <FormField id="posteOccupe" label="Poste occupé" required error={currentErrors.posteOccupe}>
+                  <input
+                    id="posteOccupe"
+                    type="text"
+                    value={data.posteOccupe}
+                    onChange={(e) => set('posteOccupe', e.target.value)}
+                    placeholder="Ingénieur logiciel"
+                    aria-invalid={!!currentErrors.posteOccupe}
+                    aria-describedby={currentErrors.posteOccupe ? 'posteOccupe-error' : undefined}
+                    className={inputBase(!!currentErrors.posteOccupe)}
+                  />
+                </FormField>
+
+                <FormField id="natureContrat" label="Nature du contrat" required error={currentErrors.natureContrat}>
+                  <div className="relative">
+                    <select
+                      id="natureContrat"
+                      value={data.natureContrat}
+                      onChange={(e) => set('natureContrat', e.target.value as NatureContrat)}
+                      aria-invalid={!!currentErrors.natureContrat}
+                      className={inputBase(!!currentErrors.natureContrat) + ' cursor-pointer appearance-none bg-white'}
+                    >
+                      <option value="CDI">CDI (Durée Indéterminée)</option>
+                      <option value="CDD">CDD (Durée Déterminée)</option>
+                      <option value="Stage">Stage</option>
+                      <option value="Autre">Autre</option>
+                    </select>
+                    <svg className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fillRule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                </FormField>
+              </div>
+
+              {/* Optional salary inclusion */}
+              <div className="flex flex-col gap-3 pt-2 border-t border-neutral-100">
+                <label htmlFor="inclureSalaire" className="flex items-center gap-3 cursor-pointer select-none group">
+                  <input
+                    id="inclureSalaire"
+                    type="checkbox"
+                    checked={data.inclureSalaire}
+                    onChange={(e) => set('inclureSalaire', e.target.checked)}
+                    className="sr-only peer"
+                  />
+                  <span className="relative inline-flex h-5 w-9 shrink-0 rounded-full bg-neutral-200 transition-colors duration-200 peer-checked:bg-primary group-hover:bg-neutral-300 peer-checked:group-hover:bg-primary-600 peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-primary/50">
+                    <span className="pointer-events-none absolute left-0.5 top-0.5 inline-block h-4 w-4 rounded-full bg-white shadow transition-transform duration-200 peer-checked:translate-x-4" />
+                  </span>
+                  <span className="text-sm font-medium text-neutral-700">
+                    Inclure le salaire <span className="text-xs font-normal text-neutral-500">(attestation de travail et de salaire)</span>
+                  </span>
+                </label>
+
+                {data.inclureSalaire && (
+                  <div className="mt-1 pl-12">
+                    <FormField id="salaireBrut" label="Salaire brut mensuel (MAD)" required error={currentErrors.salaireBrut}>
+                      <input
+                        id="salaireBrut"
+                        type="text"
+                        value={data.salaireBrut}
+                        onChange={(e) => set('salaireBrut', e.target.value)}
+                        placeholder="12 500"
+                        aria-invalid={!!currentErrors.salaireBrut}
+                        aria-describedby={currentErrors.salaireBrut ? 'salaireBrut-error' : undefined}
+                        className={inputBase(!!currentErrors.salaireBrut)}
+                      />
+                    </FormField>
+                  </div>
+                )}
+              </div>
 
               <FormField id="dateDebut" label="Date de début" required error={currentErrors.dateDebut}>
                 <input
@@ -509,7 +596,6 @@ const AttestationDeTravailPage: React.FC = () => {
                   htmlFor="toujoursEnPoste"
                   className="flex items-center gap-3 cursor-pointer select-none group"
                 >
-                  {/* input must be first sibling for peer-checked to work */}
                   <input
                     id="toujoursEnPoste"
                     type="checkbox"
@@ -517,9 +603,7 @@ const AttestationDeTravailPage: React.FC = () => {
                     onChange={(e) => set('toujoursEnPoste', e.target.checked)}
                     className="sr-only peer"
                   />
-                  {/* Track */}
                   <span className="relative inline-flex h-5 w-9 shrink-0 rounded-full bg-neutral-200 transition-colors duration-200 peer-checked:bg-primary group-hover:bg-neutral-300 peer-checked:group-hover:bg-primary-600 peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-primary/50">
-                    {/* Thumb */}
                     <span className="pointer-events-none absolute left-0.5 top-0.5 inline-block h-4 w-4 rounded-full bg-white shadow transition-transform duration-200 peer-checked:translate-x-4" />
                   </span>
                   <span className="text-sm font-medium text-neutral-700">

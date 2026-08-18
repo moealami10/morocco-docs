@@ -13,6 +13,7 @@ const NAV_ITEMS: NavItem[] = [
   { to: '/attestation-de-travail', label: 'Attestation de travail' },
   { to: '/autorisation-parentale', label: 'Autorisation parentale' },
   { to: '/photo-cin', label: 'Photo CIN' },
+  { to: '/guides', label: 'Guides' },
 ]
 
 // ---------------------------------------------------------------------------
@@ -45,7 +46,6 @@ const Header: React.FC = () => {
             </span>
             <span className="text-lg font-bold tracking-tight text-neutral-900">
               Kaghit
-              
             </span>
           </Link>
 
