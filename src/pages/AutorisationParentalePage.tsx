@@ -462,6 +462,9 @@ const AutorisationParentalePage: React.FC = () => {
                     aria-describedby={currentErrors.nomParent ? 'nomParent-error' : undefined}
                     className={inputCls(!!currentErrors.nomParent)}
                   />
+                  <p className="text-xs text-neutral-500 mt-1">
+                    {data.nomParent.length}/60 caractères
+                  </p>
                 </FormField>
 
                 <FormField id="qualite" label="Qualité" required error={currentErrors.qualite}>
@@ -479,6 +482,9 @@ const AutorisationParentalePage: React.FC = () => {
                     </select>
                     {chevron}
                   </div>
+                  <p className="text-xs text-neutral-500 mt-1">
+                    {data.qualite.length}/15 caractères
+                  </p>
                 </FormField>
               </div>
 
@@ -494,6 +500,9 @@ const AutorisationParentalePage: React.FC = () => {
                   aria-describedby={currentErrors.cinParent ? 'cinParent-error' : undefined}
                   className={inputCls(!!currentErrors.cinParent)}
                 />
+                <p className="text-xs text-neutral-500 mt-1">
+                  {data.cinParent.length}/20 caractères
+                </p>
               </FormField>
 
               <FormField id="adresseParent" label="Adresse complète" required error={currentErrors.adresseParent}>
@@ -508,6 +517,9 @@ const AutorisationParentalePage: React.FC = () => {
                   aria-describedby={currentErrors.adresseParent ? 'adresseParent-error' : undefined}
                   className={inputCls(!!currentErrors.adresseParent)}
                 />
+                <p className="text-xs text-neutral-500 mt-1">
+                  {data.adresseParent.length}/100 caractères
+                </p>
               </FormField>
 
               <FormField id="telephoneParent" label="Téléphone" required error={currentErrors.telephoneParent}>
@@ -522,6 +534,9 @@ const AutorisationParentalePage: React.FC = () => {
                   aria-describedby={currentErrors.telephoneParent ? 'telephoneParent-error' : undefined}
                   className={inputCls(!!currentErrors.telephoneParent)}
                 />
+                <p className="text-xs text-neutral-500 mt-1">
+                  {data.telephoneParent.length}/30 caractères
+                </p>
               </FormField>
             </div>
           </Card>
@@ -545,6 +560,9 @@ const AutorisationParentalePage: React.FC = () => {
                   aria-describedby={currentErrors.nomEnfant ? 'nomEnfant-error' : undefined}
                   className={inputCls(!!currentErrors.nomEnfant)}
                 />
+                <p className="text-xs text-neutral-500 mt-1">
+                  {data.nomEnfant.length}/60 caractères
+                </p>
               </FormField>
 
               <FormField
@@ -602,6 +620,9 @@ const AutorisationParentalePage: React.FC = () => {
                   aria-describedby={currentErrors.motif ? 'motif-error' : undefined}
                   className={inputCls(!!currentErrors.motif)}
                 />
+                <p className="text-xs text-neutral-500 mt-1">
+                  {data.motif.length}/150 caractères
+                </p>
               </FormField>
 
               {/* Destination — only for travel types */}
@@ -623,6 +644,9 @@ const AutorisationParentalePage: React.FC = () => {
                     aria-describedby={currentErrors.destination ? 'destination-error' : undefined}
                     className={inputCls(!!currentErrors.destination)}
                   />
+                  <p className="text-xs text-neutral-500 mt-1">
+                    {data.destination.length}/150 caractères
+                  </p>
                 </FormField>
               )}
 

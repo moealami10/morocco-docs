@@ -399,6 +399,9 @@ const AttestationDeTravailPage: React.FC = () => {
                   aria-describedby={currentErrors.nomEntreprise ? 'nomEntreprise-error' : undefined}
                   className={inputBase(!!currentErrors.nomEntreprise)}
                 />
+                <p className="text-xs text-neutral-500 mt-1">
+                  {data.nomEntreprise.length}/100 caractères
+                </p>
               </FormField>
 
               <FormField id="adresseEntreprise" label="Adresse de l'entreprise" required error={currentErrors.adresseEntreprise}>
@@ -413,6 +416,9 @@ const AttestationDeTravailPage: React.FC = () => {
                   aria-describedby={currentErrors.adresseEntreprise ? 'adresseEntreprise-error' : undefined}
                   className={inputBase(!!currentErrors.adresseEntreprise)}
                 />
+                <p className="text-xs text-neutral-500 mt-1">
+                  {data.adresseEntreprise.length}/100 caractères
+                </p>
               </FormField>
 
               <FormField id="iceEntreprise" label="ICE de l'entreprise" hint="Optionnel — Identifiant Commun de l'Entreprise" error={currentErrors.iceEntreprise}>
@@ -425,6 +431,9 @@ const AttestationDeTravailPage: React.FC = () => {
                   placeholder="000000000000000"
                   className={inputBase(false)}
                 />
+                <p className="text-xs text-neutral-500 mt-1">
+                  {data.iceEntreprise.length}/20 caractères
+                </p>
               </FormField>
             </div>
           </Card>
@@ -448,6 +457,9 @@ const AttestationDeTravailPage: React.FC = () => {
                   aria-describedby={currentErrors.nomSignataire ? 'nomSignataire-error' : undefined}
                   className={inputBase(!!currentErrors.nomSignataire)}
                 />
+                <p className="text-xs text-neutral-500 mt-1">
+                  {data.nomSignataire.length}/60 caractères
+                </p>
               </FormField>
 
               <FormField id="qualiteSignataire" label="Qualité / Titre du signataire" required error={currentErrors.qualiteSignataire}>
@@ -462,6 +474,9 @@ const AttestationDeTravailPage: React.FC = () => {
                   aria-describedby={currentErrors.qualiteSignataire ? 'qualiteSignataire-error' : undefined}
                   className={inputBase(!!currentErrors.qualiteSignataire)}
                 />
+                <p className="text-xs text-neutral-500 mt-1">
+                  {data.qualiteSignataire.length}/80 caractères
+                </p>
               </FormField>
             </div>
           </Card>
@@ -485,6 +500,9 @@ const AttestationDeTravailPage: React.FC = () => {
                   aria-describedby={currentErrors.nomEmploye ? 'nomEmploye-error' : undefined}
                   className={inputBase(!!currentErrors.nomEmploye)}
                 />
+                <p className="text-xs text-neutral-500 mt-1">
+                  {data.nomEmploye.length}/60 caractères
+                </p>
               </FormField>
 
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -500,6 +518,9 @@ const AttestationDeTravailPage: React.FC = () => {
                     aria-describedby={currentErrors.cinEmploye ? 'cinEmploye-error' : undefined}
                     className={inputBase(!!currentErrors.cinEmploye)}
                   />
+                  <p className="text-xs text-neutral-500 mt-1">
+                    {data.cinEmploye.length}/20 caractères
+                  </p>
                 </FormField>
 
                 <FormField id="noCnss" label="Numéro CNSS" hint="Optionnel" error={currentErrors.noCnss}>
@@ -512,6 +533,9 @@ const AttestationDeTravailPage: React.FC = () => {
                     placeholder="1234567"
                     className={inputBase(false)}
                   />
+                  <p className="text-xs text-neutral-500 mt-1">
+                    {data.noCnss.length}/20 caractères
+                  </p>
                 </FormField>
               </div>
 
@@ -528,6 +552,9 @@ const AttestationDeTravailPage: React.FC = () => {
                     aria-describedby={currentErrors.posteOccupe ? 'posteOccupe-error' : undefined}
                     className={inputBase(!!currentErrors.posteOccupe)}
                   />
+                  <p className="text-xs text-neutral-500 mt-1">
+                    {data.posteOccupe.length}/80 caractères
+                  </p>
                 </FormField>
 
                 <FormField id="natureContrat" label="Nature du contrat" required error={currentErrors.natureContrat}>
@@ -583,6 +610,9 @@ const AttestationDeTravailPage: React.FC = () => {
                         aria-describedby={currentErrors.salaireBrut ? 'salaireBrut-error' : undefined}
                         className={inputBase(!!currentErrors.salaireBrut)}
                       />
+                      <p className="text-xs text-neutral-500 mt-1">
+                        {data.salaireBrut.length}/20 caractères
+                      </p>
                     </FormField>
                   </div>
                 )}

@@ -13,11 +13,11 @@ interface GoalItem {
 
 const GOALS: GoalItem[] = [
   {
-    to: '/objectifs/trouver-un-emploi',
-    title: 'Trouver un emploi',
+    to: '/objectifs/constituer-dossier-embauche',
+    title: 'Constituer mon dossier d\'embauche',
     description:
-      'Le dossier complet : casier judiciaire, attestation de travail, photo d\'identité.',
-    badge: '3 étapes',
+      'Liste personnalisée selon votre situation : casier judiciaire, attestation de travail, photo d\'identité.',
+    badge: 'Questionnaire adapté',
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />

@@ -12,7 +12,7 @@ import GuidesIndexPage from './pages/GuidesIndexPage'
 import GuideCasierJudiciairePage from './pages/GuideCasierJudiciairePage'
 import GuideActeDeNaissancePage from './pages/GuideActeDeNaissancePage'
 import ObjectifsIndexPage from './pages/ObjectifsIndexPage'
-import GoalTrouverEmploiPage from './pages/GoalTrouverEmploiPage'
+import GoalConstituerDossierEmbauchePage from './pages/GoalConstituerDossierEmbauchePage'
 import GoalVoyagerEnfantPage from './pages/GoalVoyagerEnfantPage'
 import GoalRenouvelerCinPage from './pages/GoalRenouvelerCinPage'
 import NotFoundPage from './pages/NotFoundPage'
@@ -34,7 +34,7 @@ const App: React.FC = () => {
               <Route path="/guides/casier-judiciaire" element={<GuideCasierJudiciairePage />} />
               <Route path="/guides/acte-de-naissance" element={<GuideActeDeNaissancePage />} />
               <Route path="/objectifs" element={<ObjectifsIndexPage />} />
-              <Route path="/objectifs/trouver-un-emploi" element={<GoalTrouverEmploiPage />} />
+              <Route path="/objectifs/constituer-dossier-embauche" element={<GoalConstituerDossierEmbauchePage />} />
               <Route path="/objectifs/voyager-avec-mon-enfant" element={<GoalVoyagerEnfantPage />} />
               <Route path="/objectifs/renouveler-ma-cin" element={<GoalRenouvelerCinPage />} />
               <Route path="*" element={<NotFoundPage />} />

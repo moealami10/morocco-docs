@@ -34,7 +34,6 @@ const Header: React.FC = () => {
   const location = useLocation()
   const isArabic = location.pathname.startsWith('/ar')
   const navItems = isArabic ? NAV_ITEMS_AR : NAV_ITEMS_FR
-  const switchTarget = isArabic ? '/' : '/ar'
 
   const activeLinkClass =
     'text-primary font-semibold border-b-2 border-primary pb-0.5'
@@ -81,25 +80,43 @@ const Header: React.FC = () => {
             </nav>
 
             {/* Language Switcher Button */}
-            <Link
-              to={switchTarget}
+            <button
+              onClick={() => {
+                if (isArabic) {
+                  // Currently in Arabic, switch to French by removing /ar prefix
+                  const pathWithoutAr = location.pathname.substring(3) // Remove '/ar'
+                  window.location.href = pathWithoutAr === '' ? '/' : pathWithoutAr
+                } else {
+                  // Currently in French, switch to Arabic by adding /ar prefix
+                  window.location.href = '/ar' + location.pathname
+                }
+              }}
               className="inline-flex items-center justify-center rounded-lg bg-neutral-100 px-3 py-1.5 text-xs font-semibold text-neutral-700 hover:bg-neutral-200 hover:text-neutral-900 transition-colors shrink-0"
               aria-label="Changer de langue / تغيير اللغة"
             >
               العربية / Français
-            </Link>
+            </button>
           </div>
 
           {/* Mobile controls */}
           <div className="flex items-center gap-2 md:hidden">
             {/* Language Switcher Button for Mobile Header */}
-            <Link
-              to={switchTarget}
+            <button
+              onClick={() => {
+                if (isArabic) {
+                  // Currently in Arabic, switch to French by removing /ar prefix
+                  const pathWithoutAr = location.pathname.substring(3) // Remove '/ar'
+                  window.location.href = pathWithoutAr === '' ? '/' : pathWithoutAr
+                } else {
+                  // Currently in French, switch to Arabic by adding /ar prefix
+                  window.location.href = '/ar' + location.pathname
+                }
+              }}
               className="inline-flex items-center justify-center rounded-lg bg-neutral-100 px-2.5 py-1 text-xs font-semibold text-neutral-700 hover:bg-neutral-200 transition-colors"
-              aria-label="Changer de langue / تغيير اللغة"
+              aria-label="Changer de langue / تحويل اللغة"
             >
               العربية / Français
-            </Link>
+            </button>
 
             <button
               className="flex items-center justify-center rounded-lg p-2 text-neutral-600 hover:bg-neutral-100 transition-colors duration-150"
