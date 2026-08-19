@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import { Analytics } from '@vercel/analytics/react'
 import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
+import HomePageAr from './pages/HomePageAr'
 import AttestationDeTravailPage from './pages/AttestationDeTravailPage'
 import AutorisationParentalePage from './pages/AutorisationParentalePage'
 import PhotoCINPage from './pages/PhotoCINPage'
@@ -25,6 +26,7 @@ const App: React.FC = () => {
           <Layout>
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/ar" element={<HomePageAr />} />
               <Route path="/attestation-de-travail" element={<AttestationDeTravailPage />} />
               <Route path="/autorisation-parentale" element={<AutorisationParentalePage />} />
               <Route path="/photo-cin" element={<PhotoCINPage />} />

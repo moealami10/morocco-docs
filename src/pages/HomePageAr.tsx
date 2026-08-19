@@ -4,9 +4,9 @@ import { Button, Card } from '../components/ui'
 import { Seo } from '../components/Seo'
 
 // ---------------------------------------------------------------------------
-// Tool card data
+// Tool card data for Arabic homepage
 // ---------------------------------------------------------------------------
-interface Tool {
+interface ToolAr {
   to: string
   title: string
   description: string
@@ -14,13 +14,13 @@ interface Tool {
   id: string
 }
 
-const TOOLS: Tool[] = [
+const TOOLS_AR: ToolAr[] = [
   {
-    id: 'card-attestation',
+    id: 'card-attestation-ar',
     to: '/attestation-de-travail',
-    title: 'Attestation de travail',
+    title: 'شهادة عمل',
     description:
-      'Générez un modèle d\'attestation de travail personnalisable au nom de votre employé en quelques secondes — prêt à imprimer et à signer.',
+      'أنشئ نموذج شهادة عمل قابل للتخصيص باسم موظفك في بضع ثوانٍ — جاهز للطباعة والتوقيع.',
     icon: (
       <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -32,11 +32,11 @@ const TOOLS: Tool[] = [
     ),
   },
   {
-    id: 'card-autorisation',
+    id: 'card-autorisation-ar',
     to: '/autorisation-parentale',
-    title: 'Autorisation parentale',
+    title: 'إذن الوالدين',
     description:
-      'Créez une autorisation parentale pour un mineur — voyage, sortie scolaire ou démarche administrative.',
+      'أنشئ إذنًا من الوالدين لطفل قاصر — سفر، رحلة مدرسية أو إجراء إداري.',
     icon: (
       <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -47,11 +47,11 @@ const TOOLS: Tool[] = [
     ),
   },
   {
-    id: 'card-photo-cin',
+    id: 'card-photo-cin-ar',
     to: '/photo-cin',
-    title: 'Photo CIN',
+    title: 'صورة بطاقة الهوية',
     description:
-      'Redimensionnez et formatez votre photo au format standard (35×45 mm, fond blanc) directement depuis votre navigateur.',
+      'قم بتعديل حجم وتنسيق صورتك بالشكل القياسي (35×45 مم، خلفية بيضاء) مباشرةً من متصفحك.',
     icon: (
       <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -62,31 +62,28 @@ const TOOLS: Tool[] = [
   },
 ]
 
-// ---------------------------------------------------------------------------
-// Homepage
-// ---------------------------------------------------------------------------
-const HomePage: React.FC = () => {
+const HomePageAr: React.FC = () => {
   return (
     <>
       <Seo
-        title="Générateur de documents administratifs marocains gratuit | Kaghit"
-        description="Générez vos documents administratifs marocains en quelques clics — attestation de travail, autorisation parentale, photo CIN — gratuit, rapide, sans inscription."
-        canonicalUrl="https://kaghit.com/"
-        lang="fr"
+        title="أنشئ مستنداتك الإدارية المغربية مجانًا | Kaghit"
+        description="أنشئ مستنداتك الإدارية المغربية ببضع نقرات — شهادة عمل، إذن الوالدين، صورة بطاقة الهوية — مجانًا، دون تسجيل."
+        canonicalUrl="https://kaghit.com/ar"
+        lang="ar"
         alternates={[
           { hrefLang: 'fr', href: 'https://kaghit.com/' },
           { hrefLang: 'ar', href: 'https://kaghit.com/ar' },
         ]}
       />
+
       {/* ── Hero ── */}
       <section className="relative overflow-hidden bg-white border-b border-neutral-100">
-        {/* Subtle background accent */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.03]"
           aria-hidden="true"
           style={{
             backgroundImage:
-              'radial-gradient(circle at 70% 50%, #C1272D 0%, transparent 60%)',
+              'radial-gradient(circle at 30% 50%, #C1272D 0%, transparent 60%)',
           }}
         />
 
@@ -97,39 +94,36 @@ const HomePage: React.FC = () => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
             </span>
-            Gratuit · Rapide · Sans inscription
+            مجانًا · سريع · دون تسجيل
           </div>
 
-          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl max-w-3xl leading-[1.1]">
-            Vos documents{' '}
-            <span className="text-primary">administratifs marocains</span>{' '}
-            en quelques clics
+          <h1 className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl max-w-3xl leading-[1.25]">
+            أنشئ مستنداتك الإدارية المغربية{' '}
+            <span className="text-primary">ببضع نقرات</span>
           </h1>
 
           <p className="mt-6 text-lg text-neutral-500 max-w-2xl leading-relaxed">
-            Générez vos documents administratifs marocains en quelques clics — gratuit, rapide,
-            sans inscription. Attestation de travail, autorisation parentale, photo CIN&nbsp;: tout
-            en un seul endroit.
+            شهادة عمل، إذن الوالدين، صورة بطاقة الهوية — مجانًا، دون تسجيل
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <Button as="a" href="#outils" variant="primary">
-              Voir les outils
+              عرض الأدوات
               <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fillRule="evenodd" d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z" clipRule="evenodd" />
               </svg>
             </Button>
             <Button as="a" href="/attestation-de-travail" variant="secondary">
-              Commencer maintenant
+              ابدأ الآن
             </Button>
           </div>
 
           {/* Stats strip */}
           <dl className="mt-12 flex flex-wrap gap-6 sm:gap-10">
             {[
-              { value: '100%', label: 'Gratuit' },
-              { value: '0', label: 'Inscription requise' },
-              { value: '3', label: 'Outils disponibles' },
+              { value: '100%', label: 'مجانًا' },
+              { value: '0', label: 'بدون تسجيل' },
+              { value: '3', label: 'أدوات متاحة' },
             ].map((stat) => (
               <div key={stat.label}>
                 <dt className="text-sm text-neutral-500">{stat.label}</dt>
@@ -151,10 +145,10 @@ const HomePage: React.FC = () => {
             id="outils-heading"
             className="text-2xl font-bold text-neutral-900 sm:text-3xl"
           >
-            Nos outils
+            أدواتنا
           </h2>
           <p className="mt-2 text-neutral-500">
-            Choisissez le document que vous souhaitez générer.
+            اختر المستند الذي ترغب في إنشائه.
           </p>
           <div className="mt-3 h-0.5 w-12 rounded-full bg-primary" aria-hidden="true" />
         </div>
@@ -162,9 +156,9 @@ const HomePage: React.FC = () => {
         <ul
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
           role="list"
-          aria-label="Liste des outils disponibles"
+          aria-label="قائمة الأدوات المتاحة"
         >
-          {TOOLS.map((tool) => (
+          {TOOLS_AR.map((tool) => (
             <li key={tool.to}>
               <Link
                 to={tool.to}
@@ -193,9 +187,9 @@ const HomePage: React.FC = () => {
 
                   {/* CTA arrow */}
                   <div className="flex items-center gap-1 text-sm font-semibold text-primary">
-                    Générer
+                    إنشاء
                     <svg
-                      className="w-4 h-4 transition-transform duration-150 group-hover:translate-x-0.5"
+                      className="w-4 h-4 rotate-180 transition-transform duration-150 group-hover:-translate-x-0.5"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                       aria-hidden="true"
@@ -220,24 +214,24 @@ const HomePage: React.FC = () => {
             id="comment-heading"
             className="text-xl font-bold text-neutral-900 sm:text-2xl mb-8 text-center"
           >
-            Comment ça fonctionne&nbsp;?
+            كيف يعمل الموقع؟
           </h2>
           <ol className="grid gap-6 sm:grid-cols-3" role="list">
             {[
               {
                 step: '01',
-                title: 'Remplissez le formulaire',
-                body: 'Saisissez vos informations directement dans le formulaire en ligne — aucun compte requis.',
+                title: 'املأ النموذج',
+                body: 'أدخل معلوماتك مباشرة في النموذج عبر الإنترنت — لا يلزم وجود حساب.',
               },
               {
                 step: '02',
-                title: 'Prévisualisez le document',
-                body: 'Le document est généré instantanément dans votre navigateur. Vérifiez chaque information.',
+                title: 'عاين المستند',
+                body: 'يتم إنشاء المستند فورًا في متصفحك. تحقق من كل معلومة.',
               },
               {
                 step: '03',
-                title: 'Téléchargez le PDF',
-                body: 'Exportez le document en PDF prêt à imprimer, signer et tamponner selon les besoins.',
+                title: 'حمّل ملف PDF',
+                body: 'قم بتصدير المستند كملف PDF جاهز للطباعة والتوقيع والختم.',
               },
             ].map((item) => (
               <li
@@ -255,7 +249,7 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* ── Trust Section ── */}
+      {/* ── Trust Section (Exact Arabic text from prompt) ── */}
       <section className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
         <Card className="p-6 sm:p-10 bg-neutral-50/80 border-neutral-200">
           <div className="flex items-center gap-3 mb-6">
@@ -265,27 +259,23 @@ const HomePage: React.FC = () => {
               </svg>
             </div>
             <h2 className="text-xl font-bold text-neutral-900">
-              Vos données restent privées.
+              بياناتك تظل سرية
             </h2>
           </div>
 
           <ul className="space-y-3 text-sm text-neutral-800 font-medium mb-8">
             <li className="flex items-center gap-2.5">
               <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" aria-hidden="true" />
-              Aucune inscription.
+              لا حاجة للتسجيل
             </li>
             <li className="flex items-center gap-2.5">
               <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" aria-hidden="true" />
-              Les documents sont générés directement dans votre navigateur.
-            </li>
-            <li className="flex items-center gap-2.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" aria-hidden="true" />
-              Vos informations personnelles ne sont pas envoyées à nos serveurs pour générer les documents.
+              يتم إنشاء المستندات مباشرةً في متصفحك — ولا يتم إرسال بياناتك أبدًا إلى خوادمنا
             </li>
           </ul>
 
           <div className="p-4 rounded-xl bg-white border border-neutral-200/80 text-xs text-neutral-600 leading-relaxed">
-            Kaghit n'est pas un service gouvernemental. Nous vous aidons à préparer et comprendre vos démarches administratives, et nous indiquons toujours nos sources officielles.
+            Kaghit ليست خدمة حكومية — نحن نساعدك في إعداد إجراءاتك وفهمها، ونشير دائمًا إلى مصادرنا الرسمية
           </div>
         </Card>
       </section>
@@ -293,4 +283,4 @@ const HomePage: React.FC = () => {
   )
 }
 
-export default HomePage
+export default HomePageAr
