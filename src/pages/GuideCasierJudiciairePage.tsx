@@ -233,7 +233,7 @@ const GuideCasierJudiciairePage: React.FC = () => {
                 Besoin d'une attestation de travail pour le même dossier ?
               </p>
               <p className="text-xs text-neutral-600 mt-0.5">
-                Générez votre attestation officielle en PDF gratuitement et instantanément.
+                Générez votre attestation au format standard en PDF gratuitement et instantanément.
               </p>
             </div>
           </div>

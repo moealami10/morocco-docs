@@ -1,5 +1,5 @@
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib'
-import type { AttestationData } from '../pages/AttestationDeTravailPage'
+import type { AttestationData } from './types'
 
 // ---------------------------------------------------------------------------
 // Helpers

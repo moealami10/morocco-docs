@@ -1,5 +1,5 @@
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib'
-import type { AutorisationData } from '../pages/AutorisationParentalePage'
+import type { AutorisationData } from './types'
 
 // ---------------------------------------------------------------------------
 // Constants

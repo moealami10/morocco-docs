@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 import { PageHeading, Card, Button } from '../components/ui'
 import { Seo } from '../components/Seo'
 
-const STORAGE_KEY = 'kaghit:progress:voyager-avec-mon-enfant'
+const STORAGE_KEY = 'kaghit:progress:voyager-avec-mon-enfant-ar'
 
 interface VoyageState {
-  travelCompanion: '' | 'both-parents' | 'one-parent' | 'another-adult' | 'alone';
-  destination: string;
-  passportValid: '' | 'oui' | 'non';
+  travelCompanion: '' | 'both-parents' | 'one-parent' | 'another-adult' | 'alone'
+  destination: string
+  passportValid: '' | 'oui' | 'non'
 }
 
 function loadProgress(): VoyageState {
@@ -21,7 +21,7 @@ function loadProgress(): VoyageState {
 }
 
 
-const GoalVoyagerEnfantPage: React.FC = () => {
+const GoalVoyagerEnfantPageAr: React.FC = () => {
   const [state, setState] = useState<VoyageState>(() => loadProgress())
 
   // Save to sessionStorage whenever state changes
@@ -61,55 +61,55 @@ const GoalVoyagerEnfantPage: React.FC = () => {
     // Both parents traveling with child - usually no authorization needed
     requirements.documents.push({
       id: 1,
-      title: 'Passeport valide de l\'enfant',
-      context: 'Seul le passeport valide de l\'enfant est exigé lorsque les deux parents voyagent ensemble.',
+      title: 'جواز سفر صالح للطفل',
+      context: 'يكتفى بجواز سفر صالح للطفل فقط عندما يسافر الوالدان معًا مع الطفل.',
       tag: 'Obligatoire légalement'
     })
 
     // Actions
     requirements.actions.push({
       id: 1,
-      title: 'Vérifier les exigences de la destination et de la compagnie aérienne',
-      context: 'Selon la destination et la compagnie aérienne, vérifiez toujours leurs exigences spécifiques même lorsque les deux parents accompagnent l\'enfant.',
+      title: 'التحقق من متطلبات الوجهة وشركة الطيران',
+      context: 'حسب الوجهة وشركة الطيران، تحقق دائمًا من متطلباتهم الخاصة حتى عندما يرافق الوالدان الطفل.',
       tag: 'Souvent demandé'
     })
   } else if (state.travelCompanion === 'one-parent' ||
              state.travelCompanion === 'another-adult' ||
              state.travelCompanion === 'alone') {
     // One parent, another adult, or child alone - authorization needed
-requirements.documents.push({
+    requirements.documents.push({
        id: 1,
-       title: 'Autorisation parentale',
-       context: 'Indispensable si l\'enfant voyage seul, accompagné d\'un seul parent ou d\'un autre adulte.',
+       title: 'إذن الوالدين',
+       context: 'ضروري إذا سافر الطفل بمفرده، أو برفقة أحد الوالدين فقط، أو برفقة بالغ آخر.',
        tag: 'Dépend de la situation',
-       linkText: 'Générer l\'autorisation parentale →',
-       linkTo: '/autorisation-parentale',
+       linkText: 'إنشاء إذن الوالدين →',
+       linkTo: '/ar/autorisation-parentale',
        isExternal: false
      })
 
-requirements.actions.push({
+    requirements.actions.push({
        id: 2,
-       title: 'Faire légaliser la signature',
-       context: 'À la commune ou Moqataa de votre domicile muni de votre CIN afin de rendre l\'autorisation légalement valide.',
+       title: 'تصديق التوقيع',
+       context: 'في البلدية أو المقاطعة التابعة لمسكنك وهوية التعريف الوطنية الخاصة بك لجعل الإذن قانونيًا صالحًا.',
        tag: 'Dépend de la situation'
      })
 
-requirements.documents.push({
+    requirements.documents.push({
        id: 2,
-       title: 'Passeport valide de l\'enfant',
-       context: 'Le passeport biométrique valide de l\'enfant est exigé.',
+       title: 'جواز سفر صالح للطفل',
+       context: 'جواز سفر بيومتري صالح للطفل مطلوب.',
        tag: 'Dépend de la situation'
      })
 
     // Photo d'identité seulement si le passeport doit être renouvelé
-if (state.passportValid === 'non') {
+    if (state.passportValid === 'non') {
        requirements.documents.push({
          id: 3,
-         title: 'Photo d\'identité aux normes',
-         context: 'Au format standard 35×45 mm pour la demande ou le renouvellement du passeport biométrique du mineur.',
+         title: 'صورة هوية بالمعايير',
+         context: 'بالتنسيق القياسي 35×45 ملم لطلب أو تجديد جواز السفر البيومتري للقاصر.',
          tag: 'Dépend de la situation',
-         linkText: 'Formater la photo du passeport →',
-         linkTo: '/photo-cin',
+         linkText: 'تنسيق صورة جواز السفر →',
+         linkTo: '/ar/photo-cin',
          isExternal: false
        })
      }
@@ -119,8 +119,8 @@ if (state.passportValid === 'non') {
   if (state.destination.trim() !== '') {
     requirements.actions.push({
       id: 3,
-      title: `Vérifier les exigences spécifiques pour ${state.destination}`,
-      context: 'Certaines destinations peuvent avoir des exigences supplémentaires (visas, vaccinations, autorisations spécifiques). Consultez le site officiel de l\'ambassade ou du consulat de votre destination.',
+      title: `التحقق من المتطلبات المحددة لـ ${state.destination}`,
+      context: 'قد تكون هناك متطلبات إضافية لبعض الوجهات (تأشيرات، تلقيحات، أذونات محددة). استشر الموقع الرسمي للسفارة أو القنصلية لوجهتك.',
       tag: 'Recommandé'
     })
   }
@@ -131,23 +131,23 @@ if (state.passportValid === 'non') {
   return (
     <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
       <Seo
-        title="Voyage d'un mineur au Maroc — Autorisation et démarches | Kaghit"
-        description="Guide étape par étape personnalisé pour voyager avec un enfant mineur au Maroc : autorisation parentale, légalisation et photo passeport selon votre situation."
-        canonicalUrl="https://kaghit.com/objectifs/voyager-avec-mon-enfant"
+        title="سفر قاصر بالمغرب — إذن وإجراءات | Kaghit"
+        description="دليل خطوة بخطوة مخصص للسفر مع طفل قاصر بالمغرب: إذن الوالدين، التصديق وصورة جواز السفر حسب situatioн."
+        canonicalUrl="https://kaghit.com/ar/objectifs/voyager-avec-mon-enfant"
       />
 
       {/* Breadcrumb */}
-      <nav className="mb-6 flex items-center gap-2 text-xs text-neutral-500" aria-label="Fil d'Ariane">
-        <Link to="/" className="hover:text-neutral-900 transition-colors">Accueil</Link>
+      <nav className="mb-6 flex items-center gap-2 text-xs text-neutral-500" aria-hour-label="مسار التنقل">
+        <Link to="/ar" className="hover:text-neutral-900 transition-colors">الصفحة الرئيسية</Link>
         <span>/</span>
-        <Link to="/objectifs" className="hover:text-neutral-900 transition-colors">Objectifs</Link>
+        <Link to="/ar/objectifs" className="hover:text-neutral-900 transition-colors">الأهداف</Link>
         <span>/</span>
-        <span className="text-neutral-900 font-medium">Voyager avec mon enfant</span>
+        <span className="text-neutral-900 font-medium">السفر مع طفلي</span>
       </nav>
 
       <PageHeading
-        title="Voyager avec mon enfant : guide personnalisé"
-        description="Répondez à quelques questions pour obtenir la liste exacte des documents et démarches nécessaires selon votre situation."
+        title="السفر مع طفلي : دليل مخصص"
+        description="أجب على بعض الأسئلة للحصول على القائمة الدقيقة للوثائق والإجراءات اللازمة حسب situatioн."
         icon={
           <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -165,32 +165,32 @@ if (state.passportValid === 'non') {
           {!state.travelCompanion && (
             <Card className="p-6 mb-8 border-primary-100 bg-neutral-50/60">
               <p className="text-sm text-neutral-700 leading-relaxed mb-4">
-                Avec qui l'enfant voyage-t-il ?
+                                مع من يسافر الطفل؟
               </p>
               <div className="space-y-3">
                 <button
                   onClick={() => setState(prev => ({ ...prev, travelCompanion: 'both-parents' }))}
                   className="w-full text-left p-4 rounded-lg border transition-all duration-150 bg-white border-neutral-200 hover:bg-neutral-50"
                 >
-                  Les deux parents
+                  الوالدان معًا
                 </button>
                 <button
                   onClick={() => setState(prev => ({ ...prev, travelCompanion: 'one-parent' }))}
                   className="w-full text-left p-4 rounded-lg border transition-all duration-150 bg-white border-neutral-200 hover:bg-neutral-50"
                 >
-                  Un seul parent
+                  أحد الوالدين فقط
                 </button>
                 <button
                   onClick={() => setState(prev => ({ ...prev, travelCompanion: 'another-adult' }))}
                   className="w-full text-left p-4 rounded-lg border transition-all duration-150 bg-white border-neutral-200 hover:bg-neutral-50"
                 >
-                  Un autre adulte
+                  بالغ آخر
                 </button>
                 <button
                   onClick={() => setState(prev => ({ ...prev, travelCompanion: 'alone' }))}
                   className="w-full text-left p-4 rounded-lg border transition-all duration-150 bg-white border-neutral-200 hover:bg-neutral-50"
                 >
-                  L'enfant seul
+                  الطفل وحده
                 </button>
               </div>
             </Card>
@@ -200,19 +200,19 @@ if (state.passportValid === 'non') {
           {state.travelCompanion && !state.destination && (
             <Card className="p-6 mb-8 border-primary-100 bg-neutral-50/60">
               <p className="text-sm text-neutral-700 leading-relaxed mb-4">
-                Quelle est la destination du voyage ?
+                                ما هي وجهة السفر؟
               </p>
               <div>
                 <input
                   type="text"
-                  placeholder="Ex: France, Espagne, Turquie..."
+                  placeholder="مثال: فرنسا، إسبانيا، تركيا..."
                   value={state.destination}
                   onChange={(e) => setState(prev => ({ ...prev, destination: e.target.value.trim() }))}
                   className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors duration-150 text-sm"
                 />
                 {state.destination && (
                   <p className="mt-2 text-xs text-neutral-500">
-                    Destination saisie : "{state.destination}"
+                                الوجهة المدخلة: "{state.destination}"
                   </p>
                 )}
               </div>
@@ -223,20 +223,20 @@ if (state.passportValid === 'non') {
           {state.travelCompanion !== '' && state.destination !== '' && state.passportValid === '' && (
             <Card className="p-6 mb-8 border-primary-100 bg-neutral-50/60">
               <p className="text-sm text-neutral-700 leading-relaxed mb-4">
-                Le passeport de l'enfant est-il encore valide ?
+                                هل جواز سفر الطفل لا يزال صالحًا؟
               </p>
               <div className="space-y-3">
                 <button
                   onClick={() => setState(prev => ({ ...prev, passportValid: 'oui' }))}
                   className="w-full text-left p-4 rounded-lg border transition-all duration-150 bg-white border-neutral-200 hover:bg-neutral-50"
                 >
-                  Oui, valide
+                  نعم، صالح
                 </button>
                 <button
                   onClick={() => setState(prev => ({ ...prev, passportValid: 'non' }))}
                   className="w-full text-left p-4 rounded-lg border transition-all duration-150 bg-white border-neutral-200 hover:bg-neutral-50"
                 >
-                  Non, à renouveler
+                  لا، يحتاج للتجديد
                 </button>
               </div>
             </Card>
@@ -250,13 +250,13 @@ if (state.passportValid === 'non') {
             {(requirements.actions.length > 0 || requirements.documents.length > 0) && (
               <Card className="p-6 mb-8 border-primary-100 bg-neutral-50/60">
                 <p className="text-sm text-neutral-700 leading-relaxed">
-                  Voici ce dont vous avez besoin pour le voyage de votre enfant :
+                                هذا هو ما تحتاجه لسفر طفلك :
                 </p>
 
                 {/* Progress indicator */}
                 <div className="mt-4 pt-4 border-t border-neutral-200/60 flex items-center justify-between text-xs">
                   <span className="font-semibold text-neutral-700">
-                    {requirements.actions.length + requirements.documents.length} élément{requirements.actions.length + requirements.documents.length > 1 ? 's' : ''} à préparer
+                    {requirements.actions.length + requirements.documents.length} عنصر{requirements.actions.length + requirements.documents.length > 1 ? 's' : ''} للتحضير
                   </span>
                   <div className="w-32 bg-neutral-200 h-2 rounded-full overflow-hidden">
                     <div
@@ -272,7 +272,7 @@ if (state.passportValid === 'non') {
             {requirements.actions.length > 0 && (
               <Card className="p-6 mb-8 border-primary-100 bg-neutral-50/60">
                 <p className="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-4">
-                  Démarches à accomplir
+                                إجراءات يجب القيام بها
                 </p>
 
                 <div className="space-y-4">
@@ -332,7 +332,7 @@ if (state.passportValid === 'non') {
             {requirements.documents.length > 0 && (
               <Card className="p-6 mb-8 border-primary-100 bg-neutral-50/60">
                 <p className="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-4">
-                  Documents à préparer
+                                وثائق يجب تحضيرها
                 </p>
 
                 <div className="space-y-4">
@@ -396,17 +396,17 @@ if (state.passportValid === 'non') {
               onClick={resetForm}
               className="w-full sm:w-auto"
             >
-              Recommencer
+              إعادة البدء
             </Button>
             <Button
               variant="primary"
               onClick={() => {
                 // In a real implementation, we might save progress or navigate elsewhere
-                alert('Pour conserver votre progression, utilisez l\'option de sauvegarde du navigateur ou notez la liste ci-dessus.')
+                alert('لحفظ تقدمك، استخدم خيار حفظ المتصفح أو دوّن القائمة أعلاه.')
               }}
               className="w-full sm:w-auto"
             >
-              Télécharger la liste
+              تنزيل القائمة
             </Button>
           </div>
         </>
@@ -417,27 +417,27 @@ if (state.passportValid === 'non') {
         <article className="prose prose-neutral max-w-none space-y-6 text-sm text-neutral-700 leading-relaxed">
           <section>
             <h2 className="text-lg font-bold text-neutral-900 mb-2">
-              À propos du voyage des mineurs au Maroc
+                                حول سفر القاصرين بالمغرب
             </h2>
             <p className="text-neutral-700">
-              Les exigences pour voyager avec un enfant mineur varient considérablement selon qui accompagne l'enfant, la destination, et la validité des documents de voyage. Cette précision est essentielle pour éviter les refus d'embarquement ou les complications aux frontières.
+                                تختلف متطلبات السفر مع طفل قاصر بشكل كبير حسب من يرافق الطفل، والوجهة، وصلاحية وثائق السفر. هذه الدقة ضرورية لتجنب refus d'embarquement أو التعقيدات عند الحدود.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-bold text-neutral-900 mb-2">
-              Conseils importants
+                                نصائح هامة
             </h2>
             <p className="text-neutral-700">
-              Toujours vérifier les exigences spécifiques de :
+                                دائمًا تحقق من المتطلبات الخاصة بـ :
             </p>
             <ul className="list-disc list-inside space-y-2">
-              <li>La compagnie aérienne ou le transporteur</li>
-              <li>Le pays de destination (et de transit le cas échéant)</li>
-              <li>Les autorités marocaines si vous partez du Maroc</li>
+              <li>شركة الطيران أو الناقل</li>
+              <li>بلد الوجهة (والبلد العابر إن وجد)</li>
+              <li>السلطات المغربية إذا كنت تغادر من المغرب</li>
             </ul>
             <p className="text-neutral-700">
-              Conservez toujours des copies électroniques et papier de tous les documents importants.
+                                احتفظ دائمًا بنسخ إلكترونية ورقية لجميع الوثائق المهمة.
             </p>
           </section>
         </article>
@@ -445,7 +445,7 @@ if (state.passportValid === 'non') {
 
       {/* Sources section */}
       <div className="mt-10 pt-6 border-t border-neutral-100 text-xs text-neutral-400">
-        <p className="font-semibold text-neutral-500 mb-2">Sources & références :</p>
+        <p className="font-semibold text-neutral-500 mb-2">مصادر ومراجع :</p>
         <ul className="list-disc list-inside space-y-1 text-[11px] leading-relaxed">
           <li>
             <a
@@ -454,9 +454,9 @@ if (state.passportValid === 'non') {
               rel="noopener noreferrer"
               className="font-bold text-neutral-700 hover:text-primary transition-colors underline"
             >
-              Wathiqa.ma - Guide voyage mineur
+              Wathiqa.ma - دليل سفر القاصر
             </a>
-            — Informations sur l'autorisation de voyage pour mineur
+            — معلومات حول إذن سفر القاصر
           </li>
           <li>
             <a
@@ -465,9 +465,9 @@ if (state.passportValid === 'non') {
               rel="noopener noreferrer"
               className="font-bold text-neutral-700 hover:text-primary transition-colors underline"
             >
-              Ministère de la Justice - Modèles d'autorisation
+              وزارة العدل - نماذج الإذن
             </a>
-            — Exemples de documents legalisés
+            — أمثلة على الوثائق المصادق عليها
           </li>
         </ul>
       </div>
@@ -491,4 +491,4 @@ function getTagBadgeStyle(tag: TagType): string {
   }
 }
 
-export default GoalVoyagerEnfantPage
+export default GoalVoyagerEnfantPageAr

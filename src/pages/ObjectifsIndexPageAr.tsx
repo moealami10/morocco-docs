@@ -13,11 +13,11 @@ interface GoalItem {
 
 const GOALS: GoalItem[] = [
   {
-    to: '/objectifs/constituer-dossier-embauche',
-    title: 'Constituer votre dossier d\'embauche',
+    to: '/ar/objectifs/constituer-dossier-embauche',
+    title: 'وضع ملف التوظيف الخاص بك',
     description:
-      'Liste personnalisée selon votre situation : casier judiciaire, attestation de travail, photo d\'identité.',
-    badge: 'Questionnaire adapté',
+      'قائمة مخصصة حسب situation: casier judiciaire, attestation de travail, photo d\'identité.',
+    badge: 'استبيان مخصص',
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
@@ -26,11 +26,11 @@ const GOALS: GoalItem[] = [
     ),
   },
   {
-    to: '/objectifs/voyager-avec-mon-enfant',
-    title: 'Voyager avec mon enfant',
+    to: '/ar/objectifs/voyager-avec-mon-enfant',
+    title: 'السفر مع طفلي',
     description:
-      'Répondez à quelques questions pour obtenir la liste exacte des documents et démarches nécessaires selon votre situation.',
-    badge: 'Questionnaire adapté',
+      'أجب على بعض الأسئلة للحصول على القائمة الدقيقة للوثائق والإجراءات اللازمة حسب situation.',
+    badge: 'استبيان مخصص',
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -41,11 +41,11 @@ const GOALS: GoalItem[] = [
     ),
   },
   {
-    to: '/objectifs/renouveler-ma-cin',
-    title: 'Renouveler ou refaire votre CIN',
+    to: '/ar/objectifs/renouveler-ma-cin',
+    title: 'تجديد أو تجديد بطاقة التعريف الوطنية',
     description:
-      'Indiquez le motif de votre demande pour obtenir la liste exacte des documents et démarches nécessaires.',
-    badge: 'Questionnaire adapté',
+      'حدد motive de demande الخاصة بك للحصول على القائمة الدقيقة للوثائق والإجراءات اللازمة.',
+    badge: 'استبيان مخصص',
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="3" y="4" width="18" height="16" rx="2" />
@@ -58,18 +58,18 @@ const GOALS: GoalItem[] = [
   },
 ]
 
-const ObjectifsIndexPage: React.FC = () => {
+const ObjectifsIndexPageAr: React.FC = () => {
   return (
     <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
       <Seo
-        title="Objectifs et guides démarches Maroc | Kaghit"
-        description="Découvrez nos plans d'action guidés pour vos démarches administratives au Maroc : trouver un emploi, voyage d'un enfant mineur, renouvellement de CIN."
-        canonicalUrl="https://kaghit.com/objectifs"
+        title="الأهداف والارشادات للإجراءات بالمغرب | Kaghit"
+        description="اكتشف خطط الإجراء الموجهة لأعمالك الإدارية بالمغرب: العثور على عمل، سفر طفل قاصر، تجديد بطاقة التعريف."
+        canonicalUrl="https://kaghit.com/ar/objectifs"
       />
 
       <PageHeading
-        title="Qu'est-ce que vous voulez accomplir ?"
-        description="Sélectionnez votre objectif ci-dessous pour obtenir un plan d'action guidé étape par étape et créer tous vos documents sans rien oublier."
+        title="ما الذي ترغب في إنجازه؟"
+        description="اختر هدفك أدناه للحصول على خطة إجراء موجهة خطوة بخطوة وإنشاء جميع وثائقك دون نسيان أي شيء."
         icon={
           <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <polyline points="9 11 12 14 22 4" />
@@ -105,7 +105,7 @@ const ObjectifsIndexPage: React.FC = () => {
               </div>
 
               <div className="flex items-center gap-1 text-xs font-semibold text-primary pt-3 border-t border-neutral-100">
-                Voir le plan d'action
+                عرض خطة الإجراء
                 <svg
                   className="w-3.5 h-3.5 transition-transform duration-150 group-hover:translate-x-0.5"
                   viewBox="0 0 20 20"
@@ -123,4 +123,4 @@ const ObjectifsIndexPage: React.FC = () => {
   )
 }
 
-export default ObjectifsIndexPage
+export default ObjectifsIndexPageAr

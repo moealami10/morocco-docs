@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { PageHeading, Card, Button } from '../components/ui'
 import { Seo } from '../components/Seo'
 
-const STORAGE_KEY = 'kaghit:progress:renouveler-ma-cin'
+const STORAGE_KEY = 'kaghit:progress:renouveler-ma-cin-ar'
 
 interface CinRenewalState {
   reason: '' | 'expiration' | 'perte' | 'vol' | 'detioration' | 'adresse' | 'autre';
@@ -18,26 +18,8 @@ function loadProgress(): CinRenewalState {
   }
 }
 
-// function saveProgress(state: CinRenewalState) {
-//   try {
-//     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-//   } catch {
-//     // ignore
-//   }
-// }
-
-const GoalRenouvelerCinPage: React.FC = () => {
+const GoalRenouvelerCinPageAr: React.FC = () => {
   const [state, setState] = useState<CinRenewalState>(() => loadProgress())
-
-  // Save to sessionStorage whenever state changes
-  // useEffect(() => {
-  //   saveProgress(state)
-  // }, [state])
-
-  const resetForm = () => {
-    setState({ reason: '' })
-    sessionStorage.removeItem(STORAGE_KEY)
-  }
 
   // Determine requirements based on selected reason
   const requirements = {
@@ -66,162 +48,162 @@ const GoalRenouvelerCinPage: React.FC = () => {
     // Expiration - standard renewal
     requirements.documents.push({
       id: 1,
-      title: 'Ancienne CIN',
-      context: 'Votre carte d\'identité nationale arrivée à expiration.',
+      title: 'البطاقة الوطنية القديمة',
+      context: 'بطاقتك الوطنية llegó إلى تاريخ انتهاء الصلاحية.',
       tag: 'Obligatoire légalement'
     })
 
     requirements.actions.push({
       id: 1,
-      title: 'Prendre rendez-vous en ligne sur le portail cnie.ma',
-      context: 'La pré-demande et la prise de rendez-vous en ligne sur le portail officiel de la DGSN sont généralement demandés depuis septembre 2020 avant tout déplacement.',
+      title: 'أخذ موعد عبر البوابة الرسمية cnie.ma',
+      context: 'الطلب المسبق وأخذ الموعد عبر الإنترنت على البوابة الرسمية للمديرية العامة للأمن الوطني (DGSN) هي بشكل عام مطلوبة منذ سبتمبر 2020 قبل أيتنقل.',
       tag: 'Obligatoire légalement',
-      linkText: 'Accéder au portail officiel cnie.ma ↗',
+      linkText: 'الوصول إلى البوابة الرسمية cnie.ma ↗',
       linkTo: 'https://www.cnie.ma',
       isExternal: true
     })
 
     requirements.documents.push({
       id: 2,
-      title: 'Photo d\'identité aux normes',
-      context: 'Format standard 35×45 mm sur fond clair, visage centré sans ombres ni reflets.',
+      title: 'صورة هويةce بالمعايير',
+      context: 'تنسيق قياسي 35×45 ملم على خلفية فاتحة، الوجه في المركز دون ظلال أو انعكاسات.',
       tag: 'Obligatoire légalement',
-      linkText: 'Formater votre photo CIN →',
-      linkTo: '/photo-cin',
+      linkText: ' تنسيق صورتك للبطاقة الوطنية →',
+      linkTo: '/ar/photo-cin',
       isExternal: false
     })
 
     requirements.actions.push({
       id: 2,
-      title: 'Déposer le dossier et payer les frais (75 DH)',
-      context: 'Réglez les frais de 75 DH en guichet et conservez le récépissé provisoire valable 3 mois.',
+      title: 'إيداع الملف ودفع الرسوم (75 درهم)',
+      context: 'ادفع رسوم قدرها 75 درهم في الشباك واحتفظ بالإيصال المؤقت الصالح لمدة 3 أشهر.',
       tag: 'Obligatoire légalement'
     })
   } else if (state.reason === 'perte' || state.reason === 'vol') {
     // Perte ou vol - nécessite déclaration préalable
     requirements.actions.push({
       id: 1,
-      title: `Faire une déclaration de ${state.reason === 'perte' ? 'perte' : 'vol'}`,
-      context: `Rendez-vous à l'arrondissement de police ou à la brigade de gendarmerie la plus proche pour faire une déclaration de ${state.reason === 'perte' ? 'perte' : 'vol'}. Conservez le récépissé de cette déclaration : il devra être joint à votre dossier de renouvellement.`,
+      title: `إجراء إعلان ${state.reason === 'perte' ? 'فقدان' : 'سرقة'}`,
+      context: `توجه إلى nearest circle policial أو درك bubrigadeclosest proche pour faire une déclaration de ${state.reason === 'perte' ? 'فقدان' : 'سرقة'}. احتفظ بإيصال هذا الإعلان: سيتعين attachingه إلى ملف تجديد بطاقتك.`,
       tag: 'Obligatoire légalement'
     })
 
     requirements.documents.push({
       id: 2,
-      title: 'Déclaration de perte/vol',
-      context: `Le récépissé de déclaration de ${state.reason === 'perte' ? 'perte' : 'vol'} obtenu auprès des autorités policières ou de gendarmerie.`,
+      title: `إثبات ${state.reason === 'perte' ? 'الفقدان' : 'السرقة'}`,
+      context: `إيصال إعلان ${state.reason === 'perte' ? 'الفضاع' : 'السرقة'} المستلم من السلطات الشرطية أو الدرك.`,
       tag: 'Obligatoire légalement'
     })
 
-requirements.actions.push({
+    requirements.actions.push({
        id: 1,
-       title: 'Prendre rendez-vous en ligne sur le portail cnie.ma',
-       context: 'La pré-demande et la prise de rendez-vous en ligne sur le portail officiel de la DGSN sont généralement demandés depuis septembre 2020 avant tout déplacement.',
+       title: 'أخذ موعد عبر البوابة الرسمية cnie.ma',
+       context: 'الطلب المسبق وأخذ الموعد عبر الإنترنت على البوابة الرسمية للمديرية العامة للأمن الوطني (DGSN) هي بشكل عام مطلوبة منذ سبتمبر 2020 قبل أيتنقل.',
        tag: 'Dépend de la situation',
-       linkText: 'Accéder au portail officiel cnie.ma ↗',
+       linkText: 'الوصول إلى البوابة الرسمية cnie.ma ↗',
        linkTo: 'https://www.cnie.ma',
        isExternal: true
      })
 
     requirements.documents.push({
       id: 3,
-      title: 'Photo d\'identité aux normes',
-      context: 'Format standard 35×45 mm sur fond clair, visage centré sans ombres ni reflets.',
+      title: 'صورة هويةce بالمعايير',
+      context: 'تنسيق قياسي 35×45 ملم على خلفية فاتحة، الوجه في المركز دون ظلال أو انعكاسات.',
       tag: 'Obligatoire légalement',
-      linkText: 'Formater votre photo CIN →',
-      linkTo: '/photo-cin',
+      linkText: ' تنسيق صورتك للبطاقة الوطنية →',
+      linkTo: '/ar/photo-cin',
       isExternal: false
     })
 
     requirements.actions.push({
       id: 3,
-      title: 'Déposer le dossier complet et payer les frais (75 DH)',
-      context: 'Réglez les frais de 75 DH en guichet et conservez le récépissé provisoire valable 3 mois.',
+      title: 'إيداع الملف الكامل ودفع الرسوم (75 درهم)',
+      context: 'ادفع رسوم قدرها 75 درهم في الشباك واحتفظ بالإيصال المؤقت الصالح لمدة 3 أشهر.',
       tag: 'Obligatoire légalement'
     })
   } else if (state.reason === 'detioration') {
-    // Détérioration - similaire à expiration mais avec ancienne CIN détériorée
+    // Détérioration - simile à expiration mais avec ancienne CIN détériorée
     requirements.documents.push({
       id: 1,
-      title: 'Ancienne CIN détériorée',
-      context: 'Votre carte d\'identité nationale détériorée ou illisible.',
+      title: 'البطاقة الوطنية التالفةice',
+      context: 'بطاقتك الوطنية تالفة أو غير مقروءة.',
       tag: 'Obligatoire légalement'
     })
 
     requirements.actions.push({
       id: 1,
-      title: 'Prendre rendez-vous en ligne sur le portail cnie.ma',
-      context: 'La pré-demande et la prise de rendez-vous en ligne sur le portail officiel de la DGSN sont généralement demandés depuis septembre 2020 avant tout déplacement.',
+      title: 'أخذ موعد عبر البوابة الرسمية cnie.ma',
+      context: 'الطلب المسبق وأخذ الموعد عبر الإنترنت على البوابة الرسمية للمديرية العامة للأمن الوطني (DGSN) هي بشكل عام مطلوبة منذ سبتمبر 2020 قبل أيتنقل.',
       tag: 'Obligatoire légalement',
-      linkText: 'Accéder au portail officiel cnie.ma ↗',
+      linkText: 'الوصول إلى البوابة الرسمية cnie.ma ↗',
       linkTo: 'https://www.cnie.ma',
       isExternal: true
     })
 
     requirements.documents.push({
       id: 2,
-      title: 'Photo d\'identité aux normes',
-      context: 'Format standard 35×45 mm sur fond clair, visage centré sans ombres ni reflets.',
+      title: 'صورة هويةce بالمعايير',
+      context: 'تنسيق قياسي 35×45 ملم على خلفية فاتحة، الوجه في المركز دون ظلال أو انعكاسات.',
       tag: 'Obligatoire légalement',
-      linkText: 'Formater votre photo CIN →',
-      linkTo: '/photo-cin',
+      linkText: ' تنسيق صورتك للبطاقة الوطنية →',
+      linkTo: '/ar/photo-cin',
       isExternal: false
     })
 
     requirements.actions.push({
       id: 2,
-      title: 'Déposer le dossier et payer les frais (75 DH)',
-      context: 'Réglez les frais de 75 DH en guichet et conservez le récépissé provisoire valable 3 mois.',
+      title: 'إيداع الملف ودفع الرسوم (75 درهم)',
+      context: 'ادفع رسوم قدرها 75 درهم في الشباك واحتفظ بالإيصال المؤقت الصالح لمدة 3 أشهر.',
       tag: 'Obligatoire légalement'
     })
   } else if (state.reason === 'adresse') {
     // Changement d'adresse - nécessite justificatif de résidence
     requirements.documents.push({
       id: 1,
-      title: 'Ancienne CIN',
-      context: 'Votre carte d\'identité nationale actuelle.',
+      title: 'البطاقة الوطنية الحالية',
+      context: 'بطاقتك الوطنية الحالية.',
       tag: 'Obligatoire légalement'
     })
 
     requirements.documents.push({
       id: 2,
       title: 'Justificatif de nouvelle adresse',
-      context: 'Certificat de résidence ou facture récente (électricité, eau, téléphone) à votre nouveau nom et adresse.',
+      context: 'شهادة إقامة أو فاتورة حديثة (كهرباء، ماء، هاتف) باسمك الجديد وعنوانك الجديد.',
       tag: 'Obligatoire légalement'
     })
 
     requirements.actions.push({
       id: 1,
-      title: 'Prendre rendez-vous en ligne sur le portail cnie.ma',
-      context: 'La pré-demande et la prise de rendez-vous en ligne sur le portail officiel de la DGSN sont généralement demandés depuis septembre 2020 avant tout déplacement.',
+      title: 'أخذ موعد عبر البوابة الرسمية cnie.ma',
+      context: 'الطلب المسبق وأخذ الموعد عبر الإنترنت على البوابة الرسمية للمديرية العامة للأمن الوطني (DGSN) هي بشكل عام مطلوبة منذ سبتمبر 2020 قبل أيتنقل.',
       tag: 'Obligatoire légalement',
-      linkText: 'Accéder au portail officiel cnie.ma ↗',
+      linkText: 'الوصول إلى البوابة الرسمية cnie.ma ↗',
       linkTo: 'https://www.cnie.ma',
       isExternal: true
     })
 
     requirements.documents.push({
       id: 3,
-      title: 'Photo d\'identité aux normes',
-      context: 'Format standard 35×45 mm sur fond clair, visage centré sans ombres ni reflets.',
+      title: 'صورة هويةce بالمعايير',
+      context: 'تنسيق قياسي 35×45 ملم على خلفية فاتحة، الوجه في المركز دون ظلال أو انعكاسات.',
       tag: 'Obligatoire légalement',
-      linkText: 'Formater votre photo CIN →',
-      linkTo: '/photo-cin',
+      linkText: ' تنسيق صورتك للبطاقة الوطنية →',
+      linkTo: '/ar/photo-cin',
       isExternal: false
     })
 
     requirements.actions.push({
       id: 2,
-      title: 'Déposer le dossier complet et payer les frais (75 DH)',
-      context: 'Réglez les frais de 75 DH en guichet et conservez le récépissé provisoire valable 3 mois.',
+      title: 'إيداع الملف الكامل ودفع الرسوم (75 درهم)',
+      context: 'ادفع رسوم قدرها 75 درهم في الشباك واحتفظ بالإيصال المؤقت الصالح لمدة 3 أشهر.',
       tag: 'Obligatoire légalement'
     })
   } else if (state.reason === 'autre') {
     // Autres raisons - guidance générale
     requirements.actions.push({
       id: 1,
-      title: 'Vérifier votre éligibilité au renouvellement',
-      context: 'Consultez le portail officiel cnie.ma ou rendez-vous au guichet pour vérifier si votre situation particulière Justifie un renouvellement de CIN.',
+      title: 'التحقق من أهليتك للتجديد',
+      context: 'استشر البوابة الرسمية cnie.ma أو توجه إلى الشباك للتحقق مما إذا كانت وضعك الخاص يبرر تجديد بطاقة وطنية.',
       tag: 'Recommandé'
     })
   }
@@ -229,23 +211,23 @@ requirements.actions.push({
   return (
     <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
       <Seo
-        title="Renouveler sa CIN au Maroc 2026 — Tarif et démarches | Kaghit"
-        description="Guide personnalisé pour le renouvellement de la carte d'identité (CNIE) au Maroc selon votre situation : expiration, perte, vol, détérioration ou changement d'adresse."
-        canonicalUrl="https://kaghit.com/objectifs/renouveler-ma-cin"
+        title="تجديد بطاقتك الوطنية بالمغرب 2026 — السعر والإجراءات | Kaghit"
+        description="دليل مخصص لتجديد البطاقة الوطنية الإلكترونية (CNIE) بالمغرب حسب وضعك: انتهاء الصلاحية، الفقدان، السرقة، التدهور أو تغيير العنوان."
+        canonicalUrl="https://kaghit.com/ar/objectifs/renouveler-ma-cin"
       />
 
       {/* Breadcrumb */}
-      <nav className="mb-6 flex items-center gap-2 text-xs text-neutral-500" aria-label="Fil d'Ariane">
-        <Link to="/" className="hover:text-neutral-900 transition-colors">Accueil</Link>
+      <nav className="mb-6 flex items-center gap-2 text-xs text-neutral-500" aria-label="مسار التنقل">
+        <Link to="/ar" className="hover:text-neutral-900 transition-colors">الصفحة الرئيسية</Link>
         <span>/</span>
-        <Link to="/objectifs" className="hover:text-neutral-900 transition-colors">Objectifs</Link>
+        <Link to="/ar/objectifs" className="hover:text-neutral-900 transition-colors">الأهداف</Link>
         <span>/</span>
-        <span className="text-neutral-900 font-medium">Renouveler sa CIN</span>
+        <span className="text-neutral-900 font-medium">تجديد أو تجديد بطاقتك الوطنية</span>
       </nav>
 
       <PageHeading
-        title="Renouveler ou refaire sa CIN au Maroc : guide personnalisé"
-        description="Indiquez le motif de votre demande pour obtenir la liste exacte des documents et démarches nécessaires."
+        title="تجديد أو تجديد بطاقتك الوطنية بالمغرب : دليل مخصص"
+        description="حدد سبب طلبك للحصول على القائمة الدقيقة للوثائق والإجراءات اللازمة."
         icon={
           <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <rect x="3" y="4" width="18" height="16" rx="2" />
@@ -262,44 +244,44 @@ requirements.actions.push({
         <div className="space-y-6">
           <Card className="p-6 mb-8 border-primary-100 bg-neutral-50/60">
             <p className="text-sm text-neutral-700 leading-relaxed mb-4">
-              Pourquoi refaites-vous votre CIN ?
+              لماذا تقوم بتجديد بطاقتك الوطنية؟
             </p>
             <div className="space-y-3">
               <button
                 onClick={() => setState(prev => ({ ...prev, reason: 'expiration' }))}
                 className="w-full text-left p-4 rounded-lg border transition-all duration-150 bg-white border-neutral-200 hover:bg-neutral-50"
               >
-                Carte expirée
+                البطاقة منتهية الصلاحية
               </button>
               <button
                 onClick={() => setState(prev => ({ ...prev, reason: 'perte' }))}
                 className="w-full text-left p-4 rounded-lg border transition-all duration-150 bg-white border-neutral-200 hover:bg-neutral-50"
               >
-                Perte de la carte
+                فقدان البطاقة
               </button>
               <button
                 onClick={() => setState(prev => ({ ...prev, reason: 'vol' }))}
                 className="w-full text-left p-4 rounded-lg border transition-all duration-150 bg-white border-neutral-200 hover:bg-neutral-50"
               >
-                Vol de la carte
+                سرقة البطاقة
               </button>
               <button
                 onClick={() => setState(prev => ({ ...prev, reason: 'detioration' }))}
                 className="w-full text-left p-4 rounded-lg border transition-all duration-150 bg-white border-neutral-200 hover:bg-neutral-50"
               >
-                Carte détériorée
+                البطاقة تالفة
               </button>
               <button
                 onClick={() => setState(prev => ({ ...prev, reason: 'adresse' }))}
                 className="w-full text-left p-4 rounded-lg border transition-all duration-150 bg-white border-neutral-200 hover:bg-neutral-50"
               >
-                Changement d'adresse
+                تغيير العنوان
               </button>
               <button
                 onClick={() => setState(prev => ({ ...prev, reason: 'autre' }))}
                 className="w-full text-left p-4 rounded-lg border transition-all duration-150 bg-white border-neutral-200 hover:bg-neutral-50"
               >
-                Autre raison
+                سبب آخر
               </button>
             </div>
           </Card>
@@ -312,13 +294,13 @@ requirements.actions.push({
             {(requirements.actions.length > 0 || requirements.documents.length > 0) && (
               <Card className="p-6 mb-8 border-primary-100 bg-neutral-50/60">
                 <p className="text-sm text-neutral-700 leading-relaxed">
-                  Voici ce dont vous avez besoin pour le renouvellement de votre CIN :
+                  هذا هو ما تحتاجه لتجديد بطاقتك الوطنية :
                 </p>
 
                 {/* Progress indicator */}
                 <div className="mt-4 pt-4 border-t border-neutral-200/60 flex items-center justify-between text-xs">
                   <span className="font-semibold text-neutral-700">
-                    {requirements.actions.length + requirements.documents.length} élément{requirements.actions.length + requirements.documents.length > 1 ? 's' : ''} à préparer
+                    {requirements.actions.length + requirements.documents.length} عنصر{requirements.actions.length + requirements.documents.length > 1 ? 's' : ''} للتحضير
                   </span>
                   <div className="w-32 bg-neutral-200 h-2 rounded-full overflow-hidden">
                     <div
@@ -334,7 +316,7 @@ requirements.actions.push({
             {requirements.actions.length > 0 && (
               <Card className="p-6 mb-8 border-primary-100 bg-neutral-50/60">
                 <p className="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-4">
-                  Démarches à accomplir
+                  إجراءات يجب القيام بها
                 </p>
 
                 <div className="space-y-4">
@@ -394,7 +376,7 @@ requirements.actions.push({
             {requirements.documents.length > 0 && (
               <Card className="p-6 mb-8 border-primary-100 bg-neutral-50/60">
                 <p className="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-4">
-                  Documents à préparer
+                  وثائق يجب تحضيرها
                 </p>
 
                 <div className="space-y-4">
@@ -455,20 +437,23 @@ requirements.actions.push({
           <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4 mt-8">
             <Button
               variant="secondary"
-              onClick={resetForm}
+              onClick={() => {
+                setState({ reason: '' })
+                sessionStorage.removeItem(STORAGE_KEY)
+              }}
               className="w-full sm:w-auto"
             >
-              Recommencer
+              إعادة البدء
             </Button>
             <Button
               variant="primary"
               onClick={() => {
                 // In a real implementation, we might save progress or navigate elsewhere
-                alert('Pour conserver votre progression, utilisez l\'option de sauvegarde du navigateur ou notez la liste ci-dessus.')
+                alert('لحفظ تقدمك، استخدم خيار حفظ المتصفح أو دوّن القائمة أعلاه.')
               }}
               className="w-full sm:w-auto"
             >
-              Télécharger la liste
+              تنزيل القائمة
             </Button>
           </div>
         </>
@@ -479,38 +464,38 @@ requirements.actions.push({
         <article className="prose prose-neutral max-w-none space-y-6 text-sm text-neutral-700 leading-relaxed">
           <section>
             <h2 className="text-lg font-bold text-neutral-900 mb-2">
-              À propos du renouvellement de la CIN au Maroc
+              حول تجديد البطاقة الوطنية بالمغرب
             </h2>
             <p className="text-neutral-700">
-              La carte d'identité nationale électronique (CNIE) se renouvelle dans plusieurs cas : elle arrive à expiration (valable 10 ans), elle est perdue, volée, détériorée, ou vous avez changé d'adresse. Bien que la procédure générale soit similaire, chaque situation nécessite des documents et démarches spécifiques.
+              يتم تجديد البطاقة الوطنية électronique (CNIE) في عدة حالات: انتهاء الصلاحية (صالحة لمدة 10 سنوات)، الفقدان، السرقة، التدهور، أو تغيير العنوان. على الرغم من أن الإجراء العام مشابه، فإن كل حالة تتطلب وثائق وإجراءات محددة.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-bold text-neutral-900 mb-2">
-              Le prix et le délai
+              السعر والمدة
             </h2>
             <p className="text-neutral-700">
-              Le tarif officiel pour le renouvellement de la CIN est de 75 DH, confirmé par le portail officiel <a href="https://www.cnie.ma" target="_blank" rel="noopener noreferrer" className="text-primary underline font-medium hover:text-primary-600">cnie.ma</a>. Le récépissé provisoire est valable 3 mois maximum.
+              السعر الرسمي لتجديد البطاقة الوطنية هو 75 درهم، كما أكده البوابة الرسمية <a href="https://www.cnie.ma" target="_blank" rel="noopener noreferrer" className="text-primary underline font-medium hover:text-primary-600">cnie.ma</a>. الإيصال المؤقت صالح لمدة أقصاها 3 أشهر.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-bold text-neutral-900 mb-2">
-              Bon à savoir
+              نصيحة مفيدة
             </h2>
             <p className="text-neutral-700">
-              Il est recommandé d'entamer le renouvellement environ 3 mois avant l'expiration de votre carte actuelle, pour éviter de vous retrouver sans pièce d'identité valide.
+              يُنصح ببدء التجديد قبل حوالي 3 أشهر من انتهاء صلاحية بطاقتك الحالية، لتجنب البقاء بدون هوية وطنية صالحة.
             </p>
           </section>
 
           {(state.reason === 'perte' || state.reason === 'vol') && (
             <section className="bg-neutral-50 p-5 rounded-xl border border-neutral-100">
               <h2 className="text-base font-bold text-neutral-900 mb-2 flex items-center gap-2">
-                <span className="text-primary">⚠️</span> En cas de perte ou de vol
+                <span className="text-primary">⚠️</span> في حالة الفقدان أو السرقة
               </h2>
               <p className="text-neutral-600 text-xs leading-relaxed">
-                Rendez-vous d'abord à l'arrondissement de police ou à la brigade de gendarmerie la plus proche pour faire une déclaration de perte (ou de vol). Conservez le récépissé de cette déclaration : il devra être joint à votre dossier de renouvellement.
+                توجه أولًا إلى أقرب دائرة شرطة أو فرقة درك لعمل إعلان عن الفقدان (أو السرقة). احتفظ بإيصال هذا الإعلان: يجب أن يرفق بملف تجديد بطاقتك.
               </p>
             </section>
           )}
@@ -518,10 +503,10 @@ requirements.actions.push({
           {(state.reason === 'adresse') && (
             <section className="bg-neutral-50 p-5 rounded-xl border border-neutral-100">
               <h2 className="text-base font-bold text-neutral-900 mb-2 flex items-center gap-2">
-                <span className="text-primary">📍</span> En cas de changement d'adresse
+                <span className="text-primary">📍</span> في حالة تغيير العنوان
               </h2>
               <p className="text-neutral-600 text-xs leading-relaxed">
-                Le renouvellement est généralement demandé dans les 30 jours suivant le changement d'adresse, avec votre ancienne CIN, un certificat de résidence pour la nouvelle adresse, et un justificatif de domicile.
+                يُطلب عادةً التجديد خلال 30 يومًا من تغيير العنوان، مع بطاقتك الوطنية القديمة، وشهادة إقامة للعنوان الجديد، وإثبات domicile.
               </p>
             </section>
           )}
@@ -530,7 +515,7 @@ requirements.actions.push({
 
       {/* Sources section */}
       <div className="mt-10 pt-6 border-t border-neutral-100 text-xs text-neutral-400">
-        <p className="font-semibold text-neutral-500 mb-2">Sources officielles & références :</p>
+        <p className="font-semibold text-neutral-500 mb-2">المصادر الرسمية والReferences :</p>
         <ul className="list-disc list-inside space-y-1 text-[11px] leading-relaxed">
           <li>
             <a
@@ -539,9 +524,9 @@ requirements.actions.push({
               rel="noopener noreferrer"
               className="font-bold text-neutral-700 hover:text-primary transition-colors underline"
             >
-              cnie.ma — portail officiel de la DGSN
+              cnie.ma — البوابة الرسمية للمديرية العامة للأمن الوطني
             </a>
-            — Prise de rendez-vous et pré-demande (tarif 75 DH et RDV généralement demandé depuis 2020)
+            — أخذ الموعد والطلب المسبق (السعر 75 درهم والموعد generalmente مطلوب منذ 2020)
           </li>
           <li>
             <a
@@ -552,7 +537,7 @@ requirements.actions.push({
             >
               demarchesmaroc.com
             </a>
-            — "Carte d'identité nationale (CIN)" et "Comment obtenir votre CNIE"
+            — "البطاقة الوطنية (CIN)" و "كيفية الحصول على CNIE"
           </li>
           <li>
             <a
@@ -563,7 +548,7 @@ requirements.actions.push({
             >
               guidedumaroc.com
             </a>
-            — FAQ Carte d'Identité Nationale (CIN)
+            — أسئلة مكررة حول البطاقة الوطنية (CIN)
           </li>
           <li>
             <a
@@ -574,7 +559,7 @@ requirements.actions.push({
             >
               chhiwat.ma
             </a>
-            — "CIN Maroc : rendez-vous, demande et démarche de renouvellement"
+            — "CIN المغرب: الموعد، الطلب وإجراءات التجديد"
           </li>
         </ul>
       </div>
@@ -590,7 +575,7 @@ function getTagBadgeStyle(tag: TagType): string {
     case 'Obligatoire légalement':
       return 'bg-amber-50 text-amber-800 border-amber-200';
     case 'Souvent demandé':
-      return 'bg-blue-50 text-blue-800 border-blue-200';
+      return 'bg-blue-50 text-blue-800 border-amber-200';
     case 'Recommandé':
       return 'bg-emerald-50 text-emerald-800 border-emerald-200';
     case 'Dépend de la situation':
@@ -598,4 +583,4 @@ function getTagBadgeStyle(tag: TagType): string {
   }
 }
 
-export default GoalRenouvelerCinPage
+export default GoalRenouvelerCinPageAr

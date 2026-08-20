@@ -11,7 +11,7 @@ const DOCUMENT_TYPES: DocumentType[] = [
   'Passeport (35x45mm)',
 ]
 
-const PhotoCINPage: React.FC = () => {
+const PhotoCINPageAr: React.FC = () => {
   const [docType, setDocType] = useState<DocumentType>('CIN (35x45mm)')
   const [imageSrc, setImageSrc] = useState<string | null>(null)
   const [crop, setCrop] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
@@ -29,12 +29,12 @@ const PhotoCINPage: React.FC = () => {
   // Handle file selection
   const handleFileChange = (file: File) => {
     if (!file.type.startsWith('image/')) {
-      setErrorMsg('Veuillez sélectionner un fichier image valide (JPEG, PNG).')
+      setErrorMsg('يرجى تحديد ملف صورة صالح (JPEG، PNG).')
       return
     }
 
     if (file.size > 15 * 1024 * 1024) {
-      setErrorMsg('L\'image est trop volumineuse (maximum 15 Mo).')
+      setErrorMsg('الصورة بحجم كبير جدًا (الحد الأقصى 15 ميجابايت).')
       return
     }
 
@@ -90,7 +90,7 @@ const PhotoCINPage: React.FC = () => {
       setGeneratedResult(result)
     } catch (e) {
       console.error(e)
-      setErrorMsg('Erreur lors du traitement de l\'image. Veuillez réessayer.')
+      setErrorMsg('خطأ أثناء معالجة الصورة. يرجى إعادة المحاولة.')
     } finally {
       setIsProcessing(false)
     }
@@ -119,14 +119,14 @@ const PhotoCINPage: React.FC = () => {
   return (
     <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
       <Seo
-        title="Photo CIN / Passeport Maroc (35×45 mm) — Redimensionner en ligne"
-        description="Format photo CIN Maroc (35×45 mm, 300 DPI) : cadrez et redimensionnez votre photo d'identité en ligne gratuitement. Vos informations restent dans votre navigateur et ne sont pas envoyées à nos serveurs."
-        canonicalUrl="https://kaghit.com/photo-cin"
+        title="صورة CIN / جواز سفر Maroc (35×45 ملم) — تصغير عبر الإنترنت"
+        description="تنسيق صورة CIN Maroc (35×45 ملم، 300 نقطة لكل بوصة): cadrer و redimensionner صورتك للهوية عبر الإنترنت مجانًا. معلوماتك تبقى في متصفحك ولا تُرسل إلى خوادمنا."
+        canonicalUrl="https://kaghit.com/ar/photo-cin"
       />
 
       <PageHeading
-        title="Photo CIN / Passeport"
-        description="Recadrez et adaptez facilement votre photo d'identité au format standard 35 × 45 mm (300 DPI). Vos informations restent dans votre navigateur et ne sont pas envoyées à nos serveurs."
+        title="صورة CIN / جواز سفر"
+        description="قص وتعديل صورتك للهوية بسهولة لتناسب التنسيق القياسي 35 × 45 ملم (300 نقطة لكل بوصة). معلوماتك تبقى في متصفحك ولا تُرسل إلى خوادمنا."
         icon={
           <svg
             className="w-6 h-6"
@@ -151,24 +151,24 @@ const PhotoCINPage: React.FC = () => {
           <svg className="w-5 h-5 text-primary shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clipRule="evenodd" />
           </svg>
-          Recommandations pour une photo au format standard (35 × 45 mm)
+          توصيات للحصول على صورة بالمواصفات القياسية (35 × 45 ملم)
         </h2>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-neutral-600">
           <li className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" aria-hidden="true" />
-            Fond uni clair (de préférence blanc ou gris très clair).
+            خلفية موحدة فاتحة (يفضل أن تكون بيضاء أو رمادية فاتحة جدًا).
           </li>
           <li className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" aria-hidden="true" />
-            Visage centré, face à l'objectif, expression neutre.
+            الوجه في المركز وموجه نحو الكاميرا، مع تعبير محايد.
           </li>
           <li className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" aria-hidden="true" />
-            Yeux bien ouverts et visibles, sans reflet sur les lunettes.
+            عيون مفتوحة وواضحة، دون انعكاس على النظارات.
           </li>
           <li className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" aria-hidden="true" />
-            Éclairage homogène sans ombres portées sur le visage.
+            إضاءة متجانسة دون ظلال تُلقى على الوجه.
           </li>
         </ul>
       </Card>
@@ -176,7 +176,7 @@ const PhotoCINPage: React.FC = () => {
       {/* ── Document specification selector ── */}
       <Card className="mb-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <FormField id="documentType" label="Type de document d'identité">
+          <FormField id="documentType" label="نوعdocument هوية الهوية">
             <div className="relative min-w-[240px]">
               <select
                 id="documentType"
@@ -202,8 +202,8 @@ const PhotoCINPage: React.FC = () => {
           </FormField>
 
           <div className="bg-neutral-50 px-4 py-3 rounded-lg border border-neutral-100 text-xs text-neutral-600 sm:text-right">
-            <span className="font-semibold text-neutral-900 block">Format d'exportation :</span>
-            35 × 45 mm (413 × 531 px @ 300 DPI) · JPEG
+            <span className="font-semibold text-neutral-900 block">تنسيق التصدير :</span>
+            35 × 45 ملم (413 × 531 بكسل @ 300 نقطة لكل بوصة) · JPEG
           </div>
         </div>
       </Card>
@@ -239,10 +239,10 @@ const PhotoCINPage: React.FC = () => {
             </div>
 
             <h3 className="text-lg font-semibold text-neutral-900 mb-1">
-              Glissez-déposez votre photo ici
+              اسحب وأفلت صورتك هنا
             </h3>
             <p className="text-sm text-neutral-500 mb-6 max-w-md">
-              Supporte les formats JPG, JPEG et PNG (taille maximale : 15 Mo).
+              يدعم صيغ JPG، JPEG و PNG (الحجم الأقصى : 15 ميجابايت).
             </p>
 
             <div>
@@ -254,7 +254,7 @@ const PhotoCINPage: React.FC = () => {
                 <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fillRule="evenodd" d="M3 3.5A1.5 1.5 0 014.5 2h11A1.5 1.5 0 0117 3.5v13a1.5 1.5 0 01-1.5 1.5h-11A1.5 1.5 0 013 16.5v-13zM4.5 3.5v9.878l3.25-3.25a.75.75 0 011.06 0l2.69 2.69 1.47-1.47a.75.75 0 011.06 0l2.47 2.47V3.5h-12z" clipRule="evenodd" />
                 </svg>
-                Choisir une photo
+                اختيار صورة
               </Button>
               <input
                 ref={fileInputRef}
@@ -275,7 +275,7 @@ const PhotoCINPage: React.FC = () => {
             <Card className="p-4 sm:p-6">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider">
-                  Ajustement du cadrage (35 × 45)
+                  ضبط الإطار (35 × 45)
                 </span>
                 <button
                   onClick={handleReset}
@@ -284,7 +284,7 @@ const PhotoCINPage: React.FC = () => {
                   <svg className="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fillRule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H4.5a.75.75 0 00-.75.75v3.75a.75.75 0 001.5 0v-1.928l.43.43a7 7 0 1010.559-8.487.75.75 0 00-1.127.99 5.5 5.5 0 01.2 3.84z" clipRule="evenodd" />
                   </svg>
-                  Changer de photo
+                  تغيير الصورة
                 </button>
               </div>
 
@@ -308,7 +308,7 @@ const PhotoCINPage: React.FC = () => {
                     {/* Eye level line indicator */}
                     <div className="w-full border-t border-dotted border-white/50 absolute top-[38%]" />
                     <span className="text-[10px] text-white/80 font-sans bg-black/40 px-2 py-0.5 rounded backdrop-blur-xs select-none">
-                      Centrer le visage
+                     ركز على الوجه
                     </span>
 
                     {/* Shoulder guideline curve */}
@@ -329,11 +329,11 @@ const PhotoCINPage: React.FC = () => {
               {/* Controls: Zoom slider */}
               <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-neutral-50 p-4 rounded-lg border border-neutral-100">
                 <div className="flex items-center gap-3 w-full sm:w-auto flex-1">
-                  <span className="text-xs font-medium text-neutral-600 shrink-0">Zoom :</span>
+                  <span className="text-xs font-medium text-neutral-600 shrink-0">تكبير :</span>
                   <button
                     onClick={() => setZoom((z) => Math.max(1, z - 0.1))}
                     className="p-1 rounded bg-white border border-neutral-200 hover:bg-neutral-100 text-neutral-700 text-xs font-bold"
-                    aria-label="Zoom arrière"
+                    aria-label="تصغير"
                   >
                     –
                   </button>
@@ -349,7 +349,7 @@ const PhotoCINPage: React.FC = () => {
                   <button
                     onClick={() => setZoom((z) => Math.min(3, z + 0.1))}
                     className="p-1 rounded bg-white border border-neutral-200 hover:bg-neutral-100 text-neutral-700 text-xs font-bold"
-                    aria-label="Zoom avant"
+                    aria-label="تكبير"
                   >
                     +
                   </button>
@@ -367,14 +367,14 @@ const PhotoCINPage: React.FC = () => {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
                       </svg>
-                      Génération...
+                      جاري التوليد...
                     </>
                   ) : (
                     <>
                       <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fillRule="evenodd" d="M1 5.25A2.25 2.25 0 013.25 3h13.5A2.25 2.25 0 0119 5.25v9.5A2.25 2.25 0 0116.75 17H3.25A2.25 2.25 0 011 14.75v-9.5zm1.5 0v9.5c0 .414.336.75.75.75h13.5a.75.75 0 00.75-.75v-9.5a.75.75 0 00-.75-.75H3.25a.75.75 0 00-.75.75z" clipRule="evenodd" />
                       </svg>
-                      Générer la photo
+                      توليد الصورة
                     </>
                   )}
                 </Button>
@@ -386,7 +386,7 @@ const PhotoCINPage: React.FC = () => {
           <div className="lg:col-span-1">
             <Card className="p-6 text-center">
               <h3 className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-4">
-                Résultat final (35 × 45 mm)
+                النتيجة النهائية (35 × 45 ملم)
               </h3>
 
               {generatedResult ? (
@@ -395,15 +395,15 @@ const PhotoCINPage: React.FC = () => {
                   <div className="p-2 bg-white rounded shadow-md border border-neutral-200 inline-block">
                     <img
                       src={generatedResult.dataUrl}
-                      alt="Photo d'identité générée"
+                      alt="صورة هويةmolدة"
                       className="w-[140px] h-[180px] object-cover rounded-xs border border-neutral-100"
                     />
                   </div>
 
                   <div className="text-xs text-neutral-500 space-y-1">
-                    <p className="font-semibold text-neutral-800">Prête pour impression</p>
-                    <p>Format : 413 × 531 px (300 DPI)</p>
-                    <p>Fichier : JPEG Haute Qualité</p>
+                    <p className="font-semibold text-neutral-800">جاهزة للطباعة</p>
+                    <p>التنسيق : 413 × 531 بكسل (300 نقطة لكل بوصة)</p>
+                    <p>ملف : JPEG عالي الجودة</p>
                   </div>
 
                   <Button
@@ -414,7 +414,7 @@ const PhotoCINPage: React.FC = () => {
                     <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                       <path fillRule="evenodd" d="M10 3a.75.75 0 01.75.75v7.44l2.47-2.47a.75.75 0 111.06 1.06l-3.75 3.75a.75.75 0 01-1.06 0L5.72 9.78a.75.75 0 011.06-1.06l2.47 2.47V3.75A.75.75 0 0110 3zM3.25 14a.75.75 0 01.75.75v1.5a.5.5 0 00.5.5h11a.5.5 0 00.5-.5v-1.5a.75.75 0 011.5 0v1.5A2 2 0 0115.5 18h-11A2 2 0 012.5 16v-1.25A.75.75 0 013.25 14z" clipRule="evenodd" />
                     </svg>
-                    Télécharger la photo
+                    تنزيل الصورة
                   </Button>
                 </div>
               ) : (
@@ -425,7 +425,7 @@ const PhotoCINPage: React.FC = () => {
                     <polyline points="21 15 16 10 5 21" />
                   </svg>
                   <p className="text-xs max-w-[180px] leading-relaxed">
-                    Ajustez le cadrage puis cliquez sur "Générer la photo".
+                    اضبط الإطار ثم انقر على "توليد الصورة".
                   </p>
                 </div>
               )}
@@ -440,44 +440,44 @@ const PhotoCINPage: React.FC = () => {
           <path fillRule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
         </svg>
         <p className="text-xs text-amber-700 leading-relaxed">
-          <strong>Avertissement :</strong> Cet outil aide au cadrage et au formatage de vos photos d'identité aux normes marocaines (35 × 45 mm). Cet outil produit des images au bon format et aux bonnes dimensions. La qualité de la photo elle-même (éclairage, netteté, fond) reste à votre charge et peut influer sur son acceptation officielle par les autorités compétentes.
+          <strong>تحذير :</strong> تساعد هذه الأداة في تنسيق وإطار صور هويتك وفقًا للمعايير المغربية (35 × 45 ملم). تنتج هذه الأداة صورًا بالتنسيق والأبعاد الصحيحة. جودة الصورة نفسها (الإضاءة، الوضوح، الخلفية) تظل على عاتقك وقد تؤثر على قبولها رسميًا من قبل السلطات المختصة.
         </p>
       </div>
 
       {/* ── Informational / SEO Section ── */}
       <section className="mt-16 border-t border-neutral-200 pt-12">
         <h2 className="text-xl font-bold text-neutral-900 mb-6">
-          Guide et normes pour la photo d'identité au Maroc
+          دليل ومعايير صورة الهوية في المغرب
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card>
             <h3 className="text-sm font-semibold text-neutral-900 mb-2 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-primary" />
-              Dimensions officielles (35 × 45 mm)
+              الأبعاد الرسمية (35 × 45 ملم)
             </h3>
             <p className="text-xs text-neutral-600 leading-relaxed">
-              Pour la carte nationale d'identité électronique (CNIE) et le passeport biométrique marocain, le format standard est strictement fixé à 35 mm de largeur et 45 mm de hauteur. Cet outil génère une image en haute résolution (300 DPI - 413 × 531 px).
+              بالنسبة لبطاقة الهوية الوطنية الإلكترونية (CNIE) وجواز السفر البيومتري المغربي، فإن التنسيق القياسي محدد بدقة عند 35 ملم عرضًا و 45 ملم ارتفاعًا. تنتج هذه الأداة صورة بدقة عالية (300 نقطة لكل بوصة - 413 × 531 بكسل).
             </p>
           </Card>
 
           <Card>
             <h3 className="text-sm font-semibold text-neutral-900 mb-2 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-primary" />
-              Cadrage et posture du visage
+              إطار ووضعية الوجه
             </h3>
             <p className="text-xs text-neutral-600 leading-relaxed">
-              Le visage doit être parfaitement centré, orienté de face avec le regard fixe vers l'objectif. L'expression doit être neutre (bouche fermée, pas de sourire prononcé). La tête doit occuper entre 70% et 80% de la hauteur de la photo.
+              يجب أن يكون الوجه completamente centered، موجهًا نحو الأمام مع ثبات النظر نحو الكاميرا. يجب أن يكون التعبير محايدًا (الفم مغلقة، دون ابتسامة بارزة). يجب أن تشغل الرأس بين 70% و 80% من ارتفاع الصورة.
             </p>
           </Card>
 
           <Card>
             <h3 className="text-sm font-semibold text-neutral-900 mb-2 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-primary" />
-              Éclairage &amp; Fond recommandé
+              الإضاءة والخلفية الموصى بها
             </h3>
             <p className="text-xs text-neutral-600 leading-relaxed">
-              La photo doit être prise sur un fond clair et uniforme (blanc ou bleu très clair), sans motifs ni ombres. L'éclairage doit être homogène afin d'éviter les yeux rouges ou les reflets sur les lunettes. Cet outil de recadrage ne remplace pas une prise de vue conforme.
+              يجب أن تُؤخذ الصورة على خلفية فاتحة وموحدة (أبيض أو أزرق فاتح جدًا) دون أنماط ولا ظلال. يجب أن يكون الإضاءة متجانسة لتجنب العيون الحمراء أو الانعكاسات على النظارات. هذه أداة لقص لا تستبدل صورة مأخوذة conforme.
             </p>
           </Card>
         </div>
@@ -486,4 +486,4 @@ const PhotoCINPage: React.FC = () => {
   )
 }
 
-export default PhotoCINPage
+export default PhotoCINPageAr
