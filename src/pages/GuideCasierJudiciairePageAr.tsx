@@ -10,34 +10,26 @@ const GuideCasierJudiciairePageAr: React.FC = () => {
     mainEntity: [
       {
         '@type': 'Question',
-        name: 'كيف يتم طلب casier judiciaire عبر الإنترنت في المغرب؟',
+        name: 'ما هو السجل العدلي (النشرة رقم 3) وكيف يمكن الحصول عليه بالمغرب؟',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'يرجى visitar casierjudiciaire.justice.gov.ma. املأ استمارة الطلب عبر الإنترنت، ثم اختر طريقة الاستلام: في المحكمة، أو في الإدارة المركزية بالرباط، أو عبر البريد الآمن (25 درهمًا داخل المغرب، 40 درهمًا إلى الخارج)، أو عبر البريد الإلكتروني إذا كان هاتفك متوافقًا مع NFC مع البطاقة الوطنية البيومترية الجديدة.',
+          text: 'السجل العدلي هو وثيقة رسمية تسلمها وزارة العدل تشهد بوجود أو عدم وجود سوابق قضائية. يمكن التقديم عليه إلكترونياً عبر البوابة الرسمية casierjudiciaire.justice.gov.ma واختيار طريقة الاستلام المناسبة.',
         },
       },
       {
         '@type': 'Question',
-        name: 'ما الفرق بين casier judiciaire و الملف الأنثروبومتري؟',
+        name: 'ما الفرق بين السجل العدلي والبطاقة الأنثروبومترية؟',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'الcasier judiciaire (النشرة رقم 3) تصدرها وزارة العدل وتختص بالمغاربة والأجانب. أما الملف الأنثروبومتري فتصدره المديرية العامة للأمن الوطني (الشرطة) ويحصر على المواطنين المغاربة فقط.',
+          text: 'السجل العدلي (النشرة رقم 3) تصدره وزارة العدل للمغاربة والأجانب، بينما البطاقة الأنثروبومترية تصدرها المديرية العامة للأمن الوطني (الشرطة) وتخص المواطنين المغاربة فقط.',
         },
       },
       {
         '@type': 'Question',
-        name: 'كم يكلف استخراج casier judiciaire في المغرب؟',
+        name: 'ما هي مدة صلاحية السجل العدلي وتكلفته؟',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'يُقدَّر تكلفته بحوالي 10 دراهم للcasier judicial (الضريبي المالي) و30 درهمًا للملف الأنثروبومتري، بالإضافة إلى مصاريف التوصيل إذا أُرسل عن طريق البريد. وثيقتا الصلاحية لمدة 3 أشهر.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'هل يمكن لشخص آخر أن يطلب casier judicial نيابةً عني؟',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'نعم، ولكن فقط بوصاية خاصة موثقة ومرفقة ببطاقة هوية الوكيل.',
+          text: 'تبلغ مدة صلاحية السجل العدلي 3 أشهر من تاريخ إصداره، وتبلغ الرسوم الرسمية حوالي 10 دراهم (طابع مالي).',
         },
       },
     ],
@@ -46,35 +38,35 @@ const GuideCasierJudiciairePageAr: React.FC = () => {
   const steps = [
     {
       num: 1,
-      label: 'الاتصال بالبوابة الرسمية',
+      label: 'الدخول إلى البوابة casierjudiciaire.justice.gov.ma',
       icon: (
         <svg className="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fillRule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v11.5A2.25 2.25 0 004.25 18h11.5A2.25 2.25 0 0018 15.75V4.25A2.25 2.25 0 0015.75 2H4.25zm4.03 6.28a.75.75 0 00-1.06-1.06L4.97 9.47a.75.75 0 000 1.06l2.25 2.25a.75.75 0 001.06-1.06L6.81 10.5h6.44a.75.75 0 000-1.5H6.81l1.47-1.22z" clipRule="evenodd" />
+          <path fillRule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zM3.5 10a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z" clipRule="evenodd" />
+          <path d="M10 5.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9z" />
         </svg>
       ),
     },
     {
       num: 2,
-      label: 'ملء استمارة الطلب',
+      label: 'تعبئة استمارة الطلب بالمعلومات الشخصية',
       icon: (
         <svg className="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fillRule="evenodd" d="M4.5 2A1.5 1.5 0 003 3.5v13A1.5 1.5 0 004.5 18h11a1.5 1.5 0 001.5-1.5V7.621a1.5 1.5 0 00-.44-1.06l-4.12-4.122A1.5 1.5 0 0011.378 2H4.5zm2.25 8.5a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5zm0 3a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5z" clipRule="evenodd" />
+          <path fillRule="evenodd" d="M2.5 4A1.5 1.5 0 001 5.5v9A1.5 1.5 0 002.5 16h15a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0017.5 4h-15zM3 6.75A.75.75 0 013.75 6h12.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zm.75 4.25a.75.75 0 000 1.5h3.5a.75.75 0 000-1.5h-3.5z" clipRule="evenodd" />
         </svg>
       ),
     },
     {
       num: 3,
-      label: 'اختيار طريقة الاستلام',
+      label: 'تحديد طريقة الاستلام والأداء',
       icon: (
         <svg className="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path d="M3 3.5A1.5 1.5 0 014.5 2h11A1.5 1.5 0 0117 3.5v13a1.5 1.5 0 01-1.5 1.5h-11A1.5 1.5 0 013 16.5v-13zM4.5 3.5v13h11v-13h-11z" />
-          <path fillRule="evenodd" d="M6.5 6.5a.75.75 0 01.75-.75h5.5a.75.75 0 010 1.5h-5.5a.75.75 0 010 1.5h-5.5a.75.75 0 01-.75-.75zm0 3a.75.75 0 01.75-.75h5.5a.75.75 0 010 1.5h-5.5a.75.75 0 01-.75-.75z" clipRule="evenodd" />
+          <path fillRule="evenodd" d="M2.5 4A1.5 1.5 0 001 5.5v9A1.5 1.5 0 002.5 16h15a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0017.5 4h-15zM3 6.75A.75.75 0 013.75 6h12.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zm.75 4.25a.75.75 0 000 1.5h3.5a.75.75 0 000-1.5h-3.5z" clipRule="evenodd" />
         </svg>
       ),
     },
     {
       num: 4,
-      label: 'استلام الوثيقة',
+      label: 'سحب الوثيقة من المحكمة أو عبر البريد',
       icon: (
         <svg className="w-4 h-4 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
@@ -87,19 +79,19 @@ const GuideCasierJudiciairePageAr: React.FC = () => {
     {
       name: 'وزارة العدل — البوابة الرسمية casierjudiciaire.justice.gov.ma',
       url: 'https://casierjudiciaire.justice.gov.ma',
-      detail: 'طلب casier judiciaire عبر الإنترنت (النشرة رقم 3)',
+      detail: 'طلب السجل العدلي إلكترونياً (النشرة رقم 3)',
       verifiedDate: '18 أغسطس 2026',
     },
     {
       name: 'demarchesmaroc.com',
       url: 'https://demarchesmaroc.com',
-      detail: '"الcasier judicial: الطلب في المغرب والخارج"',
+      detail: '"السجل العدلي: كيفية الطلب بالمغرب وبالخارج"',
       verifiedDate: '18 أغسطس 2026',
     },
     {
       name: 'avocatrabat.com',
       url: 'https://avocatrabat.com',
-      detail: '"الcasier judicial المغربي للأجانب"',
+      detail: '"السجل العدلي المغربي بالنسبة للأجانب"',
       verifiedDate: '18 أغسطس 2026',
     },
   ]
@@ -107,29 +99,30 @@ const GuideCasierJudiciairePageAr: React.FC = () => {
   return (
     <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
       <Seo
-        title="استخراج casier judiciaire بالمغرب 2026 — كيف تحصل عليه | Kaghit"
-        description="دليل شامل 2026 للحصول على casier judiciaire (النشرة رقم 3) أو الملف الأنثروبومتري بالمغرب: الإجراء عبر الإنترنت، التكلفة (10 درهم) والأوقات."
+        title="السجل العدلي بالمغرب 2026 — كيفية الحصول عليه | Kaghit"
+        description="الدليل الكامل 2026 للحصول على خلاصة السجل العدلي (النشرة رقم 3) أو البطاقة الأنثروبومترية بالمغرب: الإجراءات عبر الإنترنت، السعر والآجال."
         canonicalUrl="https://kaghit.com/ar/guides/casier-judiciaire"
+        lang="ar"
       />
 
-      {/* ديناميكية البياناتfaq Schema */}
+      {/* Structured data FAQ Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      {/* المسار التنقلي */}
+      {/* Breadcrumb */}
       <nav className="mb-6 flex items-center gap-2 text-xs text-neutral-500" aria-label="مسار التنقل">
         <Link to="/ar" className="hover:text-neutral-900 transition-colors">الصفحة الرئيسية</Link>
         <span>/</span>
         <Link to="/ar/guides" className="hover:text-neutral-900 transition-colors">الأدلة الإرشادية</Link>
         <span>/</span>
-        <span className="text-neutral-900 font-medium">casier judiciaire</span>
+        <span className="text-neutral-900 font-medium">السجل العدلي</span>
       </nav>
 
       <PageHeading
-        title="كيف تحصل على casier judiciaire بالمغرب (2026)"
-        description="الإجراء步骤 خطوة بخطوة لطلب النشرة رقم 3 أو الملف الأنثروبومتري عبر الإنترنت أو في المكاتب."
+        title="كيفية الحصول على السجل العدلي بالمغرب (دليل 2026)"
+        description="الإجراءات خطوة بخطوة لطلب النشرة رقم 3 أو البطاقة الأنثروبومترية إلكترونياً أو بالمحكمة."
         icon={
           <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -141,7 +134,7 @@ const GuideCasierJudiciairePageAr: React.FC = () => {
       />
 
       <Card className="p-6 sm:p-10 mb-8">
-        {/* ── المخطط الزمني المرئي للخطوات (4 خطوات) ── */}
+        {/* Step visual timeline */}
         <div className="mb-8 rounded-xl bg-neutral-50 border border-neutral-100 p-5">
           <p className="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-4">
             نظرة عامة على الإجراء في 4 خطوات
@@ -166,10 +159,10 @@ const GuideCasierJudiciairePageAr: React.FC = () => {
           </div>
         </div>
 
-        {/* ── محتوى المقالة الرئيسي (النص الدقيق، مُنسق بالعناوین الفرعية) ── */}
+        {/* Article content */}
         <article className="prose prose-neutral max-w-none space-y-6 text-sm text-neutral-700 leading-relaxed">
           <p className="text-base text-neutral-800 font-medium leading-relaxed">
-            يعود casier judiciaire بشكل متكرر في العديد من الإجراءات الإدارية المغربية — وظيفة جديدة، طلب تأشيرة، تسجيل جامعي، ملف زواج. والخبر السار: الخدمة تم رقمنتها بالكامل لسنوات الآن، والحصول عليها يستغرق بضع دقائق عبر الإنترنت بدلاً من صبحية كاملة في المحكمة.
+            يُطلب السجل العدلي باستمرار في العديد من المعاملات المغربية — التوظيف الجديد، طلب الفيزا، التسجيل الجامعي أو ملف الزواج. والخبر السار أن الخدمة ممتدة إلكترونياً بالكامل للحصول عليها بسرعة من هاتفك أو حاسوبك.
           </p>
 
           <section>
@@ -177,52 +170,48 @@ const GuideCasierJudiciairePageAr: React.FC = () => {
               تقديم الطلب عبر الإنترنت
             </h2>
             <p>
-              قم بزيارة <a href="https://casierjudiciaire.justice.gov.ma" target="_blank" rel="noopener noreferrer" className="text-primary underline font-medium hover:text-primary-600">casierjudiciaire.justice.gov.ma</a>، البوابة الرسمية لوزارة العدل. بعد قبول شروط الاستخدام وإدخال مكان الولادة (في المغرب أو بالخارج)، تملأ استمارة الطلب، تتحقق من المعلومات المدخلة، ثم تختار كيف تستلم وثيقتك: في المحكمة الابتدائية التي تختارها، أو في الإدارة المركزية للوزارة بالرباط، أو عبر البريد المؤمّن (25 درهمًا رسوم توصيل داخل المغرب، 40 درهمًا للخارج)، أو مباشرة عبر البريد الإلكتروني إذا كان هاتفك متوافقًا مع NFC وكنت تحمل البطاقة الوطنية البيومترية الجديدة. يوجد أيضًا تطبيق جوال لإجراء الطلب من هاتف ذكي.
+              قم بزيارة البوابة الرسمية لوزارة العدل <a href="https://casierjudiciaire.justice.gov.ma" target="_blank" rel="noopener noreferrer" className="text-primary underline font-medium hover:text-primary-600">casierjudiciaire.justice.gov.ma</a>. تملأ استمارة الطلب بتحديد مكان الولادة والمعلومات الشخصية، ثم تختار طريقة الاستلام المناسبة: السحب من المحكمة الابتدائية الأقرب إليك، أو التوصل بها عبر البريد المضمون.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-bold text-neutral-900 mb-2">
-              أي وثيقة تطلب: casier judiciaire أم الملف الأنثروبومتري؟
+              أيهما تطلب: السجل العدلي أم البطاقة الأنثروبومترية؟
             </h2>
             <p>
-              كلاهما يشهدان على وضعك القضائي، لكنهما لايصدران عن نفس الإدارة. casier judiciaire — والمعروف رسميًا باسم "النشرة رقم 3" — يصدره وزارة العدل ويتعلق بالمغاربة والأجانب. أما الملف الأنثروبومتري، فتصدره المديرية العامة للأمن الوطني (الشرطة) ويحصر على المغاربة فقط. في حالة الشك في whichever يطلبونك، من الأفضل الاتصال مباشرة بالجهة المعنية بدلًا من الخطأ في الوثيقة.
+              كلا الوثيقتين تشهدان على الوضع القضائي، لكنهما تصدران عن إدارتين مختلفين: السجل العدلي (النشرة رقم 3) تصدره وزارة العدل للمغاربة والأجانب، في حين أن البطاقة الأنثروبومترية تصدرها مصالح الشرطة (DGSN) وتخص المواطنين المغاربة فقط.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-bold text-neutral-900 mb-2">
-              التكلفة والصلاحية
+              الرسوم والصلاحية
             </h2>
             <p>
-              تكلف حوالي 10 دراهم للcasier judicial (من خلال طابع مالي) و30 درهمًا للملف الأنثروبومتري، بالإضافة إلى مصاريف التوصيل إذا اخترت الاستلام عبر البريد. وثيقتا الصلاحية لمدة 3 أشهر فقط — لذا لا تطلبها مبكرًا جدًا относительно ملفك.
+              تبلغ الرسوم حوالي 10 دراهم للسجل العدلي (طابع مالي)، والوثيقة صالحة لمدة 3 أشهر فقط من تاريخ الإصدار.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-bold text-neutral-900 mb-2">
-              إذا تم الطلب بواسطة طرف ثالث نيابةً عنك
+              إذا تم الطلب بواسطة وكيل
             </h2>
             <p>
-              هذا ممكن،但仅 مع توكيل خاص موثق، مصحوب ببطاقة هوية الوكيل. بدونه، سترفض الإدارة الطلب: النشرة رقم 3 في原则上 تُسلَّم يدويًا إلى المعني بالأمر.
+              يمكن ذلك بشرط تقديم توكيل خاص ومصادق عليه مرفقاً ببطاقة تعريف الوكيل، لأن الوثيقة تسلم مبدئياً للمعني بالأمر.
             </p>
           </section>
 
           <section className="bg-neutral-50 p-5 rounded-xl border border-neutral-100">
             <h2 className="text-base font-bold text-neutral-900 mb-2 flex items-center gap-2">
-              <span className="text-primary">💡</span> مثال واقعي
+              <span className="text-primary">💡</span> مثال توضيحي
             </h2>
             <p className="text-neutral-600 text-xs leading-relaxed">
-              كريم حصل recientemente على وظيفة في شركة بالدار البيضاء. صاحب عمله المستقبلي طلب منه casier judicial يعود لشهرين قبل توقيع العقد. صباح يوم الاثنين، وذلك من خلال هاتفه، دخل إلى casierjudiciaire.justice.gov.ma، وملأ الاستمارة في بضع دقائق، واختار استلام الوثيقة من المحكمة الابتدائية الأقرب إلى سكنه عوض انتظار البريد. بعد يومين، حصل على الوثيقة في يده — 걸쳐ً largement في الموعد لتوقيع العقد يوم الجمعة.
+              كريم حصل مؤخراً على فرصة عمل بشركة في الدار البيضاء، وطلب منه المشغل سجلاً عدلياً حديثاً. دخل كريم صباح الاثنين إلى الموقع الرسمي لوزارة العدل وقدم طلبه إلكترونياً، وتوجه للمحكمة القريبة منه لاستلامه في موعده لتوقيع العقد.
             </p>
           </section>
-
-          <p className="pt-2">
-            بمجرد حصولك على الوثيقة، فكر في التحقق مما إذا كان نفس الملف يطلب أيضًا شهادة عمل — ف רבות من طلبات العمل أو الائتمان تتطلب الاثنين معًا.
-          </p>
         </article>
 
-        {/* ── تنويع مربع الربط مع أداة attestation de travail ── */}
+        {/* Callout box */}
         <div className="mt-8 rounded-xl bg-primary-50/60 border border-primary-100 p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-start gap-3">
             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-white font-bold text-sm select-none">
@@ -230,22 +219,22 @@ const GuideCasierJudiciairePageAr: React.FC = () => {
             </span>
             <div>
               <p className="text-sm font-semibold text-neutral-900">
-                هل تحتاج إلى شهادة عمل لنفس الملف؟
+                هل تحتاج أيضاً إلى شهادة عمل لنفس الملف؟
               </p>
               <p className="text-xs text-neutral-600 mt-0.5">
-                أنشئ شهادتك بصيغة PDF مجانًا وفوريًا.
+                قم بإنشاء شهادة العمل الخاصة بك مجاناً وفورياً.
               </p>
             </div>
           </div>
 
           <Button as="a" href="/ar/attestation-de-travail" variant="primary" className="shrink-0 text-xs">
-            إنشاء مجانًا →
+            إنشاء مجاناً ←
           </Button>
         </div>
 
-        {/* ── قسم المصادر (منسق distinctly وخفيف مثل التذييل) ── */}
+        {/* Sources section */}
         <div className="mt-10 pt-6 border-t border-neutral-100 text-xs text-neutral-400">
-          <p className="font-semibold text-neutral-500 mb-2">المصادر الرسمية والReferences :</p>
+          <p className="font-semibold text-neutral-500 mb-2">المصادر الرسمية والمراجع:</p>
           <ul className="list-disc list-inside space-y-1 text-[11px] leading-relaxed">
             {SOURCES.map((src, i) => (
               <li key={i}>

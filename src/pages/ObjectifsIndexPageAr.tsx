@@ -16,7 +16,7 @@ const GOALS: GoalItem[] = [
     to: '/ar/objectifs/constituer-dossier-embauche',
     title: 'وضع ملف التوظيف الخاص بك',
     description:
-      'قائمة مخصصة حسب situation: casier judiciaire, attestation de travail, photo d\'identité.',
+      'قائمة مخصصة حسب وضعيتك: السجل العدلي، شهادة العمل، صورة الهوية.',
     badge: 'استبيان مخصص',
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -29,7 +29,7 @@ const GOALS: GoalItem[] = [
     to: '/ar/objectifs/voyager-avec-mon-enfant',
     title: 'السفر مع طفلي',
     description:
-      'أجب على بعض الأسئلة للحصول على القائمة الدقيقة للوثائق والإجراءات اللازمة حسب situation.',
+      'أجب على بعض الأسئلة للحصول على القائمة الدقيقة للوثائق والإجراءات اللازمة حسب وضعيتك.',
     badge: 'استبيان مخصص',
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -44,7 +44,7 @@ const GOALS: GoalItem[] = [
     to: '/ar/objectifs/renouveler-ma-cin',
     title: 'تجديد أو تجديد بطاقة التعريف الوطنية',
     description:
-      'حدد motive de demande الخاصة بك للحصول على القائمة الدقيقة للوثائق والإجراءات اللازمة.',
+      'حدد سبب طلبك للحصول على القائمة الدقيقة للوثائق والإجراءات اللازمة.',
     badge: 'استبيان مخصص',
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

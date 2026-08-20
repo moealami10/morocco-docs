@@ -19,11 +19,11 @@ const NAV_ITEMS_FR: NavItem[] = [
 
 const NAV_ITEMS_AR: NavItem[] = [
   { to: '/ar', label: 'الصفحة الرئيسية' },
-  { to: '/attestation-de-travail', label: 'شهادة عمل' },
-  { to: '/autorisation-parentale', label: 'إذن الوالدين' },
-  { to: '/photo-cin', label: 'صورة بطاقة الهوية' },
-  { to: '/guides', label: 'الأدلة الإرشادية' },
-  { to: '/objectifs', label: 'الأهداف' },
+  { to: '/ar/attestation-de-travail', label: 'شهادة عمل' },
+  { to: '/ar/autorisation-parentale', label: 'إذن الوالدين' },
+  { to: '/ar/photo-cin', label: 'صورة بطاقة الهوية' },
+  { to: '/ar/guides', label: 'الأدلة الإرشادية' },
+  { to: '/ar/objectifs', label: 'الأهداف' },
 ]
 
 // ---------------------------------------------------------------------------

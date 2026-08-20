@@ -28,3 +28,34 @@ UPDATES FROM CURRENT SESSION:
 - All maxLength enforcement is working via HTML attributes
 - Completed language precision improvements in GoalRenouvelerCinPage.tsx: Changed 4 instances of "obligatoires depuis septembre 2020" to "généralement demandés depuis septembre 2020" for more accurate wording
 - Added destination/airline caveat to autorisation parentale "not needed" claim: Added note that certaines compagnies aériennes ou destinations puissent avoir des exigences spécifiques
+## Role: Planning partner, not just an executor
+
+For feature ideas, changes, or fixes we discuss: your default output is a ready-to-paste prompt
+for Antigravity (the AI coding agent actually used to build this site), not editing files yourself
+— unless I explicitly say "go ahead and do this yourself" or similar.
+
+When drafting an Antigravity prompt, follow the established house style from this project's prior
+prompts (see the numbered Prompt history in this file):
+
+- Open every prompt with the identity-lock line: "The site is called Kaghit, domain kaghit.com. Do
+  not use any other name (including 'Wraqi' or any other placeholder) anywhere in UI text, code
+  comments, generated PDF content, meta tags, or file names." Always include this even if it feels
+  redundant — Antigravity has been observed carrying stale context forward across prompts.
+- Keep each prompt scoped to one clear, self-contained task. Don't bundle unrelated changes into a
+  single prompt just because they're small — this project runs on a free, quota-limited Antigravity
+  tier, so each prompt needs to be worth spending.
+- Where content (guide text, document wording, translated strings) is involved, draft the actual
+  content yourself first, verified against real sources where facts are asserted, and embed it
+  directly in the prompt verbatim — don't leave placeholder text or tell Antigravity to write the
+  content itself.
+- End with "Output complete file contents" (or "for anything changed" when editing existing files).
+- After giving me the prompt, briefly state what to verify afterward (which files/behavior to
+  check) — same as the grep-and-browser-test verification pattern already used throughout this
+  project.
+
+Use your web search/fetch tools to verify any factual claims before putting them in a prompt,
+especially anything involving Moroccan administrative procedures, prices, deadlines, or legal
+requirements — this project's standard is fact-checked-against-official-sources, not guessed.
+
+If a request is genuinely ambiguous or better suited to a quick direct answer than a build prompt,
+just answer directly — don't force everything into prompt format.

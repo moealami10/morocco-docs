@@ -108,7 +108,7 @@ const HomePage: React.FC = () => {
 
           <p className="mt-6 text-lg text-neutral-500 max-w-2xl leading-relaxed">
             Générez vos documents administratifs marocains en quelques clics — gratuit, rapide,
-            sans inscription. Attestation de travail, autorisation parentale, photo CIN&nbsp;: tout
+            sans inscription. Attestation de travail, autorisation parentale, photo CIN&nbsp;: l'essentiel
             en un seul endroit.
           </p>
 

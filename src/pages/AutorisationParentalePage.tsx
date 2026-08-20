@@ -811,7 +811,7 @@ const AutorisationParentalePage: React.FC = () => {
               Exigences et contrôles aux frontières
             </h3>
             <p className="text-xs text-neutral-600 leading-relaxed">
-              Au Maroc, ce document est systématiquement demandé lors du passage aux frontières pour tout voyage international d'un mineur non accompagné de ses deux parents. Il est aussi requis lors des sorties scolaires, colonies de vacances ou compétitions sportives.
+              Au Maroc, ce document est généralement demandé lors du passage aux frontières pour tout voyage international d'un mineur non accompagné de ses deux parents. Il est aussi requis lors des sorties scolaires, colonies de vacances ou compétitions sportives.
             </p>
           </Card>
 

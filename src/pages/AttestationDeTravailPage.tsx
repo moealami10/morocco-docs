@@ -795,7 +795,7 @@ const AttestationDeTravailPage: React.FC = () => {
               Valeur juridique &amp; Signature
             </h3>
             <p className="text-xs text-neutral-600 leading-relaxed">
-              Ce modèle en ligne permet de générer un document conforme à l'usage courant. Pour qu'il ait une valeur juridique probante, l'attestation originale doit obligatoirement être imprimée, signée par le représentant légal de l'entreprise et revêtue du cachet officiel. Cet outil ne remplace pas un conseil juridique.
+              Ce modèle en ligne permet de générer un document structuré selon l'usage courant. Pour qu'il ait une valeur juridique probante, l'attestation originale doit obligatoirement être imprimée, signée par le représentant légal de l'entreprise et revêtue du cachet officiel. Cet outil ne remplace pas un conseil juridique.
             </p>
           </Card>
         </div>
