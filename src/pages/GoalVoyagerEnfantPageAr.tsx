@@ -9,14 +9,20 @@ interface VoyageState {
   travelCompanion: '' | 'both-parents' | 'one-parent' | 'another-adult' | 'alone'
   destination: string
   passportValid: '' | 'oui' | 'non'
+  destinationConfirmed: boolean
 }
 
 function loadProgress(): VoyageState {
   try {
     const raw = sessionStorage.getItem(STORAGE_KEY)
-    return raw ? JSON.parse(raw) : { travelCompanion: '', destination: '', passportValid: '' }
+    const parsed = raw ? JSON.parse(raw) : { travelCompanion: '', destination: '', passportValid: '' }
+    // Ensure destinationConfirmed exists for backward compatibility
+    return {
+      ...parsed,
+      destinationConfirmed: parsed.destinationConfirmed ?? false
+    }
   } catch {
-    return { travelCompanion: '', destination: '', passportValid: '' }
+    return { travelCompanion: '', destination: '', passportValid: '', destinationConfirmed: false }
   }
 }
 
@@ -44,7 +50,7 @@ const GoalVoyagerEnfantPageAr: React.FC = () => {
   const [state, setState] = useState<VoyageState>(() => loadProgress())
 
   const resetForm = () => {
-    setState({ travelCompanion: '', destination: '', passportValid: '' })
+    setState({ travelCompanion: '', destination: '', passportValid: '', destinationConfirmed: false })
     sessionStorage.removeItem(STORAGE_KEY)
   }
 
@@ -213,7 +219,7 @@ const GoalVoyagerEnfantPageAr: React.FC = () => {
           )}
 
           {/* Destination Question */}
-          {state.travelCompanion && !state.destination && (
+          {state.travelCompanion && !state.destinationConfirmed && (
             <Card className="p-6 mb-8 border-primary-100 bg-neutral-50/60">
               <p className="text-sm text-neutral-700 font-medium leading-relaxed mb-4">
                 ما هي وجهة السفر؟
@@ -226,9 +232,22 @@ const GoalVoyagerEnfantPageAr: React.FC = () => {
                   onChange={(e) => setState(prev => ({ ...prev, destination: e.target.value.trim() }))}
                   className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors duration-150 text-sm"
                 />
-                {state.destination && (
-                  <p className="mt-2 text-xs text-neutral-500">
-                    الوجهة المدخلة: "{state.destination}"
+                {state.destination ? (
+                  <>
+                    <p className="mt-2 text-xs text-neutral-500">
+                      الوجهة المدخلة: "{state.destination}"
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setState(prev => ({ ...prev, destinationConfirmed: true }))}
+                      className="mt-3 w-full px-4 py-2 rounded-lg border border-primary-100 bg-primary-50 text-primary font-medium hover:bg-primary-100 transition-colors duration-150"
+                    >
+                      متابعة
+                    </button>
+                  </>
+                ) : (
+                  <p className="mt-2 text-xs text-neutral-500 text-italic">
+                    يرجى إدخال وجهة السفر
                   </p>
                 )}
               </div>
@@ -236,7 +255,7 @@ const GoalVoyagerEnfantPageAr: React.FC = () => {
           )}
 
           {/* Passport Validity Question */}
-          {state.travelCompanion !== '' && state.destination !== '' && state.passportValid === '' && (
+          {state.travelCompanion !== '' && state.destinationConfirmed && state.passportValid === '' && (
             <Card className="p-6 mb-8 border-primary-100 bg-neutral-50/60">
               <p className="text-sm text-neutral-700 font-medium leading-relaxed mb-4">
                 هل جواز سفر الطفل لا يزال صالحًا؟

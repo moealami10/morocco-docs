@@ -9,14 +9,20 @@ interface VoyageState {
   travelCompanion: '' | 'both-parents' | 'one-parent' | 'another-adult' | 'alone';
   destination: string;
   passportValid: '' | 'oui' | 'non';
+  destinationConfirmed: boolean;
 }
 
 function loadProgress(): VoyageState {
   try {
     const raw = sessionStorage.getItem(STORAGE_KEY)
-    return raw ? JSON.parse(raw) : { travelCompanion: '', destination: '', passportValid: '' }
+    const parsed = raw ? JSON.parse(raw) : { travelCompanion: '', destination: '', passportValid: '' }
+    // Ensure destinationConfirmed exists for backward compatibility
+    return {
+      ...parsed,
+      destinationConfirmed: parsed.destinationConfirmed ?? false
+    }
   } catch {
-    return { travelCompanion: '', destination: '', passportValid: '' }
+    return { travelCompanion: '', destination: '', passportValid: '', destinationConfirmed: false }
   }
 }
 
@@ -30,7 +36,7 @@ const GoalVoyagerEnfantPage: React.FC = () => {
   // }, [state])
 
   const resetForm = () => {
-    setState({ travelCompanion: '', destination: '', passportValid: '' })
+    setState({ travelCompanion: '', destination: '', passportValid: '', destinationConfirmed: false })
     sessionStorage.removeItem(STORAGE_KEY)
   }
 
@@ -197,7 +203,7 @@ if (state.passportValid === 'non') {
           )}
 
           {/* Destination Question */}
-          {state.travelCompanion && !state.destination && (
+          {state.travelCompanion && !state.destinationConfirmed && (
             <Card className="p-6 mb-8 border-primary-100 bg-neutral-50/60">
               <p className="text-sm text-neutral-700 leading-relaxed mb-4">
                 Quelle est la destination du voyage ?
@@ -205,14 +211,26 @@ if (state.passportValid === 'non') {
               <div>
                 <input
                   type="text"
-                  placeholder="Ex: France, Espagne, Turquie..."
+                  placeholder="Ex: France, Espagne, Tunisie..."
                   value={state.destination}
                   onChange={(e) => setState(prev => ({ ...prev, destination: e.target.value.trim() }))}
                   className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors duration-150 text-sm"
                 />
-                {state.destination && (
-                  <p className="mt-2 text-xs text-neutral-500">
-                    Destination saisie : "{state.destination}"
+                {state.destination ? (
+                  <>
+                    <p className="mt-2 text-xs text-neutral-500">
+                      Destination saisie : "{state.destination}"
+                    </p>
+                    <button
+                      onClick={() => setState(prev => ({ ...prev, destinationConfirmed: true }))}
+                      className="mt-3 w-full px-4 py-2 rounded-lg border border-primary-100 bg-primary-50 text-primary font-medium hover:bg-primary-100 transition-colors duration-150"
+                    >
+                      Continuer
+                    </button>
+                  </>
+                ) : (
+                  <p className="mt-2 text-xs text-neutral-500 text-italic">
+                    Veuillez saisir une destination
                   </p>
                 )}
               </div>
@@ -220,7 +238,7 @@ if (state.passportValid === 'non') {
           )}
 
           {/* Passport Validity Question */}
-          {state.travelCompanion !== '' && state.destination !== '' && state.passportValid === '' && (
+          {state.travelCompanion !== '' && state.destinationConfirmed && state.passportValid === '' && (
             <Card className="p-6 mb-8 border-primary-100 bg-neutral-50/60">
               <p className="text-sm text-neutral-700 leading-relaxed mb-4">
                 Le passeport de l'enfant est-il encore valide ?
