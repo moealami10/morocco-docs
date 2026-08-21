@@ -99,6 +99,27 @@ function formatDateIsoToArabic(iso: string): string {
   return `${parseInt(d, 10)} ${months[parseInt(m, 10) - 1]} ${y}`
 }
 
+function validate(data: AttestationData): FormErrors {
+  const err: FormErrors = {}
+  if (!data.nomEntreprise.trim())     err.nomEntreprise = 'هذا الحقل مطلوب'
+  if (!data.adresseEntreprise.trim()) err.adresseEntreprise = 'هذا الحقل مطلوب'
+  if (!data.nomSignataire.trim())     err.nomSignataire = 'هذا الحقل مطلوب'
+  if (!data.qualiteSignataire.trim()) err.qualiteSignataire = 'هذا الحقل مطلوب'
+  if (!data.nomEmploye.trim())        err.nomEmploye = 'هذا الحقل مطلوب'
+  if (!data.cinEmploye.trim())        err.cinEmploye = 'هذا الحقل مطلوب'
+  if (!data.posteOccupe.trim())       err.posteOccupe = 'هذا الحقل مطلوب'
+  if (!data.natureContrat)            err.natureContrat = 'هذا الحقل مطلوب'
+  if (data.inclureSalaire && !data.salaireBrut.trim()) {
+    err.salaireBrut = 'هذا الحقل مطلوب عند إ inclusion الراتب'
+  }
+  if (!data.dateDebut)                err.dateDebut = 'هذا الحقل مطلوب'
+  if (!data.toujoursEnPoste && !data.dateFin)
+    err.dateFin = `هذا الحقل مطلوب إذا لم يكن الموظف لا يزال في منصب`
+  if (!data.lieuEmission.trim())      err.lieuEmission = 'هذا الحقل مطلوب'
+  if (!data.dateEmission)             err.dateEmission = 'هذا الحقل مطلوب'
+  return err
+}
+
 // ---------------------------------------------------------------------------
 // Preview component
 // ---------------------------------------------------------------------------
