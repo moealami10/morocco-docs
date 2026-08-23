@@ -60,6 +60,21 @@ const TOOLS: Tool[] = [
       </svg>
     ),
   },
+  {
+    id: 'card-doc-templates',
+    to: '/modeles-de-documents',
+    title: 'Modèles de documents',
+    description:
+      'Accédez à notre bibliothèque de modèles de documents administratifs marocains prêts à personnaliser.',
+    icon: (
+      <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect x="4" y="4" width="16" height="16" rx="2" />
+        <rect x="8" y="8" width="8" height="8" rx="1" />
+        <path d="M12 8v8" />
+        <path d="M8 12h8" />
+      </svg>
+    ),
+  },
 ]
 
 // ---------------------------------------------------------------------------
