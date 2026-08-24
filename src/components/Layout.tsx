@@ -14,6 +14,7 @@ const NAV_ITEMS_FR: NavItem[] = [
   { to: '/autorisation-parentale', label: 'Autorisation parentale' },
   { to: '/photo-cin', label: 'Photo CIN' },
   { to: '/guides', label: 'Guides' },
+  { to: '/formulaires-administratifs', label: 'Formulaires administratifs' },
   { to: '/objectifs', label: 'Objectifs' },
 ]
 
@@ -23,6 +24,7 @@ const NAV_ITEMS_AR: NavItem[] = [
   { to: '/ar/autorisation-parentale', label: 'إذن الوالدين' },
   { to: '/ar/photo-cin', label: 'صورة بطاقة الهوية' },
   { to: '/ar/guides', label: 'الأدلة الإرشادية' },
+  { to: '/ar/formulaires-administratifs', label: 'النماذج الإدارية' },
   { to: '/ar/objectifs', label: 'الأهداف' },
 ]
 
@@ -198,6 +200,16 @@ const Footer: React.FC = () => {
               'Cet outil génère des documents à usage pratique ; il ne constitue pas un conseil juridique ou fiscal, et le document généré peut nécessiter signature, cachet ou légalisation selon son usage.'
             )}
           </p>
+
+          {/* Trust link */}
+          <div className="flex items-center gap-2 text-xs">
+            <Link
+              to={isArabic ? '/ar/confidentialite' : '/confidentialite'}
+              className="text-neutral-500 hover:text-neutral-900 transition-colors duration-150"
+            >
+              {isArabic ? 'سياسة الخصوصية' : 'Confidentialité'}
+            </Link>
+          </div>
         </div>
 
         <div className="mt-6 pt-4 border-t border-neutral-100 text-xs text-neutral-400">

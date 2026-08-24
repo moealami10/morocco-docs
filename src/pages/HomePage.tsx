@@ -62,10 +62,10 @@ const TOOLS: Tool[] = [
   },
   {
     id: 'card-doc-templates',
-    to: '/modeles-de-documents',
-    title: 'Modèles de documents',
+    to: '/formulaires-administratifs',
+    title: 'Formulaires administratifs',
     description:
-      'Accédez à notre bibliothèque de modèles de documents administratifs marocains prêts à personnaliser.',
+      'Accédez à notre bibliothèque de formulaires administratifs marocains prêts à personnaliser - gagnez du temps et évitez les déplacements inutiles.',
     icon: (
       <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="4" y="4" width="16" height="16" rx="2" />
