@@ -504,6 +504,7 @@ const DocumentViewerModal: React.FC<DocumentViewerModalProps> = ({ document, onC
                 variant="secondary"
                 className="w-full text-sm sm:w-auto"
                 onClick={() => {
+                  console.log('Opening PDF:', document.pdfUrl);
                   window.open(document.pdfUrl, '_blank')
                 }}
               >
