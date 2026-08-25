@@ -36,7 +36,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'Lexend', 'Source Sans 3', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         card: '0 1px 3px 0 rgb(0 0 0 / 0.07), 0 1px 2px -1px rgb(0 0 0 / 0.07)',
@@ -45,6 +45,28 @@ export default {
       borderRadius: {
         xl: '0.75rem',
         '2xl': '1rem',
+      },
+      spacing: {
+        'gap-xl': '4rem', // 64px - for extra large gaps
+      },
+      keyframes: {
+        move: {
+          '0%': { transform: 'translateX(0) translateY(0)' },
+          '100%': { transform: 'translateX(-256px) translateY(-256px)' },
+        },
+        pulse: {
+          '0%, 100%': { opacity: 1 },
+          '50%': { opacity: 0.8 },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+      },
+      animation: {
+        'move': 'move 30s linear infinite',
+        'pulse': 'pulse 4s ease-in-out infinite',
+        'float': 'float 6s ease-in-out infinite',
       },
     },
   },
