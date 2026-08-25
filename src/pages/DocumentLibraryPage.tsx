@@ -133,7 +133,6 @@ const [filters, setFilters] = useState<DocumentFilters>({
   searchTerm: '',
   category: ''
 })
-  const [selectedDocument, setSelectedDocument] = useState<Document | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   // Initialize documents data
@@ -170,19 +169,9 @@ const [filters, setFilters] = useState<DocumentFilters>({
 // Get unique categories for filter dropdowns
    const categories = Array.from(new Set(documents.map(doc => doc.category)))
 
-  // Handle document selection for preview
-  const handleDocumentSelect = (doc: Document) => {
-    setSelectedDocument(doc)
-  }
-
-  // Handle closing preview
-  const handlePreviewClose = () => {
-    setSelectedDocument(null)
-  }
-
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-      
+
       <Seo
         title="Bibliothèque de modèles de documents administratifs — Kaghit"
         description="Accédez gratuitement à une bibliothèque de modèles de documents administratifs marocains : demandes de mariage, contrats de location, attestations et autres formulaires pour vos démarches."
@@ -289,20 +278,10 @@ const [filters, setFilters] = useState<DocumentFilters>({
               <DocumentCard
                 key={doc.id}
                 document={doc}
-                onSelect={handleDocumentSelect}
-                className={`${selectedDocument?.id === doc.id ? 'selected-ring' : ''}`}
               />
             </div>
           ))}
         </div>
-      )}
-
-      {/* Document preview modal */}
-      {selectedDocument && (
-        <DocumentViewerModal
-          document={selectedDocument}
-          onClose={handlePreviewClose}
-        />
       )}
 
       {/* Informational section */}
@@ -373,15 +352,13 @@ const [filters, setFilters] = useState<DocumentFilters>({
 
 interface DocumentCardProps {
   document: Document
-  onSelect: (doc: Document) => void
   className?: string
 }
 
-const DocumentCard: React.FC<DocumentCardProps> = ({ document, onSelect, className }) => {
+const DocumentCard: React.FC<DocumentCardProps> = ({ document, className }) => {
   return (
     <div
-      onClick={() => onSelect(document)}
-      className={`group hover:shadow-lg transition-shadow duration-200 cursor-pointer ${className || ''}`}
+      className={`group hover:shadow-lg transition-shadow duration-200 ${className || ''}`}
     >
       <Card
         aria-label={`Aperçu du document : ${document.title}`}
@@ -420,6 +397,7 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ document, onSelect, classNa
               <p className="text-xs text-neutral-500 line-clamp-2">{document.description}</p>
             </div>
           </div>
+        </div>
 
           <div className="mt-auto pt-4 border-t border-neutral-100">
             <div className="flex flex-wrap gap-2 mb-2">
@@ -441,80 +419,12 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ document, onSelect, classNa
               ))}
             </div>
 
-            <Button
-              variant="secondary"
-              className="w-full text-sm"
-              onClick={(e) => {
-                e.stopPropagation();
-                onSelect(document);
-              }}
-            >
-              Voir
-            </Button>
-
-                      </div>
-        </div>
-      </Card>
-    </div>
-  );
-};
-
-// ---------------------------------------------------------------------------
-// Document Viewer Modal
-// ---------------------------------------------------------------------------
-
-interface DocumentViewerModalProps {
-  document: Document
-  onClose: () => void
-}
-
-const DocumentViewerModal: React.FC<DocumentViewerModalProps> = ({ document, onClose }) => {
-  const [isDownloading, setIsDownloading] = useState(false);
-  
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="relative w-full max-w-4xl max-h-[90vh] overflow-hidden rounded-xl bg-white shadow-2xl">
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 p-1 rounded hover:bg-neutral-200 transition-colors duration-150"
-          aria-label="Fermer l'aperçu"
-        >
-          <svg className="w-4 h-4" stroke="currentColor" viewBox="0 0 20 20" fill="none" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-
-        {/* Document content */}
-        <div className="p-6 sm:p-8">
-          <div className="mb-4 flex items-center gap-3">
-            <h1 className="text-2xl font-bold text-neutral-900">{document.title}</h1>
-            <span className="px-2 py-0.5 text-xs font-medium bg-neutral-100 text-neutral-800 rounded-full">
-              {document.category}
-            </span>
-          </div>
-
-          <p className="text-neutral-600 mb-6">{document.description}</p>
-
-{/* Document metadata */}
-           <div className="grid grid-cols-1 gap-4 mb-6 text-sm text-neutral-600">
-             <div className="flex flex-col">
-               <span className="font-medium">Autorité émettrice :</span>
-               <span>{document.agency}</span>
-             </div>
-             <div className="flex flex-col">
-               <span className="font-medium">Version :</span>
-               <span>{document.versionDate}</span>
-             </div>
-           </div>
-
-          {/* Download buttons */}
-          <div className="mt-6 pt-4 border-t border-neutral-100">
             <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
               <Button
                 variant="secondary"
                 className="w-full text-sm sm:w-auto"
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   window.open(document.pdfUrl, '_blank')
                 }}
               >
@@ -523,48 +433,18 @@ const DocumentViewerModal: React.FC<DocumentViewerModalProps> = ({ document, onC
               <a
                 href={document.pdfUrl}
                 download={`${document.title.replace(/\s+/g, '_')}.pdf`}
-                onClick={(e) => {
-                  if (isDownloading) {
-                    e.preventDefault();
-                    return;
-                  }
-                  setIsDownloading(true);
-                  // Simulate delay to demonstrate concept - in reality, browser handles download
-                  // Reset after 2 seconds (adjust as needed)
-                  setTimeout(() => setIsDownloading(false), 2000);
-                }}
-                className={`inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50 select-none bg-white text-neutral-700 ring-1 ring-neutral-200 hover:bg-neutral-50 hover:ring-neutral-300 active:bg-neutral-100 focus-visible:outline-primary w-full text-sm sm:w-auto ${isDownloading ? 'opacity-70' : ''}`}
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50 select-none bg-white text-neutral-700 ring-1 ring-neutral-200 hover:bg-neutral-50 hover:ring-neutral-300 active:bg-neutral-100 focus-visible:outline-primary w-full text-sm sm:w-auto"
               >
-                {isDownloading ? 'Téléchargement...' : 'Télécharger en PDF'}
-                {isDownloading && <span className="ml-2 h-4 w-4 animate-spin border-2 border-primary border-t-transparent rounded-full"/>}
+                Télécharger en PDF
               </a>
             </div>
-          </div>
-
-          {/* Disclaimer */}
-          <div className="mt-6 pt-4 border-t border-neutral-100">
-            <p className="text-xs text-neutral-500 leading-relaxed">
-              <strong>Important :</strong> Ce document est fourni à titre informatif seulement.
-              Il ne constitue pas un document officiel et doit être validé par les autorités
-              compétentes avant toute utilisation officielle. Vous devez vérifier que vous
-              utilisez la version la plus récente directement auprès de l administration concernée.
-            </p>
-          </div>
         </div>
-      </div>
+      </Card>
     </div>
-  )
-}
+  );
+};
+
 
 export default DocumentLibraryPage
 
-/* Selected ring style for document cards */
-const style = document.createElement('style');
-style.textContent = `
-  .selected-ring {
-    outline: 2px solid rgba(59, 130, 246, 0.7);
-    outline-offset: 2px;
-    border-radius: 0.5rem;
-  }
-`;
-document.head.appendChild(style);
