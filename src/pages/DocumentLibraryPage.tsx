@@ -269,8 +269,16 @@ const [filters, setFilters] = useState<DocumentFilters>({
       {!isLoading && filteredDocuments.length === 0 && (
         <div className="text-center py-12">
           <p className="text-neutral-500">
-            Aucun document ne correspond à vos filtres. Essayez de modifier votre recherche.
+            Aucun document ne correspond à vos filtres actuels.
           </p>
+          <div className="flex flex-col items-center space-y-4 mt-6">
+            <Button variant="secondary" onClick={() => setFilters({ searchTerm: '', category: '' })}>
+              Réinitialiser les filtres
+            </Button>
+            <p className="text-sm text-neutral-500">
+              Essayez de rechercher par terme comme "mariage", "location" ou "travail"
+            </p>
+          </div>
         </div>
       )}
 
@@ -282,6 +290,7 @@ const [filters, setFilters] = useState<DocumentFilters>({
                 key={doc.id}
                 document={doc}
                 onSelect={handleDocumentSelect}
+                className={`${selectedDocument?.id === doc.id ? 'selected-ring' : ''}`}
               />
             </div>
           ))}
@@ -365,13 +374,14 @@ const [filters, setFilters] = useState<DocumentFilters>({
 interface DocumentCardProps {
   document: Document
   onSelect: (doc: Document) => void
+  className?: string
 }
 
-const DocumentCard: React.FC<DocumentCardProps> = ({ document, onSelect }) => {
+const DocumentCard: React.FC<DocumentCardProps> = ({ document, onSelect, className }) => {
   return (
     <div
       onClick={() => onSelect(document)}
-      className="group hover:shadow-lg transition-shadow duration-200 cursor-pointer"
+      className={`group hover:shadow-lg transition-shadow duration-200 cursor-pointer ${className || ''}`}
     >
       <Card
         aria-label={`Aperçu du document : ${document.title}`}
@@ -459,6 +469,7 @@ interface DocumentViewerModalProps {
 }
 
 const DocumentViewerModal: React.FC<DocumentViewerModalProps> = ({ document, onClose }) => {
+  const [isDownloading, setIsDownloading] = useState(false);
   
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
@@ -509,13 +520,18 @@ const DocumentViewerModal: React.FC<DocumentViewerModalProps> = ({ document, onC
               >
                 Voir le document
               </Button>
-              <a
-                href={document.pdfUrl}
-                download={`${document.title.replace(/\s+/g, '_')}.pdf`}
-                className="inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50 select-none bg-white text-neutral-700 ring-1 ring-neutral-200 hover:bg-neutral-50 hover:ring-neutral-300 active:bg-neutral-100 focus-visible:outline-primary w-full text-sm sm:w-auto"
+              <button
+                onClick={() => {
+                  setIsDownloading(true);
+                  // Simulate delay to demonstrate concept - in reality, browser handles download
+                  setTimeout(() => setIsDownloading(false), 2000);
+                }}
+                disabled={isDownloading}
+                className={`inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50 select-none bg-white text-neutral-700 ring-1 ring-neutral-200 hover:bg-neutral-50 hover:ring-neutral-300 active:bg-neutral-100 focus-visible:outline-primary w-full text-sm sm:w-auto ${isDownloading ? 'opacity-70' : ''}`}
               >
-                Télécharger en PDF
-              </a>
+                {isDownloading ? 'Downloading...' : 'Télécharger en PDF'}
+                {isDownloading && <span className="ml-2 h-4 w-4 animate-spin border-2 border-primary border-t-transparent rounded-full"/>}
+              </button>
             </div>
           </div>
 
@@ -535,3 +551,14 @@ const DocumentViewerModal: React.FC<DocumentViewerModalProps> = ({ document, onC
 }
 
 export default DocumentLibraryPage
+
+/* Selected ring style for document cards */
+const style = document.createElement('style');
+style.textContent = `
+  .selected-ring {
+    outline: 2px solid rgba(59, 130, 246, 0.7);
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
+`;
+document.head.appendChild(style);
