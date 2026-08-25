@@ -535,7 +535,7 @@ const DocumentViewerModal: React.FC<DocumentViewerModalProps> = ({ document, onC
                 }}
                 className={`inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50 select-none bg-white text-neutral-700 ring-1 ring-neutral-200 hover:bg-neutral-50 hover:ring-neutral-300 active:bg-neutral-100 focus-visible:outline-primary w-full text-sm sm:w-auto ${isDownloading ? 'opacity-70' : ''}`}
               >
-                {isDownloading ? 'Downloading...' : 'Télécharger en PDF'}
+                {isDownloading ? 'Téléchargement...' : 'Télécharger en PDF'}
                 {isDownloading && <span className="ml-2 h-4 w-4 animate-spin border-2 border-primary border-t-transparent rounded-full"/>}
               </a>
             </div>
