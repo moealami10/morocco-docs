@@ -38,8 +38,8 @@ const DOCUMENTS_DATA: Document[] = [
       agency: 'Ministère de la Justice',
       complexity: 'Moderate',
       versionDate: '2025',
-      htmlContent: '/public/documents/mariage/demande-mariage-etranger.html',
-      pdfUrl: '/public/documents/mariage/demande-mariage-etranger.pdf', // Would be generated from HTML
+      htmlContent: '/documents/mariage/demande-mariage-etranger.html',
+      pdfUrl: '/documents/mariage/demande-mariage-etranger.pdf', // Would be generated from HTML
       tags: ['mariage', 'étranger', 'autorisation', 'union']
     },
 {
@@ -50,8 +50,8 @@ const DOCUMENTS_DATA: Document[] = [
       agency: 'Ministère de la Justice',
       complexity: 'Simple',
       versionDate: '2025',
-      htmlContent: '/public/documents/mariage/extrait-acte-mariage.html', // Would exist if created
-      pdfUrl: '/public/documents/mariage/extrait-acte-mariage.pdf',
+      htmlContent: '/documents/mariage/extrait-acte-mariage.html', // Would exist if created
+      pdfUrl: '/documents/mariage/extrait-acte-mariage.pdf',
       tags: ['mariage', 'extrait', 'acte', 'certificat']
     },
   
@@ -64,8 +64,8 @@ const DOCUMENTS_DATA: Document[] = [
       agency: 'Ministère de la Justice',
       complexity: 'Moderate',
       versionDate: '2025',
-      htmlContent: '/public/documents/etat-civil/changement-nom.html',
-      pdfUrl: '/public/documents/etat-civil/changement-nom.pdf',
+      htmlContent: '/documents/etat-civil/changement-nom.html',
+      pdfUrl: '/documents/etat-civil/changement-nom.pdf',
       tags: ['nom', 'identité', 'état civil', 'changement']
     },
 {
@@ -76,8 +76,8 @@ const DOCUMENTS_DATA: Document[] = [
       agency: 'Ministère de la Justice',
       complexity: 'Simple',
       versionDate: '2025',
-      htmlContent: '/public/documents/etat-civil/acte-naissance.html',
-      pdfUrl: '/public/documents/etat-civil/acte-naissance.pdf',
+      htmlContent: '/documents/etat-civil/acte-naissance.html',
+      pdfUrl: '/documents/etat-civil/acte-naissance.pdf',
       tags: ['naissance', 'acte', 'certificat', 'état civil']
     },
   
@@ -90,8 +90,8 @@ const DOCUMENTS_DATA: Document[] = [
       agency: 'Ministère de l Habitat',
       complexity: 'Moderate',
       versionDate: '2025',
-      htmlContent: '/public/documents/contrats/contrat-location.html',
-      pdfUrl: '/public/documents/contrats/contrat-location.pdf',
+      htmlContent: '/documents/contrats/contrat-location.html',
+      pdfUrl: '/documents/contrats/contrat-location.pdf',
       tags: ['location', 'logement', 'bail', 'contrat']
     },
 {
@@ -102,8 +102,8 @@ const DOCUMENTS_DATA: Document[] = [
       agency: 'Ministère du Travail',
       complexity: 'Moderate',
       versionDate: '2025',
-      htmlContent: '/public/documents/contrats/contrat-travail.html',
-      pdfUrl: '/public/documents/contrats/contrat-travail.pdf',
+      htmlContent: '/documents/contrats/contrat-travail.html',
+      pdfUrl: '/documents/contrats/contrat-travail.pdf',
       tags: ['travail', 'emploi', 'CDI', 'contrat']
     },
   
@@ -116,8 +116,8 @@ const DOCUMENTS_DATA: Document[] = [
       agency: 'Employeur',
       complexity: 'Simple',
       versionDate: '2025',
-      htmlContent: '/public/documents/attestations/attestation-travail.html',
-      pdfUrl: '/public/documents/attestations/attestation-travail.pdf',
+      htmlContent: '/documents/attestations/attestation-travail.html',
+      pdfUrl: '/documents/attestations/attestation-travail.pdf',
       tags: ['attestation', 'travail', 'emploi', 'certificat']
     }
 ]
