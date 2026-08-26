@@ -67,7 +67,7 @@ const HomePageAr: React.FC = () => {
     <>
       <Seo
         title="أنشئ مستنداتك الإدارية المغربية مجانًا | Kaghit"
-        description="أنشئ مستنداتك الإدارية المغربية ببضع نقرات — شهادة عمل، إذن الوالدين، صورة بطاقة الهوية — مجانًا، دون تسجيل."
+        description="أنشئ وثائقك الإدارية بثقة — شهادة عمل، إذن الوالدين، صورة بطاقة الهوية — مجانًا، دون تسجيل."
         canonicalUrl="https://kaghit.com/ar"
         lang="ar"
         alternates={[
@@ -98,8 +98,7 @@ const HomePageAr: React.FC = () => {
           </div>
 
           <h1 className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl max-w-3xl leading-[1.25]">
-            أنشئ مستنداتك الإدارية المغربية{' '}
-            <span className="text-primary">ببضع نقرات</span>
+            أنشئ <span className="text-red-700">وثائقك الادارية</span> بثقة
           </h1>
 
           <p className="mt-6 text-lg text-neutral-500 max-w-2xl leading-relaxed">

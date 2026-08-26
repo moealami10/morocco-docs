@@ -70,7 +70,7 @@ const HomePage: React.FC = () => {
     <>
       <Seo
         title="Générateur de documents administratifs marocains gratuit | Kaghit"
-        description="Générez vos documents administratifs marocains en quelques clics — attestation de travail, autorisation parentale, photo CIN — gratuit, rapide, sans inscription."
+        description="Générez vos documents administratifs en toute confiance — attestation de travail, autorisation parentale, photo CIN — gratuit, rapide, sans inscription."
         canonicalUrl="https://kaghit.com/"
         lang="fr"
         alternates={[
@@ -101,9 +101,7 @@ const HomePage: React.FC = () => {
           </div>
 
           <h1 className="text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl max-w-3xl leading-[1.1]">
-            Vos documents{' '}
-            <span className="text-primary">administratifs marocains</span>{' '}
-            en quelques clics
+            Générez vos <span className="text-red-700">documents administratifs</span> en toute confiance
           </h1>
 
           <p className="mt-6 text-lg text-neutral-500 max-w-2xl leading-relaxed">
