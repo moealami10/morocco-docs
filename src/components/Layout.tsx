@@ -14,7 +14,6 @@ const NAV_ITEMS_FR: NavItem[] = [
   { to: '/autorisation-parentale', label: 'Autorisation parentale' },
   { to: '/photo-cin', label: 'Photo CIN' },
   { to: '/guides', label: 'Guides' },
-  { to: '/formulaires-administratifs', label: 'Formulaires administratifs' },
   { to: '/objectifs', label: 'Objectifs' },
 ]
 
@@ -24,7 +23,6 @@ const NAV_ITEMS_AR: NavItem[] = [
   { to: '/ar/autorisation-parentale', label: 'إذن الوالدين' },
   { to: '/ar/photo-cin', label: 'صورة بطاقة الهوية' },
   { to: '/ar/guides', label: 'الأدلة الإرشادية' },
-  { to: '/ar/formulaires-administratifs', label: 'النماذج الإدارية' },
   { to: '/ar/objectifs', label: 'الأهداف' },
 ]
 

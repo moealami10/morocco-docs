@@ -25,7 +25,6 @@ import GoalRenouvelerCinPage from './pages/GoalRenouvelerCinPage'
 import GoalRenouvelerCinPageAr from './pages/GoalRenouvelerCinPageAr'
 import TrustPage from './pages/TrustPage'
 import TrustPageAr from './pages/TrustPageAr'
-import DocumentLibraryPage from './pages/DocumentLibraryPage'
 import NotFoundPage from './pages/NotFoundPage'
 import { ErrorBoundary } from './components/ErrorBoundary'
 
@@ -54,8 +53,6 @@ const App: React.FC = () => {
               <Route path="/ar/guides/acte-de-naissance" element={<GuideActeDeNaissancePageAr />} />
               <Route path="/objectifs" element={<ObjectifsIndexPage />} />
               <Route path="/ar/objectifs" element={<ObjectifsIndexPageAr />} />
-              <Route path="/formulaires-administratifs" element={<DocumentLibraryPage />} />
-              <Route path="/ar/formulaires-administratifs" element={<DocumentLibraryPage />} />
               <Route path="/objectifs/constituer-dossier-embauche" element={<GoalConstituerDossierEmbauchePage />} />
               <Route path="/ar/objectifs/constituer-dossier-embauche" element={<GoalConstituerDossierEmbauchePageAr />} />
               <Route path="/objectifs/voyager-avec-mon-enfant" element={<GoalVoyagerEnfantPage />} />

@@ -1,0 +1,20 @@
+[
+  {
+    "file": "/home/papillion/morocco-docs/tailwind.config.js",
+    "line": 50,
+    "summary": "Added custom spacing values 'section', 'section-lg', 'gap-lg', 'gap-xl' to Tailwind theme.",
+    "failure_scenario": "These values are not currently used in the codebase. If they are only used in one or two places later, it duplicates values that could be arbitrary values or constants, making the theme harder to maintain. If never used, they represent wasted complexity."
+  },
+  {
+    "file": "/home/papillion/morocco-docs/tailwind.config.js",
+    "line": 56,
+    "summary": "Added custom keyframes and animations 'move', 'pulse', 'float' to Tailwind theme.",
+    "failure_scenario": "These animations are not currently used in the codebase. If they are only used in one or two places, it duplicates animation definitions that could be inline or in constants, making the theme harder to maintain. If never used, they represent wasted complexity."
+  },
+  {
+    "file": "/home/papillion/morocco-docs/package.json",
+    "line": 13,
+    "summary": "Added @heroicons/react dependency that is not currently used in the codebase.",
+    "failure_scenario": "An unused dependency increases bundle size and maintenance burden without providing any benefit. If the dependency is never used, it represents wasted resources and potential confusion for developers."
+  }
+]
